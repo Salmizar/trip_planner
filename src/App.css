@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer body {
+    font-family: font-sans;
+    font-size: 13px;
+}
+a {
+    color:blue;
+    text-decoration: none;
+}
+a:visited {
+    color:darkblue;
+}
+a:hover {
+    text-decoration: underline;
+}
