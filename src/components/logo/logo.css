@@ -1,0 +1,15 @@
+.TripCalendarTitle {
+    font-weight: bolder;
+    padding-left: 20px;
+    font-size: 35px;
+    font-family:Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+}
+.TripCalendarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top:20px;
+    padding-bottom: 40px;
+
+}
