@@ -15,34 +15,34 @@ function Login() {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/dashboard"); 
+    if (user) navigate("/dashboard/calendar"); 
   }, [user, loading, navigate]);
   return (
     <div>
       <Logo></Logo>
       <div className="login">
-        <div className="login__container overflow-hidden shadow-lg">
+        <div className="login-container overflow-hidden shadow-lg">
           <input
             type="text"
-            className="login__textBox"
+            className="login-textBox"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail Address"
           />
           <input
             type="password"
-            className="login__textBox"
+            className="login-textBox"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
           <button
-            className="login__btn"
+            className="login-btn"
             onClick={() => logInWithEmailAndPassword(email, password)}
           >
             Login
           </button>
-          <button className="login__btn login__google" onClick={signInWithGoogle}>
+          <button className="login-btn login-google" onClick={signInWithGoogle}>
             Login with Google
           </button>
           <div>

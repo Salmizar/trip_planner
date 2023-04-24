@@ -1,0 +1,37 @@
+.calendar {
+    position: absolute;
+    top: 65px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    flex-flow: column;
+    display: flex;
+}
+.calendar-days-of-week, .calendar-date-of-week {
+    width:100vw;
+    text-align:center;
+    border-bottom: 1px solid rgb(218 220 224);
+    display: flex;
+    height:150px;
+    color: #70757a;
+}
+.calendar-days-of-week {
+    height:20px;
+}
+.calendar-days-of-week div {
+    float:left;
+    font-size: 12px;
+    width: calc(100% / 7);
+    border-right: 1px solid rgb(218 220 224);
+    overflow: hidden;
+}
+.calendar-date-of-week-notthismonth {
+    color: #bdbfc2;
+}
+.calendar-date-of-week div {
+    float:left;
+    font-size: 12px;
+    width: calc(100% / 7);
+    border-right: 1px solid rgb(218 220 224);
+    overflow: hidden;
+}

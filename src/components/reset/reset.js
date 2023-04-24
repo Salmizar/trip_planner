@@ -12,22 +12,22 @@ const Reset = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/dashboard");
+    if (user) navigate("/dashboard/calendar");
   }, [user, loading, navigate]);
   return (
     <div>
         <Logo></Logo>
         <div className="reset">
-            <div className="reset__container overflow-hidden shadow-lg">
+            <div className="reset-container overflow-hidden shadow-lg">
                 <input
                 type="text"
-                className="reset__textBox"
+                className="reset-textBox"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="E-mail Address"
                 />
                 <button
-                className="reset__btn"
+                className="reset-btn"
                 onClick={() => sendPasswordResetEmail(email)}
                 >
                 Send password reset email

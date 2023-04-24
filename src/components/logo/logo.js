@@ -5,7 +5,7 @@ import "./logo.css";
 const Logo = () => {
   return (
     <div className="TripCalendarContainer">
-        <img alt='Trip Calendar' src={TripCalendarImg} width={150} height={130}></img>
+        <img alt='Trip Calendar' style={{height:130}} src={TripCalendarImg}></img>
         <div className="TripCalendarTitle">Trip Calendar</div>
     </div>
   )
