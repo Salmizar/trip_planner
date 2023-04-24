@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
   }
-  .register__container {
+  .register-container {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -13,12 +13,12 @@
     padding: 30px;
     border-radius: 10px;
   }
-  .register__textBox {
+  .register-textBox {
     padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
   }
-  .register__btn {
+  .register-btn {
     padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -27,6 +27,6 @@
     background-color: black;
     border-radius: 7px;
   }
-  .register__google {
+  .register-google {
     background-color: #4285f4;
   }

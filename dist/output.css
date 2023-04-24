@@ -562,16 +562,8 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.max-w-sm {
-  max-width: 24rem;
-}
-
 .overflow-hidden {
   overflow: hidden;
-}
-
-.rounded {
-  border-radius: 0.25rem;
 }
 
 .shadow-lg {

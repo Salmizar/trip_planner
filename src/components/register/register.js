@@ -23,39 +23,39 @@ const Register = () => {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/dashboard");
+    if (user) navigate("/dashboard/calendar");
   }, [user, loading, navigate]);
   return (
     <div>
       <Logo></Logo>
       <div className="register">
-        <div className="register__container overflow-hidden shadow-lg">
+        <div className="register-container overflow-hidden shadow-lg">
           <input
             type="text"
-            className="register__textBox"
+            className="register-textBox"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Full Name"
           />
           <input
             type="text"
-            className="register__textBox"
+            className="register-textBox"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail Address"
           />
           <input
             type="password"
-            className="register__textBox"
+            className="register-textBox"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button className="register__btn" onClick={register}>
+          <button className="register-btn" onClick={register}>
             Register
           </button>
           <button
-            className="register__btn register__google"
+            className="register-btn register-google"
             onClick={signInWithGoogle}
           >
             Register with Google
