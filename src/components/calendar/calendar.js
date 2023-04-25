@@ -7,7 +7,7 @@ const Calendar = ({currentDate}) => {
   for (let week=0; week<=6 ; week++) {
     let weekArray = [];
     for (let day=0; day<=6 ; day++) {
-      weekArray.push([tempDate.getDate(),currentDate.getMonth()!=tempDate.getMonth()]);
+      weekArray.push([tempDate.getDate(),currentDate.getMonth()!==tempDate.getMonth()]);
       tempDate.setDate(tempDate.getDate()+1);
     }
     datesOfWeek.push(weekArray);

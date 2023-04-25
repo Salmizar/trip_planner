@@ -25,12 +25,12 @@ const Dashboard = () => {
       }
   },[user]); 
   const changeTheMonth = (incriment) => {
-    if (incriment!=null) {
-      setDisplayDate(new Date(currentDate.setMonth(currentDate.getMonth()+incriment)));
-    } else {
+    if (incriment == null) {
       let tDate = new Date();
       setDisplayDate(new Date(tDate.getFullYear(),tDate.getMonth(),1));
+      return;
     }
+    setDisplayDate(new Date(currentDate.setMonth(currentDate.getMonth()+incriment)));
   }
   const showUserMenu = (event) => {
     var menu = document.getElementsByClassName("dashboard-nav-user-menu")[0];
