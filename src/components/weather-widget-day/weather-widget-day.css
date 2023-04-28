@@ -1,0 +1,89 @@
+.weather-widget-forecast {
+    border-left: 1px solid #F5F5F5;
+}
+
+.weather-widget-forecast-date {
+    mix-blend-mode: plus-lighter;
+}
+.weather-widget-day-container,
+.weather-widget-night-container {
+    float: left;
+    width: 50%;
+    position: relative;
+    height: 149px;
+}
+
+.weather-widget-day-container-title,
+.weather-widget-night-container-title {
+    height: 30px;
+    text-shadow: 0px 0px 4px #FFF;
+}
+
+.weather-widget-container-description,
+.weather-widget-container-description {
+    font-size: 11px;
+    color: #8a8a8a;
+    height: 45px;
+    mix-blend-mode: plus-lighter;
+}
+
+.weather-widget-day-container-feels,
+.weather-widget-night-container-feels {
+    font-size: 10px;
+    color: darkgray;
+    text-align: center;
+    margin-top: -9px;
+    height: 18px;
+    mix-blend-mode: plus-lighter;
+}
+
+.weather-widget-night-container-feels-wind {
+    width: 10px;
+    height: 15px;
+}
+
+.weather-widget-container-wind-direction img {
+    float: left;
+}
+
+.weather-widget-container-wind-direction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.weather-widget-container-precipitation {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+}
+
+.weather-widget-container-precipitation span {
+    position: absolute;
+    bottom: 1px;
+    font-size: 11px;
+    width: 100%;
+    color: #fff;
+    vertical-align: top;
+    text-shadow: 0px 0px 10px #000;
+}
+
+.weather-widget-container-precipitation div {
+    width: 100%;
+    z-index: -50;
+}
+
+.weather-widget-container-precipitation-rain {
+    border-top: 1px solid #63AFEE;
+    min-height: 17px;
+    background-color: #3484C1;
+}
+
+.weather-widget-container-precipitation-snow {
+    border-top:1px solid #FCFDFF;
+    background-color: #bcc5d2;
+    min-height: 17px;
+}
