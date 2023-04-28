@@ -42,10 +42,6 @@
     height: 15px;
 }
 
-.weather-widget-container-wind-direction img {
-    float: left;
-}
-
 .weather-widget-container-wind-direction {
     display: flex;
     align-items: center;
