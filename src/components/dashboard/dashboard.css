@@ -32,6 +32,9 @@
     border-bottom: darkgrey;
     cursor: default;
   }
+  .dashboard-nav-calendar-navigation-hidden {
+    display: none;
+  }
   .dashboard-nav-calendar-navigation {
     position: absolute;
     width: 300px;

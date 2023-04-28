@@ -1,3 +1,41 @@
-.weather-widget {
-    height:150px;
+.weather-widget-now,
+.weather-widget-forecast {
+    overflow: hidden;
+    width: calc(100%/6);
+    text-align: center;
+}
+
+.weather-widget-container {
+    display: flex;
+    height: 150px;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.weather-widget-container-first {
+    height: 174px;
+}
+
+.weather-widget-now-container-weather-ico,
+.weather-widget-day-container-weather-ico,
+.weather-widget-night-container-weather-ico {
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -10px;
+}
+
+.weather-widget-now-container-temp {
+    font-size: 35px;
+}
+
+.weather-widget-day-container-temp,
+.weather-widget-night-container-temp {
+    font-size: 25px;
+}
+
+.weather-widget-now-container-feels-wind {
+    font-size: 11px;
+    color: darkgray;
+    margin-top: -9px;
 }

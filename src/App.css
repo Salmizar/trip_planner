@@ -3,16 +3,21 @@
 @tailwind utilities;
 
 @layer body {
-    font-family: font-sans;
-    font-size: 13px;
+        font-family: font-sans;
+        font-size: 13px;
+    }
+body {
+    overflow-x: hidden;
 }
 a {
-    color:blue;
+    color: blue;
     text-decoration: none;
 }
+
 a:visited {
-    color:darkblue;
+    color: darkblue;
 }
+
 a:hover {
     text-decoration: underline;
 }
