@@ -23,7 +23,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                 //if data is about current day, ignore
                 var dteNow = new Date();
                 if (entryDate.getFullYear() == dteNow.getFullYear() && entryDate.getMonth() == dteNow.getMonth() && entryDate.getDate() == dteNow.getDate()) {
-                    continue;
+                    //continue;
                 }
                 let entryId = entryDate.getFullYear() + '-' + (entryDate.getMonth() + 1) + '-' + entryDate.getDate();
                 let existingData = processedData[entryId];
@@ -117,6 +117,13 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                             daysEvents = 1;
                         }
                     }
+                    if (processedData.forecastDates.length == 6) {
+                        //We have one too many days
+                        if (processedData[processedData.forecastDates[0]].total_daily_events < processedData[processedData.forecastDates[5]].total_daily_events) {
+                            //if first day has less weather data points than the last, remove it
+                            processedData.forecastDates.splice(0, 1);
+                        }
+                    }
                 } catch (error) {
                     console.log('An error occurred processing the Weather Data', error);
                 }
@@ -155,7 +162,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                     <div className='weather-widget-now'>
                         <div className='weather-widget-now-container'>
                             <div className='whitespace-nowrap z-50 relative'>{location}</div>
-                            <img className='weather-widget-now-container-weather-ico' src={'/assets/weatherIcons/' + fiveDayForecast.currentWeather.weather[0].icon + '.png'}></img>
+                            <img className='weather-widget-now-weather-ico' src={'/assets/weatherIcons/' + fiveDayForecast.currentWeather.weather[0].icon + '.png'}></img>
                             {Utils.WeatherUtils.weatherIconDescription[fiveDayForecast.currentWeather.weather[0].icon.substring(0, 2)]}
                             <div className='weather-widget-now-container-temp'>
                                 {Math.round(fiveDayForecast.currentWeather.main.temp) + '°C'}
@@ -165,11 +172,11 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                                     'Feels like ' + Math.round(fiveDayForecast.currentWeather.main.feels_like) + '°C ' : ''
                                 )
                                 }
-                                <svg height="10" width="8" style={{ transform: ' rotate(' + 260 + 'deg)' }}>
+                                <svg height="10" width="8" style={{ transform: ' rotate(' + fiveDayForecast.currentWeather.wind.deg + 'deg)' }}>
                                     <path d="M4 0 L0 10 L4 6 L8 10 Z" />
                                 </svg>
-                                <div>{Utils.WeatherUtils.convertMPStoKPH(fiveDayForecast.currentWeather.wind.speed)} kph&nbsp;
-                                {Utils.WeatherUtils.getWindDirection(fiveDayForecast.currentWeather.wind.deg)}</div>
+                                <div>&nbsp;&nbsp;{Utils.WeatherUtils.convertMPStoKPH(fiveDayForecast.currentWeather.wind.speed)} kph&nbsp;
+                                    {Utils.WeatherUtils.getWindDirection(fiveDayForecast.currentWeather.wind.deg)}</div>
                             </div>
                         </div>
                     </div>
