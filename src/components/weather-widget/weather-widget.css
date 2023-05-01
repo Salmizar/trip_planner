@@ -8,16 +8,15 @@
 .weather-widget-container {
     display: flex;
     height: 150px;
-    border-bottom: 1px solid #E8E8E8;
+    border-bottom: 1px solid lightgrey;
 }
 
 .weather-widget-container-first {
     height: 174px;
 }
 
-.weather-widget-now-container-weather-ico,
-.weather-widget-day-container-weather-ico,
-.weather-widget-night-container-weather-ico {
+.weather-widget-now-weather-ico,
+.weather-widget-forecast-weather-ico {
     width: 50px;
     height: 50px;
     margin-left: auto;
@@ -29,13 +28,12 @@
     font-size: 35px;
 }
 
-.weather-widget-day-container-temp,
-.weather-widget-night-container-temp {
-    font-size: 25px;
-}
-
 .weather-widget-now-container-feels-wind {
     font-size: 11px;
     color: darkgray;
     margin-top: -9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
