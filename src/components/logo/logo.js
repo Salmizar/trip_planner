@@ -4,9 +4,9 @@ import "./logo.css";
 
 const Logo = () => {
   return (
-    <div className="TripCalendarContainer">
-        <img alt='Trip Calendar' style={{height:130}} src={TripCalendarImg}></img>
-        <div className="TripCalendarTitle">Trip Calendar</div>
+    <div className="trip-calendar-logo">
+        <img alt='Trip Calendar' src={TripCalendarImg}></img>
+        <div className="trip-calendar-logo-title">Trip Calendar</div>
     </div>
   )
 }

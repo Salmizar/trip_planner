@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
   const [name, setName] = useState("");
   let tDate = new Date();
-  const [currentDate, setDisplayDate] = useState(new Date(tDate.getFullYear(),tDate.getMonth(),1));
+  const [currentDate, setCurrentDate] = useState(new Date(tDate.getFullYear(),tDate.getMonth(),1));
   const navigate = useNavigate();
   const location = useLocation();
   const fetchUserName =  React.useCallback(async () => {
@@ -27,10 +27,10 @@ const Dashboard = () => {
   const changeTheMonth = (incriment) => {
     if (incriment == null) {
       let tDate = new Date();
-      setDisplayDate(new Date(tDate.getFullYear(),tDate.getMonth(),1));
+      setCurrentDate(new Date(tDate.getFullYear(),tDate.getMonth(),1));
       return;
     }
-    setDisplayDate(new Date(currentDate.setMonth(currentDate.getMonth()+incriment)));
+    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth()+incriment)));
   }
   const showUserMenu = (event) => {
     var menu = document.getElementsByClassName("dashboard-nav-user-menu")[0];

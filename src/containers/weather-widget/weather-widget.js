@@ -8,7 +8,10 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
     const [state, setState] = useState('loading');
     const [locationData, setLocationData] = useState({});
     const [fiveDayForecast, setFiveDayForecast] = useState({});
-    const processData = function () {
+    const getForecastData = function (forecastDay) {
+        return JSON.stringify(fiveDayForecast[fiveDayForecast.forecastDates[forecastDay]]);
+    }
+    useEffect(() => {
         let processedData = {};
         if (locationData !== undefined && locationData.list != null) {
             //console.log('rawdata', locationData);
@@ -22,7 +25,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                 entryDate = new Date((entry.dt * 1000) + (entryDate.getTimezoneOffset() * 60 * 1000));
                 //if data is about current day, ignore
                 var dteNow = new Date();
-                if (entryDate.getFullYear() == dteNow.getFullYear() && entryDate.getMonth() == dteNow.getMonth() && entryDate.getDate() == dteNow.getDate()) {
+                if (entryDate.getFullYear() === dteNow.getFullYear() && entryDate.getMonth() === dteNow.getMonth() && entryDate.getDate() === dteNow.getDate()) {
                     //continue;
                 }
                 let entryId = entryDate.getFullYear() + '-' + (entryDate.getMonth() + 1) + '-' + entryDate.getDate();
@@ -117,7 +120,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                             daysEvents = 1;
                         }
                     }
-                    if (processedData.forecastDates.length == 6) {
+                    if (processedData.forecastDates.length === 6) {
                         //We have one too many days
                         if (processedData[processedData.forecastDates[0]].total_daily_events < processedData[processedData.forecastDates[5]].total_daily_events) {
                             //if first day has less weather data points than the last, remove it
@@ -132,12 +135,6 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
             setFiveDayForecast(processedData);
             setState('success');
         }
-    }
-    const getForecastData = function (forecastDay) {
-        return JSON.stringify(fiveDayForecast[fiveDayForecast.forecastDates[forecastDay]]);
-    }
-    useEffect(() => {
-        processData();
     }, [locationData]);
     useEffect(() => {
         const fetchWeather = async () => {
@@ -151,10 +148,10 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                 console.log(error);
             }
         };
-        //if (location === "Ottawa") { setLocationData(Utils.staticAPIData); }
+        //if (location === "Ottawa") { setLocationData(Utils.StaticData.staticAPIData); }
         fetchWeather();
 
-    }, []);
+    }, [lat, lon]);
     return (
         <div className='weather-widget'>
             {state === 'success' ? (
@@ -162,7 +159,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                     <div className='weather-widget-now'>
                         <div className='weather-widget-now-container'>
                             <div className='whitespace-nowrap z-50 relative'>{location}</div>
-                            <img className='weather-widget-now-weather-ico' src={'/assets/weatherIcons/' + fiveDayForecast.currentWeather.weather[0].icon + '.png'}></img>
+                            <img alt='weatherIcon' className='weather-widget-now-weather-ico' src={'/assets/weatherIcons/' + fiveDayForecast.currentWeather.weather[0].icon + '.png'}></img>
                             {Utils.WeatherUtils.weatherIconDescription[fiveDayForecast.currentWeather.weather[0].icon.substring(0, 2)]}
                             <div className='weather-widget-now-container-temp'>
                                 {Math.round(fiveDayForecast.currentWeather.main.temp) + '°C'}
@@ -187,7 +184,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                     <WeatherWidgetDay forecastInfo={getForecastData(4)} firstEntry={isFirstEntry} weatherIconDescription={Utils.WeatherUtils.weatherIconDescription}></WeatherWidgetDay>
                 </div>
             ) : (
-                <div>loading</div>
+                <div className='weather-widget-container weather-widget-container-loading'>loading</div>
             )}
         </div>
     );
