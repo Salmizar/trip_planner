@@ -1,15 +1,19 @@
-.TripCalendarTitle {
-    font-weight: bolder;
-    padding-left: 20px;
-    font-size: 35px;
-    font-family:Arial, Helvetica, sans-serif;
-    white-space: nowrap;
-}
-.TripCalendarContainer {
+.trip-calendar-logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top:20px;
+    padding-top: 20px;
     padding-bottom: 40px;
+}
 
+.trip-calendar-logo img {
+    height: 130px;
+}
+
+.trip-calendar-logo-title {
+    font-weight: bolder;
+    padding-left: 20px;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
 }

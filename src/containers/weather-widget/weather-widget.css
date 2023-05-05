@@ -11,6 +11,11 @@
     border-bottom: 1px solid lightgrey;
 }
 
+.weather-widget-container-loading {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
 .weather-widget-container-first {
     height: 174px;
 }

@@ -15,7 +15,7 @@ const WeatherWidgetDay = ({ forecastInfo, weatherIconDescription, firstEntry }) 
                 <div className={'weather-widget-forecast-feels ' + ((forecastData.windchill_min === forecastData.night_temp) ? 'invisible' : '')}>
                     Feels like {forecastData.windchill_min}°C
                 </div>
-                <img className='weather-widget-forecast-weather-ico' src={'/assets/weatherIcons/' + forecastData.night_weather_icon.substring(3) + 'n.png'}></img>
+                <img  alt='weatherIcon' className='weather-widget-forecast-weather-ico' src={'/assets/weatherIcons/' + forecastData.night_weather_icon.substring(3) + 'n.png'}></img>
                 <div className='weather-widget-forecast-description'>
                     <span>{weatherIconDescription[forecastData.night_weather_icon.substring(3)]}</span>
                     <div className='weather-widget-forecast-wind-direction'>
@@ -39,7 +39,7 @@ const WeatherWidgetDay = ({ forecastInfo, weatherIconDescription, firstEntry }) 
                 <div className={'weather-widget-forecast-feels ' + ((forecastData.windchill_max === forecastData.day_temp) ? 'invisible' : '')}>
                     Feels like {forecastData.windchill_max}°C
                 </div>
-                <img className='weather-widget-forecast-weather-ico' src={'/assets/weatherIcons/' + forecastData.day_weather_icon.substring(3) + 'd.png'}></img>
+                <img alt='weatherIcon' className='weather-widget-forecast-weather-ico' src={'/assets/weatherIcons/' + forecastData.day_weather_icon.substring(3) + 'd.png'}></img>
                 <div className='weather-widget-forecast-description'>
                     <span>{weatherIconDescription[forecastData.day_weather_icon.substring(3)]}</span>
                     <div className='weather-widget-forecast-wind-direction'>

@@ -1497,3 +1497,211 @@ export const staticAPIData = {
         "sunset": 1682380753
     }
 };
+/*
+{
+    name: '2 Day Trip',
+    startDate: 1683086400000,//may 3
+    endDate: 1683172800000,//May 4
+    driveUpDate: 1683086400000,//may 3
+    driveHomeDate: 1683172800000,//May 4
+    location: 'Somewhere',
+    canInviteOthers: true,
+    canOthersModifyEvent: false,
+    color: 'lightblue',
+    guests: [
+        {
+            uID: '1',
+            name: 'Chris DAoust',
+            eventOwner: true,
+            canEdit: true
+        }
+    ]
+}
+*/
+export const calendarData = [
+    {
+        name: '2 Day Trip',
+        startDate: 1683086400000,//may 3
+        endDate: 1683172800000,//May 4
+        driveUpDate: 1683086400000,//may 3
+        driveHomeDate: 1683172800000,//May 4
+        color: 'lightblue',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Small 2 Day Trip',
+        startDate: 1683259200000,//may 5
+        endDate: 1683259200000,//May 5
+        driveUpDate: 1683259200000,//may 5
+        //driveHomeDate: 1683259200000,//May 5
+        driveHomeDate: 1683345600000,//may 6
+        color: 'lemonchiffon',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Chic Chocs',
+        startDate: 1683259200000,//may 5
+        endDate: 1683432000000,//may 7
+        driveUpDate: 1683172800000,//may 4
+        driveHomeDate: 1683432000000,//may 7
+        color: 'burlywood',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Mattawa',
+        startDate: 1683345600000,//may 6
+        endDate: 1683432000000,//may 7
+        driveUpDate: 1683345600000,//may 6
+        driveHomeDate: 1683432000000,//may 7
+        color: 'darkseagreen',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'A Long Trip',
+        startDate: 1684296000000,//may 17
+        endDate: 1684382400000,//May 18
+        driveUpDate: 1684296000000,//may 17
+        driveHomeDate: 1684382400000,//May 18
+        color: 'lightpink',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Chic Chocs 2',
+        startDate: 1684382400000,//may 18
+        endDate: 1684641600000,//may 21
+        driveUpDate: 1684382400000,//may 18
+        driveHomeDate: 1684641600000,//may 21
+        color: 'greenyellow',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Small Day Trip 2',
+        startDate: 1684468800000,//may 19
+        endDate: 1684468800000,//May 19
+        driveUpDate: 1684468800000,//may 19
+        driveHomeDate: 1684468800000,//may 19
+        color: 'salmon',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Mattawa 2',
+        startDate: 1684555200000,//may 20
+        endDate: 1684641600000,//may 21
+        driveUpDate: 1684555200000,//may 20
+        driveHomeDate: 1684641600000,//may 21
+        color: 'lightsteelblue',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Random name',
+        startDate: 1683604800000,//may 9
+        endDate: 1683691200000,//may 10
+        driveUpDate: 1683604800000,//may 9
+        driveHomeDate: 1683691200000,//may 10
+        color: 'orange',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Chantal',
+        startDate: 1683691200000,//may 10
+        endDate: 1683864000000,//may 12
+        driveUpDate: 1683691200000,//may 10
+        driveHomeDate: 1683864000000,//may 12
+        color: 'lightcoral',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            },
+            {
+                uID: '2',
+                name: 'Chantal Perreault',
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'Eric',
+        startDate: 1683777600000,//may 11
+        endDate: 1683777600000,//may 11
+        driveUpDate: 1683777600000,//may 11
+        driveHomeDate: 1683777600000,//may 11
+        color: 'lightskyblue',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    }
+]
+calendarData.sort((a, b) => {
+    return a.driveUpDate - b.driveUpDate;
+});

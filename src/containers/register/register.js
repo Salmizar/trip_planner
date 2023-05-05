@@ -7,7 +7,9 @@ import {
   signInWithGoogle,
 } from "../../firebase";
 import "./register.css";
-import Logo from "../logo/logo";
+import Logo from "../../components/logo/logo";
+import { Button } from "../../components/button/button.style";
+import { Input } from "../../components/input/input.style";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -30,36 +32,26 @@ const Register = () => {
       <Logo></Logo>
       <div className="register">
         <div className="register-container overflow-hidden shadow-lg">
-          <input
+          <Input
             type="text"
-            className="register-textBox"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Full Name"
           />
-          <input
+          <Input
             type="text"
-            className="register-textBox"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail Address"
           />
-          <input
+          <Input
             type="password"
-            className="register-textBox"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button className="register-btn" onClick={register}>
-            Register
-          </button>
-          <button
-            className="register-btn register-google"
-            onClick={signInWithGoogle}
-          >
-            Register with Google
-          </button>
+          <Button onClick={register} theme='black'>Register</Button>
+          <Button onClick={signInWithGoogle}>Register with Google</Button>
           <div>
             Already have an account? <Link to="/">Login</Link> now.
           </div>

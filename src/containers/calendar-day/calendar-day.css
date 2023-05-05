@@ -1,0 +1,51 @@
+.calendar-date-of-week-today div {
+    background-color: blue;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    color: #FFF;
+    border-radius: 10px;
+    margin-top: 2px;
+}
+
+.calendar-events {
+    height: 100%;
+    position: relative;
+}
+
+.calendar-day-container,
+.calendar-day-container-notthismonth {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+    flex-flow: column;
+    font-size: 12px;
+    border-right: 1px solid rgb(218 220 224);
+}
+
+.calendar-day-container-notthismonth {
+    color: #bdbfc2;
+}
+
+.calendar-date-of-week-today,
+.calendar-date-of-week {
+    width: 100%;
+    float: left;
+    height: 26px;
+    text-align: center;
+}
+.calendar-events div {
+    position: absolute;
+    width: calc(100vw / 7);
+    padding-top: 2px;
+    padding-left: 5px;
+    height:22px;
+    border-radius: 3px;
+    z-index: 5;
+}
+.calendar-event {
+  cursor: pointer;
+  color: black;
+  text-shadow: 0px 0px 4px #FFF;
+  background-color: lightsteelblue;
+}
