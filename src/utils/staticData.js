@@ -1585,6 +1585,54 @@ export const calendarData = [
         ]
     },
     {
+        name: 'big overlap',
+        startDate: 1683432000000,//may 7
+        endDate: 1684296000000,//May 17
+        driveUpDate: 1683432000000,//may 7
+        driveHomeDate: 1684296000000,//May 17
+        color: 'lightcyan',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'month overlap',
+        startDate: 1685160000000,//may 27
+        endDate: 1685592000000,//June 1
+        driveUpDate: 1685160000000,//may 27
+        driveHomeDate: 1685592000000,//June 1
+        color: 'lightseagreen',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
+        name: 'End of May event',
+        startDate: 1685332800000,//may 29
+        endDate: 1685592000000,//June 1
+        driveUpDate: 1685332800000,//may 29
+        driveHomeDate: 1685592000000,//June 1
+        color: 'lightgray',
+        guests: [
+            {
+                uID: '1',
+                name: 'Chris DAoust',
+                eventOwner: true,
+                canEdit: true
+            }
+        ]
+    },
+    {
         name: 'A Long Trip',
         startDate: 1684296000000,//may 17
         endDate: 1684382400000,//May 18

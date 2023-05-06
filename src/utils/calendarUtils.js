@@ -13,7 +13,7 @@ export const getDateWeek = function (dte, dowOffset) {
         if(day < 4) {
             weeknum = Math.floor((daynum+day-1)/7) + 1;
             if(weeknum > 52) {
-                var nYear = new Date(this.getFullYear() + 1,0,1);
+                var nYear = new Date(dte.getFullYear() + 1,0,1);
                 var nday = nYear.getDay() - dowOffset;
                 nday = nday >= 0 ? nday : nday + 7;
                 /*if the next year starts before the middle of
@@ -26,10 +26,10 @@ export const getDateWeek = function (dte, dowOffset) {
         }
         return weeknum;
     };
-export const datesOfTheWeek = function (currentDate) {
+export const getDatesOfTheMonth = function (currentDate) {
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
     const todaysDate = new Date();
-    const datesOfWeek = {};
+    const datesOfTheMonth = {};
     for (let weekCounter = 0; weekCounter <= 6; weekCounter++) {
         let weekArray = {};
         var weekOfYear = getDateWeek(tempDate);
@@ -50,10 +50,26 @@ export const datesOfTheWeek = function (currentDate) {
             };
             tempDate.setDate(tempDate.getDate() + 1);
         }
-        datesOfWeek[weekOfYear] = weekArray;
+        datesOfTheMonth[tempDate.getFullYear()+'-'+weekOfYear] = weekArray;
         if (tempDate.getDate() < 8 && weekCounter > 0) {
             break;//We are at the end of the month
         }
     }
-    return datesOfWeek;
+    return datesOfTheMonth;
+}
+export const getMonthVisualStartStop = function (currentDate) {
+    const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
+    const visualDates = {};
+    visualDates.startDate = new Date(tempDate.getTime());
+    for (let weekCounter = 0; weekCounter <= 6; weekCounter++) {
+        for (let dayCounter = 0; dayCounter <= 6; dayCounter++) {
+            tempDate.setDate(tempDate.getDate() + 1);
+        }
+        if (tempDate.getDate() < 8 && weekCounter > 0) {
+            tempDate.setDate(tempDate.getDate() - 1);
+            break;//We are at the end of the month
+        }
+    }
+    visualDates.endDate = tempDate;
+    return visualDates;
 }
