@@ -1,5 +1,6 @@
 import React from 'react'
 import "./calendar-day.css";
+import CalendarEvent from '../calendar-event/calendar-event';
 const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events}) => {
     return (
         <div className={((isThisMonth) ? "calendar-day-container" : "calendar-day-container-notthismonth")}>
@@ -8,17 +9,10 @@ const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events}) => {
             </div>
             <div className='calendar-events'>
                 {Object.values(events).map((event, index) =>
-                    <div
-                        className='calendar-event'
-                        style={{
-                            visibility: (event.eventStartingToday) ? 'visible' : 'hidden',
-                            backgroundColor: event.color, width: 'calc(100vw / 7 * ' + event.eventLength + ')',
-                            top: (index * 24) + 'px'
-                        }}
-                        key={JSON.stringify('-'+day+'-'+month+'-'+year+'_'+index)}
-                    >
-                        {event.name + '-' + index}
-                    </div>
+                { 
+                    if (event.eventStartingToday || event.eventStartOfNextWeek)
+                        return <CalendarEvent key={JSON.stringify('-' + day + '-' + month + '-' + year + '_' + index)} eventIndex={index} event={event}></CalendarEvent>
+                }
                 )}
             </div>
         </div>

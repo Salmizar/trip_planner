@@ -1540,8 +1540,7 @@ export const calendarData = [
         startDate: 1683259200000,//may 5
         endDate: 1683259200000,//May 5
         driveUpDate: 1683259200000,//may 5
-        //driveHomeDate: 1683259200000,//May 5
-        driveHomeDate: 1683345600000,//may 6
+        driveHomeDate: 1683259200000,//May 5
         color: 'lemonchiffon',
         guests: [
             {
@@ -1587,10 +1586,10 @@ export const calendarData = [
     {
         name: 'big overlap',
         startDate: 1683432000000,//may 7
-        endDate: 1684296000000,//May 17
+        endDate: 1684209600000,//May 16
         driveUpDate: 1683432000000,//may 7
         driveHomeDate: 1684296000000,//May 17
-        color: 'lightcyan',
+        color: 'lightgray',
         guests: [
             {
                 uID: '1',
@@ -1622,7 +1621,7 @@ export const calendarData = [
         endDate: 1685592000000,//June 1
         driveUpDate: 1685332800000,//may 29
         driveHomeDate: 1685592000000,//June 1
-        color: 'lightgray',
+        color: 'lightpink',
         guests: [
             {
                 uID: '1',
