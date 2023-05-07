@@ -11,16 +11,18 @@
 
 .calendar-event-title {
     position: absolute;
-    top: 1px;
+    top: 1.5px;
     left: 10px;
-    text-shadow: 0px 0px 4px #FFF; 
+    text-shadow: 0px 0px 4px #FFF;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left:5px;
 }
 
 .calendar-event-driveHome,
 .calendar-event-driveUp {
     min-width:10px;
     opacity: 0.45;
-    white-space: nowrap;
     height: 100%;
     background-color: #FFF;
     
