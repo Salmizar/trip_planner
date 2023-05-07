@@ -37,57 +37,59 @@ export const getCalendarData = function (currentDate, calendarData) {
         let eventWeek = eventStart.getFullYear() + '-' + getDateWeek(eventStart);
         if (!datesOfTheMonth[eventWeek]) {
             if (monthConfines.endDate < eventStart || monthConfines.startDate > eventEnd) {
-                //Event doesn't occur within the current month
-                continue;
+                continue;//Event doesn't start or within the current month
             } else {
                 eventStart = monthConfines.startDate;
                 eventWeek = eventStart.getFullYear() + '-' + getDateWeek(eventStart);
             }
         }
         let calendarDayEvents = datesOfTheMonth[eventWeek][eventStart.getTime()].dayEvents;
-        for (var eventIndex = 1; eventIndex <= 4; eventIndex++) {
-            if (Object.keys(calendarDayEvents['e' + eventIndex]).length === 0) {
-                //Found an open slot
-                var eventSlotOffset = 0;
-                for (var eventLengthIndex = 0; eventLengthIndex < eventLength; eventLengthIndex++) {
-                    let offsetEventStart = new Date(event.driveUpDate);
-                    offsetEventStart.setDate(offsetEventStart.getDate() + eventLengthIndex);
-                    let eWeek = offsetEventStart.getFullYear() + '-' + getDateWeek(offsetEventStart);
-                    if (offsetEventStart.getDay() === 0 && eventIndex > 0) {;
+        var eventIndex = getEmptyEventSlot(calendarDayEvents);
+        if (eventIndex > 0) {
+            //Found an open slot
+            var eventSlotOffset = 0;
+            for (var eventLengthIndex = 0; eventLengthIndex < eventLength; eventLengthIndex++) {
+                let offsetEventStart = new Date(event.driveUpDate);
+                offsetEventStart.setDate(offsetEventStart.getDate() + eventLengthIndex);
+                let eWeek = offsetEventStart.getFullYear() + '-' + getDateWeek(offsetEventStart);
+                if (datesOfTheMonth[eWeek]) {
+                    if (offsetEventStart.getDay() === 0 && eventIndex > 0) {
                         //new Week, see if we can move the event to lower slots
-                        for (var eventOffsetIndex = 1; eventOffsetIndex <= 4; eventOffsetIndex++) {
-                            if (datesOfTheMonth[eWeek] && Object.keys(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventOffsetIndex)]).length === 0) {
-                                eventSlotOffset = eventIndex - eventOffsetIndex;
-                                break;
-                            }
-                        }
+                        var eventSlotOffset = eventIndex - getEmptyEventSlot(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents);
                     }
-                    if (datesOfTheMonth[eWeek]) {
-                        datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
-                            name: event.name,
-                            event: event,
-                            eventLength: eventLength - eventLengthIndex,
-                            eventStartOfNextWeek: (offsetEventStart.getDay() === 0),
-                            eventStartingToday: (eventLengthIndex === 0),
-                            color: event.color
-                        }
+                    datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
+                        name: event.name,
+                        event: event,
+                        eventLength: eventLength - eventLengthIndex,
+                        eventStartOfNextWeek: (offsetEventStart.getDay() === 0),
+                        eventStartingToday: (eventLengthIndex === 0),
+                        color: event.color
                     }
                 }
-                break;
-            } else if (eventIndex === 4) {
-                //no more slots available, so toss it in overflow
-                calendarDayEvents['overflow']['e' + Object.keys(calendarDayEvents['overflow']).length] = {
-                    name: event.name,
-                    event: event,
-                    eventLength: eventLength,
-                    eventStartOfNextWeek: (eventStart.getDay() === 0),
-                    eventStartingToday: (eventLengthIndex === 0),
-                    color: event.color
-                }
+            }
+        } else if (eventIndex === 4) {
+            //no more slots available, so toss it in overflow
+            calendarDayEvents['overflow']['e' + Object.keys(calendarDayEvents['overflow']).length] = {
+                name: event.name,
+                event: event,
+                eventLength: eventLength,
+                eventStartOfNextWeek: (eventStart.getDay() === 0),
+                eventStartingToday: (eventLengthIndex === 0),
+                color: event.color
             }
         }
     }
     return datesOfTheMonth;
+}
+const getEmptyEventSlot = function (calendarDayEvents) {
+    for (let eventIndex = 1; eventIndex <= 4; eventIndex++) {
+        if (Object.keys(calendarDayEvents['e' + eventIndex]).length === 0) {
+            return eventIndex;
+        } else if (eventIndex === 4) {
+            return 4;
+        }
+    }
+    return 0;
 }
 const getDatesOfTheMonth = function (currentDate) {
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
