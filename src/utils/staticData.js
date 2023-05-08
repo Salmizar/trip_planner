@@ -1497,27 +1497,6 @@ export const staticAPIData = {
         "sunset": 1682380753
     }
 };
-/*
-{
-    name: '2 Day Trip',
-    startDate: 1683086400000,//may 3
-    endDate: 1683172800000,//May 4
-    driveUpDate: 1683086400000,//may 3
-    driveHomeDate: 1683172800000,//May 4
-    location: 'Somewhere',
-    canInviteOthers: true,
-    canOthersModifyEvent: false,
-    color: 'lightblue',
-    guests: [
-        {
-            uID: '1',
-            name: 'Chris DAoust',
-            eventOwner: true,
-            canEdit: true
-        }
-    ]
-}
-*/
 export const calendarData = [
     {
         name: '2 Day Trip',
@@ -1526,6 +1505,8 @@ export const calendarData = [
         driveUpDate: 1683086400000,//may 3
         driveHomeDate: 1683172800000,//May 4
         color: 'lightblue',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1542,6 +1523,8 @@ export const calendarData = [
         driveUpDate: 1683259200000,//may 5
         driveHomeDate: 1683259200000,//May 5
         color: 'lemonchiffon',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1558,6 +1541,8 @@ export const calendarData = [
         driveUpDate: 1683172800000,//may 4
         driveHomeDate: 1683432000000,//may 7
         color: 'burlywood',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1574,6 +1559,8 @@ export const calendarData = [
         driveUpDate: 1683345600000,//may 6
         driveHomeDate: 1683432000000,//may 7
         color: 'darkseagreen',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1590,6 +1577,8 @@ export const calendarData = [
         driveUpDate: 1683432000000,//may 7
         driveHomeDate: 1684296000000,//May 17
         color: 'lightgray',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1606,6 +1595,8 @@ export const calendarData = [
         driveUpDate: 1685160000000,//may 27
         driveHomeDate: 1685592000000,//June 1
         color: 'lightseagreen',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1622,6 +1613,8 @@ export const calendarData = [
         driveUpDate: 1685332800000,//may 29
         driveHomeDate: 1685592000000,//June 1
         color: 'lightpink',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1638,6 +1631,8 @@ export const calendarData = [
         driveUpDate: 1684296000000,//may 17
         driveHomeDate: 1684382400000,//May 18
         color: 'lightpink',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1654,6 +1649,8 @@ export const calendarData = [
         driveUpDate: 1684382400000,//may 18
         driveHomeDate: 1684641600000,//may 21
         color: 'greenyellow',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1670,6 +1667,8 @@ export const calendarData = [
         driveUpDate: 1684468800000,//may 19
         driveHomeDate: 1684468800000,//may 19
         color: 'salmon',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1686,6 +1685,8 @@ export const calendarData = [
         driveUpDate: 1684555200000,//may 20
         driveHomeDate: 1684641600000,//may 21
         color: 'lightsteelblue',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1702,6 +1703,8 @@ export const calendarData = [
         driveUpDate: 1683604800000,//may 9
         driveHomeDate: 1683691200000,//may 10
         color: 'orange',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1718,6 +1721,8 @@ export const calendarData = [
         driveUpDate: 1683691200000,//may 10
         driveHomeDate: 1683864000000,//may 12
         color: 'lightcoral',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1739,6 +1744,8 @@ export const calendarData = [
         driveUpDate: 1683777600000,//may 11
         driveHomeDate: 1683777600000,//may 11
         color: 'lightskyblue',
+        location: 'someLocationText',
+        notes: 'some notes about the trip',
         guests: [
             {
                 uID: '1',
@@ -1749,6 +1756,9 @@ export const calendarData = [
         ]
     }
 ]
+for (var id = 0; id < calendarData.length; id++) {
+    calendarData[id].eId = id+1;
+}
 calendarData.sort((a, b) => {
     return a.driveUpDate - b.driveUpDate;
 });
