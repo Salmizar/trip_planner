@@ -6,7 +6,11 @@
     height: 22px;
     border-radius: 3px;
     z-index: 5;
-    border-left:solid 1px #fff;
+    border-left: solid 1px #fff;
+}
+
+.calendar-event-selected {
+    border: 1px solid #000;
 }
 
 .calendar-event-title {
@@ -16,16 +20,16 @@
     text-shadow: 0px 0px 4px #FFF;
     overflow: hidden;
     white-space: nowrap;
-    padding-left:5px;
+    padding-left: 5px;
 }
 
 .calendar-event-driveHome,
 .calendar-event-driveUp {
-    min-width:10px;
+    min-width: 10px;
     opacity: 0.45;
     height: 100%;
     background-color: #FFF;
-    
+
 }
 
 .calendar-event-driveHome {

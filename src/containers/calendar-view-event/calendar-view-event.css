@@ -1,0 +1,40 @@
+.calendar-view-event {
+    z-index: 10;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    top: 30px;
+}
+.calendar-view-event button {
+    position: relative;
+    left: 130px;
+}
+
+.calendar-view-event-title {
+    width: 350px;
+}
+.calendar-view-event-location-container {
+    display: flex;
+}
+.calendar-view-event-location {
+    width: 320px;
+    margin-left: 10px;;
+}
+
+.calendar-view-event-location-icon {
+    width: 18px;
+    height: 28px;
+    position: relative;
+    top: 8px;
+    opacity: 0.5;
+}
+
+.calendar-view-event-notes {
+    width: 350px;
+    padding-bottom: 50px;
+}
+
+.calendar-view-event-date {
+    width: 163px;
+}
