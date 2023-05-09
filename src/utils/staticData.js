@@ -1,3 +1,61 @@
+export const calendarColors = {
+    //Credit https://proactivecreative.com/pastel-color-palette/
+    Lavender: "#957DAD",
+    Thistle_Pink: "#E0BBe4",
+    Candy_Pink: "#FEC8D8",
+    Misty_Rose: "#FFDFD3",
+    Pastel_Pink: "#FFC4C4",
+    Periwinkle: "#CBC7DD",
+    Pale_Orange: "#FFDFBD",
+    Palest_Yellow: "#F8FFEB",
+    Pale_Sea_Blue: "#BAEEE5",
+    Lilac: "#DFC5E8",
+    Soft_Yellow: "#FFFAB0",
+    Tea_Green: "#CBF2B8",
+    Baby_Blue: "#D6D8F2",
+    Baby_Pink: "#F4CFDF",
+    Soft_Yellow: "#FAF4B7",
+    Light_Brandy: "#E7CBA9",
+    Soft_Sage: "#CCD4BF",
+    Ecru: "#F5F3E7",
+    Pastel_Peach: "#EEBAB2",
+    Warm_Sand: "#E9DAC1",
+    Light_Turquoise: "#CDFCF6",
+    Sea_Green: "#54BAB90",
+    Linen: "#F7ECDE",
+    Muted_Blue: "#7882A4",
+    Warm_Brown: "#C0A080",
+    Light_Gray: "#EFEFEF",
+    Medium_Gray: "#D1D1D1",
+    Deep_Aubergine: "#645CAA",
+    Medium_Purple: "#A084CA",
+    Lavender: "#BFACE0",
+    Pale_Purple_Pink: "#EBC7E8",
+    Warm_Sun: "#D37F40",
+    Sea_Blue: "#94C0D0",
+    Pale_Coral: "#ECCBC0",
+    Soft_Orange: "#FAC590",
+    Warm_Pink: "#EF7C8E",
+    Rose_Pink: "#D8A7B1",
+    Cream: "#FAE8EO",
+    Mint_Green: "#B6E2D3",
+    Pale_Sea_Blue: "#D6EFED",
+    Sky_Blue: "#B7D3DF",
+    Medium_Lilac: "#C9BBCF",
+    Muted_Purple: "#898AA6",
+    Warm_Berry: "#85586F",
+    Soft_Raspberry: "#AC7D88",
+    Pale_Orange: "#DEB6AB",
+    Soft_Yellow: "#F8ECD1",
+    Slate_Blue: "#698396",
+    Medium_Green: "#A9C8C0",
+    Warm_Yellow: "#DBBC8E",
+    Rich_Blush_Pink: "#AE8A8C",
+    Sunny_Yellow: "#F5F0BB",
+    Spring_Green: "#C4DFAA",
+    Medium_Green: "#90C8AC",
+    Dark_Turquoise: "#73A9AD"
+}
 export const staticAPIData = {
     "cod": "200",
     "message": 0,
@@ -1505,14 +1563,15 @@ export const calendarData = [
         driveUpDate: 1683086400000,//may 3
         driveHomeDate: 1683172800000,//May 4
         color: 'lightblue',
-        location: 'someLocationText',
-        notes: 'some notes about the trip',
+        location: 'Just going to Mattawa',
+        notes: '16ome5 notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1523,14 +1582,15 @@ export const calendarData = [
         driveUpDate: 1683259200000,//may 5
         driveHomeDate: 1683259200000,//May 5
         color: 'lemonchiffon',
-        location: 'someLocationText',
-        notes: 'some notes about the trip',
+        location: 'Meet at the Esso in Rolphton',
+        notes: 's165651651651ome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1542,13 +1602,28 @@ export const calendarData = [
         driveHomeDate: 1683432000000,//may 7
         color: 'burlywood',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'as5x1ad6csome notes about the trip',
+        canInvite: false,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
+            },
+            {
+                uID: '3',
+                name: 'Trevor Delam',
+                maybe: true
+            },
+            {
+                uID: '4',
+                name: 'Eric La May',
+                maybe: true
+            },
+            {
+                uID: '5',
+                name: 'Kyle Wylie'
             }
         ]
     },
@@ -1560,13 +1635,14 @@ export const calendarData = [
         driveHomeDate: 1683432000000,//may 7
         color: 'darkseagreen',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'dfklvjna vkjad vfadsome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1578,13 +1654,22 @@ export const calendarData = [
         driveHomeDate: 1684296000000,//May 17
         color: 'lightgray',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'fdvkj 34fkl4nf 1lsome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
-                name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
+                name: 'Chris DAoust'
+            },
+            {
+                uId: 'sdcd',
+                name: 'Chantal Perreault',
+                eventOwner: true
+            },
+            {
+                uId: 'MGGngCQKWUy1',
+                name: 'Ryan Ellis'
             }
         ]
     },
@@ -1596,13 +1681,14 @@ export const calendarData = [
         driveHomeDate: 1685592000000,//June 1
         color: 'lightseagreen',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'q g4 qk qkgn1q 3kgj1n gklj1 jknsome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1614,13 +1700,14 @@ export const calendarData = [
         driveHomeDate: 1685592000000,//June 1
         color: 'lightpink',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'dfv f6v5sfv6 s0fv65 0va6f5v0a65 1v0asome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1632,13 +1719,14 @@ export const calendarData = [
         driveHomeDate: 1684382400000,//May 18
         color: 'lightpink',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'ae;vkn 34kj1 34gjsome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1650,13 +1738,14 @@ export const calendarData = [
         driveHomeDate: 1684641600000,//may 21
         color: 'greenyellow',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'ewfklqm flk4mf ;l3k4 some notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1668,13 +1757,14 @@ export const calendarData = [
         driveHomeDate: 1684468800000,//may 19
         color: 'salmon',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'rmkq3 4fklm3 gklsome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1686,13 +1776,14 @@ export const calendarData = [
         driveHomeDate: 1684641600000,//may 21
         color: 'lightsteelblue',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: ' 43klgm q3glk;m 34glksome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1704,13 +1795,14 @@ export const calendarData = [
         driveHomeDate: 1683691200000,//may 10
         color: 'orange',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'rg q4klgmq 34;glk qm34gksome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     },
@@ -1721,19 +1813,19 @@ export const calendarData = [
         driveUpDate: 1683691200000,//may 10
         driveHomeDate: 1683864000000,//may 12
         color: 'lightcoral',
-        location: 'someLocationText',
-        notes: 'some notes about the trip',
+        location: 'Right in the Valios parking lot',
+        notes: 'er;lkm gmqergkmq er;lgkmqe l;gkqme some notes about the trip',
+        canInvite: false,
+        guestsCanModify: true,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             },
             {
                 uID: '2',
-                name: 'Chantal Perreault',
-                canEdit: true
+                name: 'Chantal Perreault'
             }
         ]
     },
@@ -1745,19 +1837,20 @@ export const calendarData = [
         driveHomeDate: 1683777600000,//may 11
         color: 'lightskyblue',
         location: 'someLocationText',
-        notes: 'some notes about the trip',
+        notes: 'ae;rlkvm erl;km r;elkm erl;kgmqe r;msome notes about the trip',
+        canInvite: true,
+        guestsCanModify: false,
         guests: [
             {
-                uID: '1',
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
                 name: 'Chris DAoust',
-                eventOwner: true,
-                canEdit: true
+                eventOwner: true
             }
         ]
     }
 ]
 for (var id = 0; id < calendarData.length; id++) {
-    calendarData[id].eId = id+1;
+    calendarData[id].eId = id + 1;
 }
 calendarData.sort((a, b) => {
     return a.driveUpDate - b.driveUpDate;

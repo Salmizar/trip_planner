@@ -52,8 +52,8 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <nav className="dashboard-nav">
-        <button title="View the Calendar" className={'dashboard-nav-tab dashboard-nav-tab-calendar ' +  (location.pathname.includes('/dashboard/calendar') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/calendar")}>Calendar</button>
-        <button title="View Weather" className={'dashboard-nav-tab dashboard-nav-tab-weather ' +  (location.pathname.includes('/dashboard/weather') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/weather")}>Weather</button>
+        <button title="View the Calendar" className={'dashboard-nav-tab-calendar ' +  (location.pathname.includes('/dashboard/calendar') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/calendar")}>Calendar</button>
+        <button title="View Weather" className={'dashboard-nav-tab-weather ' +  (location.pathname.includes('/dashboard/weather') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/weather")}>Weather</button>
         <div className={(location.pathname.includes('/dashboard/calendar') ? ' dashboard-nav-calendar-navigation' : 'dashboard-nav-calendar-navigation-hidden')}>
           <button title="Go to today" className='dashboard-nav-calendar-navigation-today' onClick={() => changeTheMonth()}>Today</button>
           <button title="Previous month" className='dashboard-nav-calendar-navigation-previous' onClick={() => changeTheMonth(-1)}>×</button>
@@ -68,8 +68,8 @@ const Dashboard = () => {
       </nav>
       <Routes>
           <Route  path="calendar/" element={<Calendar currentDate={currentDate} />} />
-          <Route  path="calendar/:eventId" element={<Calendar currentDate={currentDate} />} />
-          <Route  path="calendar/:eventId/edit" element={<Calendar currentDate={currentDate} />} />
+          <Route  path="calendar/:eventId" element={<Calendar currentDate={currentDate} user={user} />} />
+          <Route  path="calendar/:eventId/edit" element={<Calendar currentDate={currentDate} user={user} />} />
           <Route path="weather/*" element={<Weather />} />
       </Routes>
     </div>

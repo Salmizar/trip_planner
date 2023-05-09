@@ -10,14 +10,14 @@ const theme = {
     background: '#f6f6f6'
   }
 };
-export const Input = styled.input`
+export const TextArea = styled.textarea`
   background-color: ${(props) => theme[props.theme].background};
   padding: 10px;
   margin-bottom: 10px;
   font-size: 18px;
   border: 1px solid #dcdcdc;
   &:focus {
-    outline: ${props => (props.type != 'checkbox' ? theme[props.theme].outline : theme['disabled'].outline)};
+    outline: ${(props) => theme[props.theme].outline};
   }
   &:disabled {
     background-color: ${(props) => theme['disabled'].background};
@@ -25,6 +25,6 @@ export const Input = styled.input`
   }
 `
 
-Input.defaultProps = {
+TextArea.defaultProps = {
   theme: 'enabled'
 }

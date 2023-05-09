@@ -1,0 +1,16 @@
+.date-input {
+    background-color: #FFF;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    border: 1px solid #dcdcdc;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 163px;
+    float:left;
+    cursor: pointer;
+}
+.date-input-disabled {
+    background-color: #f6f6f6;
+    cursor: default;
+}
