@@ -6,7 +6,9 @@
     border-bottom: 1px solid rgb(218 220 224);
     height: 65px;
   }
-  .dashboard-nav-tab {
+  
+  .dashboard-nav-tab-calendar,
+  .dashboard-nav-tab-weather {
     border:1px solid darkgray;
     border-bottom: 1px solid rgb(218 220 224);
     background-color: lightgray;

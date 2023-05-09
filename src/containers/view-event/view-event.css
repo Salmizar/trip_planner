@@ -1,0 +1,64 @@
+.view-event {
+    z-index: 10;
+    display: flex;
+    flex-direction:column;
+    border-radius: 10px;
+    box-shadow: 5px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    width: 390px;
+    height: 620px;
+    top: 20px;
+}
+
+.view-event-nav-tab-details,
+.view-event-nav-tab-guests {
+    border: 1px solid darkgray;
+    border-bottom: 1px solid rgb(218 220 224);
+    background-color: lightgray;
+    text-align: center;
+    width: 100px;
+    height: 27px;
+    top: -5px;
+    position: absolute;
+    border-top-left-radius: 10px;
+    border-top-Right-radius: 10px;
+}
+
+.view-event-nav-tab-details {
+    left: 10px;
+}
+
+.view-event-nav-tab-guests {
+    left: 120px;
+}
+
+.view-event-nav-tab-active {
+    border: 1px solid rgb(218 220 224);
+    box-shadow: 0px -3px 10px -5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-bottom: darkgrey;
+    cursor: default;
+}
+.view-event-save-btn{
+    position: absolute;
+    bottom: 20px;
+    left: 200px;
+    width: 100px;
+}
+.view-event-close-btn {
+    position: absolute;
+    width: 100px;
+    left: 70px;
+    bottom: 20px;
+}
+.view-event-close-btn-only {
+    left: 130px;
+}
+
+.view-event-nav {
+    border-bottom: 1px solid rgb(218 220 224);
+    height: 22px;
+    position: relative;
+    left: -20px;
+    width: 390px;
+}

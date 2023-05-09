@@ -3,12 +3,17 @@
 @tailwind utilities;
 
 @layer body {
-        font-family: font-sans;
-        font-size: 13px;
-    }
+    font-family: font-sans;
+    font-size: 13px;
+}
+
 body {
     overflow-x: hidden;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
 a {
     color: blue;
     text-decoration: none;

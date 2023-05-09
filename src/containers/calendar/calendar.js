@@ -3,10 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import "./calendar.css";
 import * as Utils from '../../utils';
 import CalendarDay from '../calendar-day/calendar-day';
-import CalendarViewEvent from '../calendar-view-event/calendar-view-event';
-const Calendar = ({ currentDate }) => {
+import ViewEvent from '../view-event/view-event';
+const Calendar = ({ currentDate, user }) => {
   var calendarData = Utils.CalendarUtils.getCalendarData(currentDate,Utils.StaticData.calendarData);
-  let { eventId } = useParams();
+  const { eventId } = useParams();
   const navigate = useNavigate();
   return (
     <div className="calendar">
@@ -30,7 +30,7 @@ const Calendar = ({ currentDate }) => {
           )}
         </div>
       )}
-      <CalendarViewEvent eventId={eventId}></CalendarViewEvent>
+      <ViewEvent eventId={eventId} user={user}></ViewEvent>
     </div>
   )
 }

@@ -1,0 +1,50 @@
+.view-event-title {
+    width: 350px;
+}
+
+.view-event-location-container {
+    display: flex;
+}
+
+.view-event-location {
+    width: 320px;
+    margin-left: 10px;
+    ;
+}
+
+.view-event-location-icon {
+    width: 18px;
+    height: 28px;
+    position: relative;
+    top: 8px;
+    opacity: 0.5;
+}
+
+.view-event-notes {
+    width: 350px;
+    padding-bottom: 50px;
+}
+
+.view-event-date {
+    width: 155px;
+}
+.view-event-start {
+    float:left
+}
+.view-event-end {
+    float: right;
+}
+.view-event-date-to {
+    position: relative;
+    left:12px;
+    top:9px;
+}
+.view-event-date-container {
+    padding-left: 10px;
+    display:flex;
+    width: 350px;
+}
+.view-event-date-label {
+    padding-top: 10px;
+    width: 100px;
+}
