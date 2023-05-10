@@ -5,7 +5,7 @@ import { TextArea } from "../../components/textarea/textarea.style";
 import "./view-event-details.css"
 const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventData}) => {
   return (
-    <div style={{display:((detailsActive)?'block':'none')}}>
+    <div className={((detailsActive)?'block':'hidden')}>
         <Input
           disabled={!editingEvent}
           className="view-event-title"
@@ -19,14 +19,16 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
             disabled={!editingEvent}
             className="view-event-date view-event-start"
             dateValue={eventData.startDate}
-            placeholder="Event Start Date"
+            title="Event Start Date"
+            placeholder="Start Date"
           />
           <span className='view-event-date-to'>to</span>
           <DateInput
             disabled={!editingEvent}
             className="view-event-date view-event-end"
             dateValue={eventData.endDate}
-            placeholder="Event End Date"
+            title="Event End Date"
+            placeholder="End Date"
           />
         </div>
         <br></br><br></br>
@@ -36,6 +38,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           disabled={!editingEvent}
           className="view-event-date"
           dateValue={eventData.driveUpDate}
+          title="Drive Update Date"
           placeholder="Drive Up Date"
         />
         </div>
@@ -45,6 +48,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           disabled={!editingEvent}
           className="view-event-date"
           dateValue={eventData.driveHomeDate}
+          title="Drive Home Date"
           placeholder="Drive Home Date"
         />
         </div>

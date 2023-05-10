@@ -9,25 +9,29 @@ import ViewEventGuests from "../view-event-guests/view-event-guests";
 const ViewEvent = ({ eventId, user }) => {
   const navigate = useNavigate();
   const [detailsActive, setDetailsActive] = useState(true);
-  const [updatedMyGuestStatus, setUpdatedMyGuestStatus] = useState(false);
+  const [userChangedEvent, setUserChangedEvent] = useState(false);
   const [displayEventDialog, setDisplayEventDialog] = useState(false);
   const [editingEvent, setEditingEvent] = useState(false);
+  const [isMember, setIsMember] = useState(false);
   const [eventData, setEventData] = useState({});
   const changeMaybe = function (uId, newState) {
     var tempGuestList = eventData.guests;
     tempGuestList[getGuest(uId)].maybe = newState;
     updateEventData('guests', tempGuestList);
-    setUpdatedMyGuestStatus(true);
   }
-  const removeUser = function (uId) {
+  const addRemoveUser = function (addUser, uId, name) {
     var tempGuestList = eventData.guests;
-    tempGuestList.splice(getGuest(uId), 1);
+    if (addUser) {
+      tempGuestList[Object.keys(tempGuestList).length] = { uId: uId, name: name };
+    } else {
+      tempGuestList.splice(getGuest(uId), 1);
+    }
     updateEventData('guests', tempGuestList);
-    setUpdatedMyGuestStatus(true);
   }
   const updateEventData = function (obj, data) {
-    let tempEventData = {...eventData};
+    let tempEventData = { ...eventData };
     tempEventData[obj] = data;
+    setUserChangedEvent(true);
     setEventData(tempEventData);
   }
   const getGuest = function (uId) {
@@ -51,6 +55,7 @@ const ViewEvent = ({ eventId, user }) => {
             setEventData(JSON.parse(JSON.stringify(calendarData[calEvent])));
             entryFound = true;
             setDisplayEventDialog(true);
+            setUserChangedEvent(false);
           }
         }
         if (!entryFound) {
@@ -60,18 +65,21 @@ const ViewEvent = ({ eventId, user }) => {
       }
     } else if (eventId === undefined) {
       setDisplayEventDialog(false);
-      setUpdatedMyGuestStatus(false);
+      setUserChangedEvent(false);
     }
   }, [eventId]);
   useEffect(() => {
     if (displayEventDialog) {
       var isEventOwner = false;
-      for ( var guest in eventData.guests) {
-        if (user && eventData.guests[guest].uId === user.uid && eventData.guests[guest].eventOwner) {
-            isEventOwner = true;
-            break;
+      var isEventMember = false;
+      for (var guest in eventData.guests) {
+        if (user && eventData.guests[guest].uId === user.uid) {
+          isEventOwner = eventData.guests[guest].eventOwner;
+          isEventMember = true;
+          break;
         }
       }
+      setIsMember(isEventMember);
       setEditingEvent(eventData.guestsCanModify || isEventOwner);
     }
   }, [eventData]);
@@ -93,13 +101,14 @@ const ViewEvent = ({ eventId, user }) => {
         eventData={eventData}
         editingEvent={editingEvent}
         user={user}
+        isMember={isMember}
         changeMaybe={changeMaybe}
-        removeUser={removeUser}
+        addRemoveUser={addRemoveUser}
         updateEventData={updateEventData}
       ></ViewEventGuests>
       <br></br>
-      <Button theme="black" className={"view-event-close-btn " + ((editingEvent || updatedMyGuestStatus) ? '' : 'view-event-close-btn-only')} onClick={(e) => navigate('/dashboard/calendar')}>Close</Button>
-      <Button className={"view-event-save-btn " + ((editingEvent || updatedMyGuestStatus) ? 'visible' : 'hidden')} onClick={(e) => navigate('/dashboard/calendar')}>Save</Button>
+      <Button theme="black" className={"view-event-close-btn " + ((userChangedEvent) ? '' : 'view-event-close-btn-only')} onClick={(e) => navigate('/dashboard/calendar')}>Close</Button>
+      <Button className={"view-event-save-btn " + ((userChangedEvent) ? 'visible' : 'hidden')} onClick={(e) => navigate('/dashboard/calendar')}>Save</Button>
     </dialog>
   )
 }

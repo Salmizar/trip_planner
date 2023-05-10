@@ -93,18 +93,17 @@
 }
 
 .dashboard-nav-calendar-navigation-previous {
-  width: 25px;
-  margin-top: 5px;
+  width: 23px;
+  margin-top: 3px;
   margin-left: 25px;
-  font-family: 'wingdings';
+  transform: rotate(180deg);
   float: left;
 }
 
 .dashboard-nav-calendar-navigation-next {
-  width: 25px;
-  margin-top: 5px;
+  width: 23px;
+  margin-top: 3px;
   margin-left: 5px;
-  font-family: 'wingdings';
   float: left;
 }
 

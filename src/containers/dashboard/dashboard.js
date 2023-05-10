@@ -10,28 +10,28 @@ const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
   const [name, setName] = useState("");
   let tDate = new Date();
-  const [currentDate, setCurrentDate] = useState(new Date(tDate.getFullYear(),tDate.getMonth(),1));
+  const [currentDate, setCurrentDate] = useState(new Date(tDate.getFullYear(), tDate.getMonth(), 1));
   const navigate = useNavigate();
   const location = useLocation();
-  const fetchUserName =  React.useCallback(async () => {
-      try {
-        const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-        const doc = await getDocs(q);
-        const data = doc.docs[0].data();
-        setName(data.name);
-      } catch (err) {
-        console.error(err);
-        alert("An error occured while fetching user data");
-      }
-  },[user]); 
+  const fetchUserName = React.useCallback(async () => {
+    try {
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      setName(data.name);
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  }, [user]);
   const changeTheMonth = (incriment) => {
     navigate('/dashboard/calendar');
     if (incriment == null) {
       let tDate = new Date();
-      setCurrentDate(new Date(tDate.getFullYear(),tDate.getMonth(),1));
+      setCurrentDate(new Date(tDate.getFullYear(), tDate.getMonth(), 1));
       return;
     }
-    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth()+incriment)));
+    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + incriment)));
   }
   const showUserMenu = (event) => {
     var menu = document.getElementsByClassName("dashboard-nav-user-menu")[0];
@@ -52,25 +52,35 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <nav className="dashboard-nav">
-        <button title="View the Calendar" className={'dashboard-nav-tab-calendar ' +  (location.pathname.includes('/dashboard/calendar') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/calendar")}>Calendar</button>
-        <button title="View Weather" className={'dashboard-nav-tab-weather ' +  (location.pathname.includes('/dashboard/weather') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/weather")}>Weather</button>
+        <button title="View the Calendar" className={'dashboard-nav-tab-calendar ' + (location.pathname.includes('/dashboard/calendar') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/calendar")}>
+          Calendar
+        </button>
+        <button title="View Weather" className={'dashboard-nav-tab-weather ' + (location.pathname.includes('/dashboard/weather') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/weather")}>
+          Weather
+        </button>
         <div className={(location.pathname.includes('/dashboard/calendar') ? ' dashboard-nav-calendar-navigation' : 'dashboard-nav-calendar-navigation-hidden')}>
-          <button title="Go to today" className='dashboard-nav-calendar-navigation-today' onClick={() => changeTheMonth()}>Today</button>
-          <button title="Previous month" className='dashboard-nav-calendar-navigation-previous' onClick={() => changeTheMonth(-1)}>×</button>
-          <button title="Next month"  className='dashboard-nav-calendar-navigation-next' onClick={() => changeTheMonth(1)}>Ø</button>
-          <div className="dashboard-nav-calendar-display-date">{currentDate.toLocaleDateString("en-us",{month:'long', year:'numeric'})}</div>
+          <button title="Go to today" className='dashboard-nav-calendar-navigation-today' onClick={() => changeTheMonth()}>
+            Today
+          </button>
+          <button title="Previous Month" className='dashboard-nav-calendar-navigation-previous' onClick={() => changeTheMonth(1)}>
+            <img alt="Previous Month" src="/assets/arrowIcon.png"></img>
+          </button>
+          <button title="Next month" className='dashboard-nav-calendar-navigation-next' onClick={() => changeTheMonth(1)}>
+            <img alt="Next Month" src="/assets/arrowIcon.png"></img>
+          </button>
+          <div className="dashboard-nav-calendar-display-date">{currentDate.toLocaleDateString("en-us", { month: 'long', year: 'numeric' })}</div>
         </div>
-        <button className="dashboard-nav-user" onClick={showUserMenu}>{name.substring(0,1)}</button>
-          <ul className="dashboard-nav-user-menu">
-            <li onClick={() => alert('TODO: Complete Settings Dialog')}>Settings</li>
-            <li onClick={logout}>Logout</li>
-          </ul>
+        <button className="dashboard-nav-user" onClick={showUserMenu}>{name.substring(0, 1)}</button>
+        <ul className="dashboard-nav-user-menu">
+          <li onClick={() => alert('TODO: Complete Settings Dialog')}>Settings</li>
+          <li onClick={logout}>Logout</li>
+        </ul>
       </nav>
       <Routes>
-          <Route  path="calendar/" element={<Calendar currentDate={currentDate} />} />
-          <Route  path="calendar/:eventId" element={<Calendar currentDate={currentDate} user={user} />} />
-          <Route  path="calendar/:eventId/edit" element={<Calendar currentDate={currentDate} user={user} />} />
-          <Route path="weather/*" element={<Weather />} />
+        <Route path="calendar/" element={<Calendar currentDate={currentDate} />} />
+        <Route path="calendar/:eventId" element={<Calendar currentDate={currentDate} user={user} />} />
+        <Route path="calendar/:eventId/edit" element={<Calendar currentDate={currentDate} user={user} />} />
+        <Route path="weather/*" element={<Weather />} />
       </Routes>
     </div>
   );
