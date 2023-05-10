@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Input } from "../../components/input/input.style";
 import "./view-event-guests.css"
 import CheckBox from '../../components/checkbox/checkbox';
 import * as Utils from '../../utils';
+import { Button } from "../../components/button/button.style";
 
-const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user }) => {
+const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, changeMaybe, removeUser, updateEventData }) => {
   var calColors = Utils.StaticData.calendarColors;
   var calColorKeys = Object.keys(calColors);
   return (
@@ -16,12 +17,14 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user }) => {
         onChange={(e) => console.log('do nothing')}
         placeholder="Add a Guest"
       />
+      <Button className="view-event-add-myself-btn" onClick={(e) => console.log('add myself')}>Add Myself</Button>
+      
       <br></br><br></br>
       <span>Guest</span>
       <span className={"float-right pr-10"}>Maybe</span>
       <div className='view-event-guest-list'>
-        {
-          ((eventData.guests) ? eventData.guests : []).map(guest =>
+        {eventData && eventData.guests && user &&
+          (eventData.guests).map(guest =>
             <div className='view-event-guest' key={JSON.stringify(guest)}>
               <div>
                 <div className="view-event-guest-icon" style={{ backgroundColor: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]] }}>
@@ -34,17 +37,19 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user }) => {
                 className={"view-event-guest-maybe " + ((guest.eventOwner) ? 'invisible' : 'visible')}
                 type="checkbox"
                 checked={guest.maybe}
-                onChange={(e) => console.log('do nothing')}
+                onChange={(e) => changeMaybe(guest.uId, e.target.checked)}
                 title="Maybe coming"
               ></CheckBox>
               <img
                 alt='removeUser'
                 title='Remove Guest'
-                className={'view-event-guest-remove ' + (((user.uid === guest.uId || editingEvent) && !guest.eventOwner) ? 'visible cursor-pointer' : 'invisible')}
-                src={'/assets/removeIcon.png'}></img>
+                className={'view-event-guest-remove ' + ((user && (user.uid === guest.uId || editingEvent) && !guest.eventOwner) ? 'visible cursor-pointer' : 'invisible')}
+                src={'/assets/removeIcon.png'}
+                onClick={(e) => removeUser(guest.uId)}></img>
               <div className={'view-event-guest-owner ' + ((guest.eventOwner) ? 'visible' : 'invisible')}>(Event Owner)</div>
             </div>
-          )}
+          )
+        }
       </div>
       <br></br>
       <span>Marching Orders</span>
@@ -54,7 +59,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user }) => {
         disabled={!editingEvent}
         type="checkbox"
         checked={eventData.canInvite}
-        onChange={(e) => console.log('do nothing')}
+        onChange={(e) => updateEventData('canInvite',e.target.checked)}
         title="Invite other Guests"
         label="Invite Others"
       ></CheckBox>
@@ -62,7 +67,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user }) => {
         disabled={!editingEvent}
         type="checkbox"
         checked={eventData.guestsCanModify}
-        onChange={(e) => console.log('do nothing')}
+        onChange={(e) => updateEventData('guestsCanModify',e.target.checked)}
         title="Can Guests Modify this Event"
         label="Guests can modify this Event"
       ></CheckBox>

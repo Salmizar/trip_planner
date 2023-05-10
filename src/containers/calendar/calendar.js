@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import "./calendar.css";
 import * as Utils from '../../utils';
 import CalendarDay from '../calendar-day/calendar-day';
@@ -7,7 +7,6 @@ import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   var calendarData = Utils.CalendarUtils.getCalendarData(currentDate,Utils.StaticData.calendarData);
   const { eventId } = useParams();
-  const navigate = useNavigate();
   return (
     <div className="calendar">
       <div className="calendar-days-of-week-container">
@@ -26,6 +25,7 @@ const Calendar = ({ currentDate, user }) => {
               events={day[1].dayEvents}
               isThisToday={day[1].isThisToday}
               isThisMonth={day[1].isThisMonth}
+              user={user}
             ></CalendarDay>
           )}
         </div>

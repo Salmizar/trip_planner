@@ -1,7 +1,7 @@
 import React from 'react'
 import "./calendar-day.css";
 import CalendarEvent from '../calendar-event/calendar-event';
-const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events}) => {
+const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events, user}) => {
     return (
         <div className={((isThisMonth) ? "calendar-day-container" : "calendar-day-container-notthismonth")}>
             <div className={((isThisToday) ? "calendar-date-of-week-today" : "calendar-date-of-week")}>
@@ -11,7 +11,7 @@ const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events}) => {
                 {Object.values(events).map((event, index) =>
                 { 
                     if (event.eventStartingToday || event.eventStartOfNextWeek)
-                        return <CalendarEvent key={JSON.stringify('-' + day + '-' + month + '-' + year + '_' + index)} eventIndex={index} event={event}></CalendarEvent>
+                        return <CalendarEvent key={JSON.stringify('-' + day + '-' + month + '-' + year + '_' + index)} eventIndex={index} user={user} event={event}></CalendarEvent>
                 }
                 )}
             </div>

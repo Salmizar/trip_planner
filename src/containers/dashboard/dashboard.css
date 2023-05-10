@@ -1,136 +1,156 @@
 .dashboard {
-    width:100vw;
-    height: 100vh;
-  }
-  .dashboard-nav {
-    border-bottom: 1px solid rgb(218 220 224);
-    height: 65px;
-  }
-  
-  .dashboard-nav-tab-calendar,
-  .dashboard-nav-tab-weather {
-    border:1px solid darkgray;
-    border-bottom: 1px solid rgb(218 220 224);
-    background-color: lightgray;
-    text-align: center;
-    width: 100px;
-    height:27px;
-    top:38px;
-    position: absolute;
-    border-top-left-radius: 10px;
-    border-top-Right-radius: 10px;
-  }
-  .dashboard-nav-tab-calendar {
-    left:10px;
-  }
-  .dashboard-nav-tab-weather {
-    left:120px;
-  }
-  .dashboard-nav-tab-active {
-    border: 1px solid rgb(218 220 224);
-    
-    box-shadow: 0px -3px 10px -5px rgba(0,0,0,0.2);
-    background-color: #fff;
-    border-bottom: darkgrey;
-    cursor: default;
-  }
-  .dashboard-nav-calendar-navigation-hidden {
-    display: none;
-  }
+  width: 100vw;
+  height: 100vh;
+}
+
+.dashboard-nav {
+  border-bottom: 1px solid rgb(218 220 224);
+  height: 65px;
+}
+
+.dashboard-nav-tab-calendar,
+.dashboard-nav-tab-weather {
+  border: 1px solid darkgray;
+  border-bottom: 1px solid rgb(218 220 224);
+  background-color: lightgray;
+  text-align: center;
+  width: 100px;
+  height: 27px;
+  top: 38px;
+  position: absolute;
+  border-top-left-radius: 10px;
+  border-top-Right-radius: 10px;
+}
+
+.dashboard-nav-tab-calendar {
+  left: 10px;
+}
+
+.dashboard-nav-tab-weather {
+  left: 120px;
+}
+
+.dashboard-nav-tab-active {
+  border: 1px solid rgb(218 220 224);
+
+  box-shadow: 0px -3px 10px -5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-bottom: darkgrey;
+  cursor: default;
+}
+
+.dashboard-nav-calendar-navigation-hidden {
+  display: none;
+}
+
+.dashboard-nav-calendar-navigation {
+  position: absolute;
+  width: 300px;
+  top: 5px;
+  left: 20px;
+  transition: left 0.5s, top 0.3s;
+  transition-timing-function: ease-in;
+}
+
+@media screen and (min-width: 600px) {
   .dashboard-nav-calendar-navigation {
     position: absolute;
-    width: 300px;
-    top:5px;
-    left:20px;
-    transition: left 0.5s, top 0.3s;
+    top: 15px;
+    left: 300px;
+    transition: left 0.3s, top 0.5s;
     transition-timing-function: ease-in;
   }
-  @media screen and (min-width: 600px) {
-    .dashboard-nav-calendar-navigation {
-      position: absolute;
-      top:15px;
-      left:300px;
-      transition: left 0.3s, top 0.5s;
-      transition-timing-function: ease-in;
-    }
-    .dashboard-nav-calendar-navigation-today {
-      transform: scale(1.2);
-    }    
-    .dashboard-nav-calendar-display-date {
-      margin-top:5px;
-    }
-  }
-  .dashboard-nav-calendar-navigation-today:hover {
-    background-color: #0e65f1;
-    transition: transform 0.1s;
-  }
-  .dashboard-nav-calendar-navigation-today:active {
-    background-color: #0a47a9;
-    transition: transform 0.1s;
-    transform: scale(1.15);
-  }
+
   .dashboard-nav-calendar-navigation-today {
-    float: left;
-    padding: 0px 5px 2px 5px;
-    color: white;
-    background-color: #4285f4;
-    border-radius: 5px;
-    margin-top: 2px;
-    transition: transform 0.5s, background-color 0.1s;
-    transition-timing-function: ease-in;
+    transform: scale(1.2);
   }
-  .dashboard-nav-calendar-navigation-previous {
-    width:25px;
-    margin-top:5px;
-    margin-left: 25px;
-    font-family: 'wingdings';
-    float:left;
-  }
-  .dashboard-nav-calendar-navigation-next {
-    width:25px;
-    margin-top:5px;
-    margin-left: 5px;
-    font-family: 'wingdings';
-    float:left;
-  }
+
   .dashboard-nav-calendar-display-date {
-    margin-top:2px;
-    padding-left: 20px;
-    font-size: 18px;
-    cursor: default;
-    float:left;
-    transition: margin 0.5s;
+    margin-top: 5px;
   }
-  .dashboard-nav-user {
-    height: 36px;
-    width: 36px;
-    background-color: lightsteelblue;
-    border-radius: 50%;
-    display: inline-block;
-    font-weight: bold;
-    position: absolute;
-    right:14px;
-    top:14px;
-  }
-  .dashboard-nav-user-menu {
-    visibility: hidden;
-    width: 90px;
-    background-color: #f1f1f1;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    background-color: white;
-    position: absolute;
-    z-index: 1;
-    right:37px;
-    top:35px;
-  }
-  .dashboard-nav-user-menu-visible {
-    visibility: visible;
-  }
-  .dashboard-nav-user-menu li {
-    padding: 5px 20px;
-  }
-  .dashboard-nav-user-menu li:hover {
-    background-color: #f1f1f1;
-    cursor:pointer;
+}
+
+.dashboard-nav-calendar-navigation-today:hover {
+  background-color: #0e65f1;
+  transition: transform 0.1s;
+}
+
+.dashboard-nav-calendar-navigation-today:active {
+  background-color: #0a47a9;
+  transition: transform 0.1s;
+  transform: scale(1.15);
+}
+
+.dashboard-nav-calendar-navigation-today {
+  float: left;
+  padding: 0px 5px 2px 5px;
+  color: white;
+  background-color: #4285f4;
+  border-radius: 5px;
+  margin-top: 2px;
+  transition: transform 0.5s, background-color 0.1s;
+  transition-timing-function: ease-in;
+}
+
+.dashboard-nav-calendar-navigation-previous {
+  width: 25px;
+  margin-top: 5px;
+  margin-left: 25px;
+  font-family: 'wingdings';
+  float: left;
+}
+
+.dashboard-nav-calendar-navigation-next {
+  width: 25px;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-family: 'wingdings';
+  float: left;
+}
+
+.dashboard-nav-calendar-display-date {
+  margin-top: 2px;
+  padding-left: 20px;
+  font-size: 18px;
+  cursor: default;
+  float: left;
+  transition: margin 0.5s;
+}
+
+.dashboard-nav-user {
+  height: 36px;
+  width: 36px;
+  background-color: lightsteelblue;
+  border-radius: 50%;
+  display: inline-block;
+  font-weight: bold;
+  position: absolute;
+  right: 14px;
+  top: 14px;
+}
+
+.dashboard-nav-user-menu {
+  visibility: hidden;
+  width: 90px;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+  right: 37px;
+  top: 35px;
+}
+
+.dashboard-nav-user-menu-visible {
+  visibility: visible;
+}
+
+.dashboard-nav-user-menu li {
   padding: 5px 20px;
-  }
+}
+
+.dashboard-nav-user-menu li:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+  padding: 5px 20px;
+}
