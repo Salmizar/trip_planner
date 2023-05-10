@@ -1740,12 +1740,17 @@ export const calendarData = [
         location: 'someLocationText',
         notes: 'ewfklqm flk4mf ;l3k4 some notes about the trip',
         canInvite: true,
-        guestsCanModify: false,
+        guestsCanModify: true,
         guests: [
             {
                 uId: 'celkdje2edlk2',
                 name: 'Ryan Ellis',
                 eventOwner: true
+            },
+            {
+                uId: 'scdscecdsc_lkdje2edlk2',
+                name: 'Richie Drunkie',
+                maybe: true
             }
         ]
     },

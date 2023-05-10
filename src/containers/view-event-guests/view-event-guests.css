@@ -1,11 +1,13 @@
 .view-event-add-guest {
     width: 215px;
 }
+.view-event-add-guest-full {
+    width: 350px;
+}
 .view-event-add-myself-btn {
 float: right;
 }
 .view-event-guest-list {
-    border: 1px solid red;
     overflow-y: auto;
     overflow-x: hidden;
     height:200px;

@@ -5,20 +5,19 @@ import CheckBox from '../../components/checkbox/checkbox';
 import * as Utils from '../../utils';
 import { Button } from "../../components/button/button.style";
 
-const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, changeMaybe, removeUser, updateEventData }) => {
+const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMember, changeMaybe, addRemoveUser, updateEventData }) => {
   var calColors = Utils.StaticData.calendarColors;
   var calColorKeys = Object.keys(calColors);
   return (
-    <div style={{ display: ((!detailsActive) ? 'block' : 'none') }}>
+    <div className={((!detailsActive) ? 'block' : 'hidden') }>
       <Input
         disabled={!editingEvent}
-        className="view-event-add-guest"
+        className={"view-event-add-guest"+((isMember)?' view-event-add-guest-full':'')}
         type="text"
         onChange={(e) => console.log('do nothing')}
         placeholder="Add a Guest"
       />
-      <Button className="view-event-add-myself-btn" onClick={(e) => console.log('add myself')}>Add Myself</Button>
-      
+    <Button className={"view-event-add-myself-btn"+((isMember)?' hidden':'')} onClick={(e) => addRemoveUser(true, user.uid, user.displayName)}>Add Myself</Button>
       <br></br><br></br>
       <span>Guest</span>
       <span className={"float-right pr-10"}>Maybe</span>
@@ -45,7 +44,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, changeM
                 title='Remove Guest'
                 className={'view-event-guest-remove ' + ((user && (user.uid === guest.uId || editingEvent) && !guest.eventOwner) ? 'visible cursor-pointer' : 'invisible')}
                 src={'/assets/removeIcon.png'}
-                onClick={(e) => removeUser(guest.uId)}></img>
+                onClick={(e) => addRemoveUser(false,guest.uId)}></img>
               <div className={'view-event-guest-owner ' + ((guest.eventOwner) ? 'visible' : 'invisible')}>(Event Owner)</div>
             </div>
           )
