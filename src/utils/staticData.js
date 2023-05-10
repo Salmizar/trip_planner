@@ -1612,17 +1612,17 @@ export const calendarData = [
                 eventOwner: true
             },
             {
-                uID: '3',
+                uId: '3',
                 name: 'Trevor Delam',
                 maybe: true
             },
             {
-                uID: '4',
+                uId: '4',
                 name: 'Eric La May',
                 maybe: true
             },
             {
-                uID: '5',
+                uId: '5',
                 name: 'Kyle Wylie'
             }
         ]
@@ -1743,8 +1743,8 @@ export const calendarData = [
         guestsCanModify: false,
         guests: [
             {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
+                uId: 'celkdje2edlk2',
+                name: 'Ryan Ellis',
                 eventOwner: true
             }
         ]
@@ -1824,7 +1824,7 @@ export const calendarData = [
                 eventOwner: true
             },
             {
-                uID: '2',
+                uId: '2',
                 name: 'Chantal Perreault'
             }
         ]

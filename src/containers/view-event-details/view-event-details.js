@@ -3,15 +3,15 @@ import { Input } from "../../components/input/input.style";
 import DateInput from "../../components/date-input/date-input";
 import { TextArea } from "../../components/textarea/textarea.style";
 import "./view-event-details.css"
-const ViewEventDetails = ({eventData, editingEvent, detailsActive}) => {
+const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventData}) => {
   return (
     <div style={{display:((detailsActive)?'block':'none')}}>
         <Input
           disabled={!editingEvent}
           className="view-event-title"
           type="text"
-          defaultValue={eventData.name}
-          onChange={(e) => console.log('do nothing')}
+          value={eventData.name || ''}
+          onChange={(e) => updateEventData('name', e.target.value)}
           placeholder="Event Title"
         />
         <div>
@@ -55,8 +55,8 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive}) => {
             disabled={!editingEvent}
             className="view-event-location"
             type="text"
-            defaultValue={eventData.location}
-            onChange={(e) => console.log('do nothing')}
+            value={eventData.location || ''}
+            onChange={(e) => updateEventData('location', e.target.value)}
             placeholder="Location Information"
           />
         </div>
@@ -64,8 +64,8 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive}) => {
           disabled={!editingEvent}
           className="view-event-notes"
           type="text"
-          defaultValue={eventData.notes}
-          onChange={(e) => console.log('do nothing')}
+          value={eventData.notes || ''}
+          onChange={(e) => updateEventData('notes', e.target.value)}
           placeholder="Misc Notes"
           rows={3}
         />
