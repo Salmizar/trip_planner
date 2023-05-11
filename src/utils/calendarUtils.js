@@ -91,7 +91,7 @@ const getEmptyEventSlot = function (calendarDayEvents) {
     }
     return 0;
 }
-const getDatesOfTheMonth = function (currentDate) {
+export const getDatesOfTheMonth = function (currentDate) {
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
     const todaysDate = new Date();
     const datesOfTheMonth = {};

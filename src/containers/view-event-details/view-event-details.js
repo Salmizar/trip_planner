@@ -17,8 +17,10 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
         <div>
           <DateInput
             disabled={!editingEvent}
+            invalid={true}
             className="view-event-date view-event-start"
             dateValue={eventData.startDate}
+            onChange={(newValue) => updateEventData('startDate', newValue.getTime())}
             title="Event Start Date"
             placeholder="Start Date"
           />
@@ -27,6 +29,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
             disabled={!editingEvent}
             className="view-event-date view-event-end"
             dateValue={eventData.endDate}
+            onChange={(newValue) => updateEventData('endDate', newValue.getTime())}
             title="Event End Date"
             placeholder="End Date"
           />
@@ -38,6 +41,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           disabled={!editingEvent}
           className="view-event-date"
           dateValue={eventData.driveUpDate}
+          onChange={(newValue) => updateEventData('driveUpDate', newValue.getTime())}
           title="Drive Update Date"
           placeholder="Drive Up Date"
         />
@@ -48,6 +52,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           disabled={!editingEvent}
           className="view-event-date"
           dateValue={eventData.driveHomeDate}
+          onChange={(newValue) => updateEventData('driveHomeDate', newValue.getTime())}
           title="Drive Home Date"
           placeholder="Drive Home Date"
         />
