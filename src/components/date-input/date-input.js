@@ -7,19 +7,19 @@ const DateInput = ({ dateValue, title, placeHolder, onChange, className, disable
   const [pickerDate, setPickerDate] = useState(new Date(0));
   const [datesOfMonth, setDatesOfMonth] = useState({});
   const dateInputContainer = createRef();
-  const toggleTheMonth = (incriment) => {
+  const ToggleTheMonth = (incriment) => {
     setPickerDate(new Date(pickerDate.setMonth(pickerDate.getMonth() + incriment)));
   }
-  const toggleDatePicker = () => {
+  const ToggleDatePicker = () => {
     if (dateInputContainer.current.classList.contains('date-input-container-visible')) {
       dateInputContainer.current.classList.remove('date-input-container-visible');
     } else {
       dateInputContainer.current.classList.add('date-input-container-visible');
     }
   }
-  const changeDisplayDate = (year, month, day) => {
+  const ChangeDisplayDate = (year, month, day) => {
     setDisplayDate(new Date(year, month, day));
-    toggleDatePicker();
+    ToggleDatePicker();
     if (onChange) {
       onChange(new Date(year, month, day));
     }
@@ -40,16 +40,16 @@ const DateInput = ({ dateValue, title, placeHolder, onChange, className, disable
       className={'date-input-display-date' +
         ((disabled) ? ' date-input-display-date-disabled' : '')+
         ((error)? ' date-input-display-date-error':'' )
-      } onClick={toggleDatePicker}>
+      } onClick={ToggleDatePicker}>
         {((displayDate) ? displayDate.toDateString() : placeHolder && title)}
       </div>
       <div ref={dateInputContainer} className="date-input-container">
         <nav className='date-input-nav'>
           {pickerDate.toLocaleDateString("en-us", { month: 'long', year: 'numeric' })}
-          <button title="Next month" className='date-input-nav-next' onClick={() => toggleTheMonth(1)}>
+          <button title="Next month" className='date-input-nav-next' onClick={() => ToggleTheMonth(1)}>
             <img alt="Next Month" src="/assets/arrowIcon.png"></img>
           </button>
-          <button title="Previous Month" className='date-input-nav-previous' onClick={() => toggleTheMonth(-1)}>
+          <button title="Previous Month" className='date-input-nav-previous' onClick={() => ToggleTheMonth(-1)}>
             <img alt="Previous Month" src="/assets/arrowIcon.png"></img>
           </button>
         </nav>
@@ -68,7 +68,7 @@ const DateInput = ({ dateValue, title, placeHolder, onChange, className, disable
                     ((day[1].isThisToday) ? ' date-input-today' : '' +
                       ((day[1].year === displayDate.getFullYear() && day[1].month === displayDate.getMonth() && day[1].dayOfMonth === displayDate.getDate()) ? ' date-input-selected' : '')
                     )}
-                  onClick={() => changeDisplayDate(day[1].year, day[1].month, day[1].dayOfMonth)}
+                  onClick={() => ChangeDisplayDate(day[1].year, day[1].month, day[1].dayOfMonth)}
                 >
                   {JSON.stringify(day[1].dayOfMonth)}
                 </div>

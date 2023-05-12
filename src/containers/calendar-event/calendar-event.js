@@ -8,7 +8,12 @@ const CalendarEvent = ({ event, eventIndex, user}) => {
     var cEvent = event;
     var driveUpLength = (cEvent.event.startDate - cEvent.event.driveUpDate) / 86400000;
     var driveHomeLength = (cEvent.event.driveHomeDate - cEvent.event.endDate) / 86400000;
-    const canEditEvent = function() {
+    const OpenEvent = (e) => {
+        e.stopPropagation();
+        navigate("/dashboard/calendar/" + cEvent.event.eId);
+    }
+    const CanEditEvent = (e) => {
+        e.stopPropagation();
         if (cEvent.event.guestsCanModify) {
             navigate("/dashboard/calendar/" + cEvent.event.eId+'/edit');
         } else {
@@ -23,8 +28,8 @@ const CalendarEvent = ({ event, eventIndex, user}) => {
     return (
         <div className={'calendar-event ' + ((!isNaN(eventId) && parseInt(eventId) === parseInt(cEvent.event.eId)) ? 'calendar-event-selected' : '')}
             style={{ backgroundColor: event.color, width: 'calc(100vw / 7 * ' + event.eventLength + ')', top: (eventIndex * 24) + 'px' }}
-            onClick={() => navigate("/dashboard/calendar/" + cEvent.event.eId)}
-            onDoubleClick={() => canEditEvent()}
+            onClick={(e) => OpenEvent(e)}
+            onDoubleClick={(e) => CanEditEvent(e)}
         >
             <div className="calendar-event-driveUp" style={{ visibility: ((cEvent.eventStartingToday) ? 'visible' : 'hidden'), width: 'calc(100vw / 7 * ' + driveUpLength + ')' }}></div>
             <div className="calendar-event-title">{event.name}</div>

@@ -77,7 +77,7 @@ const Dashboard = () => {
         </ul>
       </nav>
       <Routes>
-        <Route path="calendar/" element={<Calendar currentDate={currentDate} />} />
+        <Route path="calendar/" element={<Calendar currentDate={currentDate} user={user} />} />
         <Route path="calendar/:eventId" element={<Calendar currentDate={currentDate} user={user} />} />
         <Route path="calendar/:eventId/edit" element={<Calendar currentDate={currentDate} user={user} />} />
         <Route path="weather/*" element={<Weather />} />

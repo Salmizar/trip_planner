@@ -10,6 +10,14 @@
     top: 20px;
 }
 
+.view-event-nav {
+    border-bottom: 1px solid rgb(218 220 224);
+    height: 22px;
+    position: relative;
+    left: -20px;
+    width: 390px;
+}
+
 .view-event-nav-tab-details,
 .view-event-nav-tab-guests {
     border: 1px solid darkgray;
@@ -39,26 +47,12 @@
     border-bottom: darkgrey;
     cursor: default;
 }
-.view-event-save-btn{
-    position: absolute;
-    bottom: 20px;
-    left: 200px;
-    width: 100px;
-}
-.view-event-close-btn {
-    position: absolute;
-    width: 100px;
-    left: 70px;
-    bottom: 20px;
-}
-.view-event-close-btn-only {
-    left: 130px;
-}
 
-.view-event-nav {
-    border-bottom: 1px solid rgb(218 220 224);
-    height: 22px;
-    position: relative;
-    left: -20px;
-    width: 390px;
+.view-event-btn-container {
+text-align: center;
+
+}
+.view-event-btn-container button {
+    margin:0px 10px 0px;
+    width:90px;
 }
