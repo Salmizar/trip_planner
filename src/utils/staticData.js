@@ -1555,6 +1555,33 @@ export const staticAPIData = {
         "sunset": 1682380753
     }
 };
+export const newEventObject = function(newEventDate) {
+    
+    let calColors = calendarColors;
+    let calColorKeys = Object.keys(calColors);
+    let eId = calendarData.length + 1;
+    return {
+    name: 'New Trip',
+    eId: eId,
+    startDate: newEventDate.getTime(),
+    endDate: newEventDate.getTime(),
+    driveUpDate: newEventDate.getTime(),
+    driveHomeDate: newEventDate.getTime(),
+    color: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]],
+    location: '',
+    notes: '',
+    newEvent: true,
+    canInvite: false,
+    guestsCanModify: false,
+    guests: [
+        {
+            uId: 0,
+            name: '',
+            eventOwner: true
+        }
+    ]
+}
+}
 export const calendarData = [
     {
         name: '2 Day Trip',

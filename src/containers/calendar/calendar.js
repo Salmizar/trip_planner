@@ -1,23 +1,51 @@
-import { React, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { React, createElement, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import "./calendar.css";
 import * as Utils from '../../utils';
 import CalendarDay from '../calendar-day/calendar-day';
 import ViewEvent from '../view-event/view-event';
+import { createEvent } from '@testing-library/react';
 const Calendar = ({ currentDate, user }) => {
-  const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate,Utils.StaticData.calendarData) );
+  const navigate = useNavigate();
+  const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
   const { eventId } = useParams();
-  const saveEvent = function(eventData) {
+  const SaveEvent = function (eventData) {
     for (var eKey in Object.keys(Utils.StaticData.calendarData)) {
       if (eventData.eId === Utils.StaticData.calendarData[eKey].eId) {
-        Utils.StaticData.calendarData[eKey] = {...eventData};
-        setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate,Utils.StaticData.calendarData) );
+        Utils.StaticData.calendarData[eKey] = { ...eventData };
+        setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
       }
     }
+    navigate("/dashboard/calendar");
+  }
+  const DeleteEvent = function (eventData) {
+    if (window.confirm('Are you sure you want to delete this?')) {
+      for (var eKey=0;eKey < Utils.StaticData.calendarData.length;eKey++) {
+        if (eventData.eId === Utils.StaticData.calendarData[eKey].eId) {
+          Utils.StaticData.calendarData.splice(eKey,1);
+          setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+        }
+      }
+      navigate("/dashboard/calendar");
+    }
+  }
+  const CreateEvent = function (year, month, day) {
+    var newEventDate = new Date(year, month, day);
+    var newEvent = {...Utils.StaticData.newEventObject(newEventDate)};
+    newEvent.guests = [
+      {
+        uId: user.uid,
+        name: user.displayName,
+        eventOwner: true
+      }
+    ]
+    Utils.StaticData.calendarData.push(newEvent);
+    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+    navigate("/dashboard/calendar/" + newEvent.eId + '/edit');
   }
   useEffect(() => {
-    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate,Utils.StaticData.calendarData) );
-  },[currentDate, Utils.StaticData.calendarData]);
+    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+  }, [currentDate, Utils.StaticData.calendarData]);
   return (
     <div className="calendar">
       <div className="calendar-days-of-week-container">
@@ -37,11 +65,12 @@ const Calendar = ({ currentDate, user }) => {
               isThisToday={day[1].isThisToday}
               isThisMonth={day[1].isThisMonth}
               user={user}
+              CreateEvent={CreateEvent}
             ></CalendarDay>
           )}
         </div>
       )}
-      <ViewEvent eventId={eventId} user={user} saveEvent={saveEvent}></ViewEvent>
+      <ViewEvent eventId={eventId} user={user} SaveEvent={SaveEvent} DeleteEvent={DeleteEvent}></ViewEvent>
     </div>
   )
 }
