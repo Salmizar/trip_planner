@@ -7,8 +7,9 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
   return (
     <div className={((detailsActive)?'block':'hidden')}>
         <Input
-          disabled={!editingEvent}
           className="view-event-title"
+          theme={((!editingEvent)?'disabled':((eventData && eventData.name && eventData.name.length>0)?'enabled':'error'))}
+          error={true}
           type="text"
           value={eventData.name || ''}
           onChange={(e) => updateEventData('name', e.target.value)}
@@ -17,16 +18,17 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
         <div>
           <DateInput
             disabled={!editingEvent}
-            invalid={true}
+            error={eventData.startDate > eventData.endDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
             className="view-event-date view-event-start"
             dateValue={eventData.startDate}
             onChange={(newValue) => updateEventData('startDate', newValue.getTime())}
             title="Event Start Date"
             placeholder="Start Date"
           />
-          <span className='view-event-date-to'>to</span>
+          <span className='view-event-date-to'>to </span>
           <DateInput
             disabled={!editingEvent}
+            error={eventData.startDate > eventData.endDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
             className="view-event-date view-event-end"
             dateValue={eventData.endDate}
             onChange={(newValue) => updateEventData('endDate', newValue.getTime())}
@@ -39,6 +41,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           <div className="view-event-date-label">Drive Up:</div>
           <DateInput
           disabled={!editingEvent}
+          error={eventData.driveUpDate > eventData.driveHomeDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
           className="view-event-date"
           dateValue={eventData.driveUpDate}
           onChange={(newValue) => updateEventData('driveUpDate', newValue.getTime())}
@@ -50,6 +53,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           <div className="view-event-date-label">Drive Home:</div>
           <DateInput
           disabled={!editingEvent}
+          error={eventData.driveUpDate > eventData.driveHomeDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
           className="view-event-date"
           dateValue={eventData.driveHomeDate}
           onChange={(newValue) => updateEventData('driveHomeDate', newValue.getTime())}

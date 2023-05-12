@@ -62,7 +62,7 @@ const Dashboard = () => {
           <button title="Go to today" className='dashboard-nav-calendar-navigation-today' onClick={() => changeTheMonth()}>
             Today
           </button>
-          <button title="Previous Month" className='dashboard-nav-calendar-navigation-previous' onClick={() => changeTheMonth(1)}>
+          <button title="Previous Month" className='dashboard-nav-calendar-navigation-previous' onClick={() => changeTheMonth(-1)}>
             <img alt="Previous Month" src="/assets/arrowIcon.png"></img>
           </button>
           <button title="Next month" className='dashboard-nav-calendar-navigation-next' onClick={() => changeTheMonth(1)}>

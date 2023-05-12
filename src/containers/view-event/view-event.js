@@ -6,7 +6,7 @@ import { Button } from "../../components/button/button.style";
 import ViewEventDetails from "../view-event-details/view-event-details";
 import ViewEventGuests from "../view-event-guests/view-event-guests";
 
-const ViewEvent = ({ eventId, user }) => {
+const ViewEvent = ({ eventId, user, saveEvent }) => {
   const navigate = useNavigate();
   const [detailsActive, setDetailsActive] = useState(true);
   const [userChangedEvent, setUserChangedEvent] = useState(false);
@@ -34,13 +34,31 @@ const ViewEvent = ({ eventId, user }) => {
     setUserChangedEvent(true);
     setEventData(tempEventData);
   }
-  const getGuest = function (uId) {
+  const getGuest = (uId) => {
     for (var guest in eventData.guests) {
       if (uId === eventData.guests[guest].uId) {
         return guest;
       }
     }
     return undefined;
+  }
+  const saveChanges = function() {
+    if (eventData.name.length===0) {
+      alert('The Event Title is missing');
+    } else if (eventData.startDate > eventData.endDate) {
+      alert('Trip start date is before end Date');
+    } else if (eventData.startDate < eventData.driveUpDate) {
+      alert('Trip start date is before you drive up');
+    } else if (eventData.startDate > eventData.driveHomeDate) {
+      alert('Trip start date is after you drive home');
+    } else if (eventData.endDate > eventData.driveHomeDate) {
+      alert('Trip end date is after you drive home');
+    } else if (eventData.endDate < eventData.driveUpDate) {
+      alert('Trip end date is before you drive up');
+    } else {
+      saveEvent(eventData);
+      navigate("/dashboard/calendar");
+    }
   }
   useEffect(() => {
     if (eventId != undefined) {
@@ -82,7 +100,7 @@ const ViewEvent = ({ eventId, user }) => {
       setIsMember(isEventMember);
       setEditingEvent(eventData.guestsCanModify || isEventOwner);
     }
-  }, [eventData]);
+  }, [eventData, user]);
   return (
     <dialog style={{ display: (displayEventDialog) ? 'block' : 'none' }} className="view-event">
       <nav className="view-event-nav">
@@ -108,7 +126,7 @@ const ViewEvent = ({ eventId, user }) => {
       ></ViewEventGuests>
       <br></br>
       <Button theme="black" className={"view-event-close-btn " + ((userChangedEvent) ? '' : 'view-event-close-btn-only')} onClick={(e) => navigate('/dashboard/calendar')}>Close</Button>
-      <Button className={"view-event-save-btn " + ((userChangedEvent) ? 'visible' : 'hidden')} onClick={(e) => navigate('/dashboard/calendar')}>Save</Button>
+      <Button className={"view-event-save-btn " + ((userChangedEvent) ? 'visible' : 'hidden')} onClick={saveChanges}>Save</Button>
     </dialog>
   )
 }

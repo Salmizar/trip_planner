@@ -6,6 +6,7 @@
     position: relative;
     cursor: pointer;
 }
+
 .date-input-container {
     position: absolute;
     left: -5px;
@@ -57,11 +58,7 @@
     font-size: 12px;
     overflow: hidden;
     justify-content: center;
-
 }
-
-
-
 
 .date-input-display-date {
     padding: 10px;
@@ -75,14 +72,11 @@
     background-color: #f6f6f6;
     cursor: default;
 }
-.date-input-display-date-invalid {
+
+.date-input-display-date-error {
     border: 1px solid red;
     background-color: #ffe6e6;
 }
-
-
-
-
 
 .date-input-week-container {
     display: flex;

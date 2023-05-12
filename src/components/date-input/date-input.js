@@ -2,7 +2,7 @@ import React, { createRef, useState, useEffect } from 'react'
 import "./date-input.css"
 import * as Utils from "../../utils";
 
-const DateInput = ({ dateValue, title, placeHolder, onChange, className, disabled, invalid }) => {
+const DateInput = ({ dateValue, title, placeHolder, onChange, className, disabled, error }) => {
   const [displayDate, setDisplayDate] = useState(new Date(0));
   const [pickerDate, setPickerDate] = useState(new Date(0));
   const [datesOfMonth, setDatesOfMonth] = useState({});
@@ -39,7 +39,7 @@ const DateInput = ({ dateValue, title, placeHolder, onChange, className, disable
       <div title={title} 
       className={'date-input-display-date' +
         ((disabled) ? ' date-input-display-date-disabled' : '')+
-        ((invalid)? ' date-input-display-date-invalid':'' )
+        ((error)? ' date-input-display-date-error':'' )
       } onClick={toggleDatePicker}>
         {((displayDate) ? displayDate.toDateString() : placeHolder && title)}
       </div>
