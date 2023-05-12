@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Input } from "../../components/input/input.style";
 import "./view-event-guests.css"
 import CheckBox from '../../components/checkbox/checkbox';
 import * as Utils from '../../utils';
 import { Button } from "../../components/button/button.style";
-
 const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMember, changeMaybe, addRemoveUser, updateEventData }) => {
   var calColors = Utils.StaticData.calendarColors;
   var calColorKeys = Object.keys(calColors);
   return (
-    <div className={((!detailsActive) ? 'block' : 'hidden') }>
+    <div className={((!detailsActive) ? 'block' : 'hidden')}>
       <Input
         disabled={!editingEvent}
-        className={"view-event-add-guest"+((isMember)?' view-event-add-guest-full':'')}
+        className={"view-event-add-guest" + ((isMember) ? ' view-event-add-guest-full' : '')}
         type="text"
         onChange={(e) => console.log('do nothing')}
         placeholder="Add a Guest"
       />
-    <Button className={"view-event-add-myself-btn"+((isMember)?' hidden':'')} onClick={(e) => addRemoveUser(true, user.uid, user.displayName)}>Add Myself</Button>
+      <Button className={"view-event-add-myself-btn" + ((isMember) ? ' hidden' : '')} onClick={(e) => addRemoveUser(true, user.uid, user.displayName)}>Add Myself</Button>
       <br></br><br></br>
       <span>Guest</span>
       <span className={"float-right pr-10"}>Maybe</span>
@@ -44,7 +43,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
                 title='Remove Guest'
                 className={'view-event-guest-remove ' + ((user && (user.uid === guest.uId || editingEvent) && !guest.eventOwner) ? 'visible cursor-pointer' : 'invisible')}
                 src={'/assets/removeIcon.png'}
-                onClick={(e) => addRemoveUser(false,guest.uId)}></img>
+                onClick={(e) => addRemoveUser(false, guest.uId)}></img>
               <div className={'view-event-guest-owner ' + ((guest.eventOwner) ? 'visible' : 'invisible')}>(Event Owner)</div>
             </div>
           )
@@ -58,7 +57,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
         disabled={!editingEvent}
         type="checkbox"
         checked={eventData.canInvite}
-        onChange={(e) => updateEventData('canInvite',e.target.checked)}
+        onChange={(e) => updateEventData('canInvite', e.target.checked)}
         title="Invite other Guests"
         label="Invite Others"
       ></CheckBox>
@@ -66,7 +65,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
         disabled={!editingEvent}
         type="checkbox"
         checked={eventData.guestsCanModify}
-        onChange={(e) => updateEventData('guestsCanModify',e.target.checked)}
+        onChange={(e) => updateEventData('guestsCanModify', e.target.checked)}
         title="Can Guests Modify this Event"
         label="Guests can modify this Event"
       ></CheckBox>
