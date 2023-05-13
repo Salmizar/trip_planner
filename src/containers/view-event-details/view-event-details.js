@@ -3,7 +3,7 @@ import { Input } from "../../components/input/input.style";
 import DateInput from "../../components/date-input/date-input";
 import { TextArea } from "../../components/textarea/textarea.style";
 import "./view-event-details.css"
-const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventData}) => {
+const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventData}) => {
   const titleInput = createRef();
   useEffect(() => {
     titleInput.current.focus();
@@ -17,7 +17,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventDa
           type="text"
           value={eventData.name || ''}
           ref={titleInput}
-          onChange={(e) => UpdateEventData('name', e.target.value)}
+          onChange={(e) => updateEventData('name', e.target.value)}
           placeholder="Event Title"
         />
         <div>
@@ -26,7 +26,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventDa
             error={eventData.startDate > eventData.endDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
             className="view-event-date view-event-start"
             dateValue={eventData.startDate}
-            onChange={(newValue) => UpdateEventData('startDate', newValue.getTime())}
+            onChange={(newValue) => updateEventData('startDate', newValue.getTime())}
             title="Event Start Date"
             placeholder="Start Date"
           />
@@ -36,7 +36,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventDa
             error={eventData.startDate > eventData.endDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
             className="view-event-date view-event-end"
             dateValue={eventData.endDate}
-            onChange={(newValue) => UpdateEventData('endDate', newValue.getTime())}
+            onChange={(newValue) => updateEventData('endDate', newValue.getTime())}
             title="Event End Date"
             placeholder="End Date"
           />
@@ -49,7 +49,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventDa
           error={eventData.driveUpDate > eventData.driveHomeDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
           className="view-event-date"
           dateValue={eventData.driveUpDate}
-          onChange={(newValue) => UpdateEventData('driveUpDate', newValue.getTime())}
+          onChange={(newValue) => updateEventData('driveUpDate', newValue.getTime())}
           title="Drive Update Date"
           placeholder="Drive Up Date"
         />
@@ -61,7 +61,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventDa
           error={eventData.driveUpDate > eventData.driveHomeDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
           className="view-event-date"
           dateValue={eventData.driveHomeDate}
-          onChange={(newValue) => UpdateEventData('driveHomeDate', newValue.getTime())}
+          onChange={(newValue) => updateEventData('driveHomeDate', newValue.getTime())}
           title="Drive Home Date"
           placeholder="Drive Home Date"
         />
@@ -74,7 +74,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventDa
             className="view-event-location"
             type="text"
             value={eventData.location || ''}
-            onChange={(e) => UpdateEventData('location', e.target.value)}
+            onChange={(e) => updateEventData('location', e.target.value)}
             placeholder="Location Information"
           />
         </div>
@@ -83,7 +83,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, UpdateEventDa
           className="view-event-notes"
           type="text"
           value={eventData.notes || ''}
-          onChange={(e) => UpdateEventData('notes', e.target.value)}
+          onChange={(e) => updateEventData('notes', e.target.value)}
           placeholder="Misc Notes"
           rows={3}
         />

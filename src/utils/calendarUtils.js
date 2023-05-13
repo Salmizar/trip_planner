@@ -1,3 +1,5 @@
+import { StaticData } from '.';
+
 export const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export const getDateWeek = function (dte, dowOffset) {
@@ -121,6 +123,32 @@ export const getDatesOfTheMonth = function (currentDate) {
         }
     }
     return datesOfTheMonth;
+}
+export const newEventObject = function (newEventDate) {
+    let calColors = StaticData.calendarColors;
+    let calColorKeys = Object.keys(calColors);
+    let eId = StaticData.calendarData.length + 1;
+    return {
+        name: 'New Trip',
+        eId: eId,
+        startDate: newEventDate.getTime(),
+        endDate: newEventDate.getTime(),
+        driveUpDate: newEventDate.getTime(),
+        driveHomeDate: newEventDate.getTime(),
+        color: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]],
+        location: '',
+        notes: '',
+        newEvent: true,
+        canInvite: false,
+        guestsCanModify: false,
+        guests: [
+            {
+                uId: 0,
+                name: '',
+                eventOwner: true
+            }
+        ]
+    }
 }
 const getMonthVisualStartStop = function (currentDate) {
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());

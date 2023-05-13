@@ -6,7 +6,7 @@ import { Button } from "../../components/button/button.style";
 import ViewEventDetails from "../view-event-details/view-event-details";
 import ViewEventGuests from "../view-event-guests/view-event-guests";
 
-const ViewEvent = ({ eventId, user, SaveEvent, DeleteEvent }) => {
+const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
   const navigate = useNavigate();
   const [detailsActive, setDetailsActive] = useState(true);
   const [userChangedEvent, setUserChangedEvent] = useState(false);
@@ -14,27 +14,29 @@ const ViewEvent = ({ eventId, user, SaveEvent, DeleteEvent }) => {
   const [editingEvent, setEditingEvent] = useState(false);
   const [isMember, setIsMember] = useState(false);
   const [eventData, setEventData] = useState({});
-  const ChangeMaybe = function (uId, newState) {
+  const changeMaybe = function (uId, newState) {
     var tempGuestList = eventData.guests;
-    tempGuestList[GetGuest(uId)].maybe = newState;
-    UpdateEventData('guests', tempGuestList);
+    tempGuestList[getGuest(uId)].maybe = newState;
+    updateEventData('guests', tempGuestList);
   }
-  const AddRemoveUser = function (addUser, uId, name) {
+  const addRemoveUser = function (addUser, uId, name) {
     var tempGuestList = eventData.guests;
     if (addUser) {
-      tempGuestList[Object.keys(tempGuestList).length] = { uId: uId, name: name };
+      if (tempGuestList.find((guest) => guest.uId === uId) === undefined) {
+        tempGuestList[Object.keys(tempGuestList).length] = { uId: uId, name: name };
+      }
     } else {
-      tempGuestList.splice(GetGuest(uId), 1);
+      tempGuestList.splice(getGuest(uId), 1);
     }
-    UpdateEventData('guests', tempGuestList);
+    updateEventData('guests', tempGuestList);
   }
-  const UpdateEventData = function (obj, data) {
+  const updateEventData = function (obj, data) {
     let tempEventData = { ...eventData };
     tempEventData[obj] = data;
     setUserChangedEvent(true);
     setEventData(tempEventData);
   }
-  const GetGuest = (uId) => {
+  const getGuest = (uId) => {
     for (var guest in eventData.guests) {
       if (uId === eventData.guests[guest].uId) {
         return guest;
@@ -42,8 +44,8 @@ const ViewEvent = ({ eventId, user, SaveEvent, DeleteEvent }) => {
     }
     return undefined;
   }
-  const SaveChanges = () => {
-    if (eventData.name.length===0) {
+  const saveChanges = () => {
+    if (eventData.name.length === 0) {
       alert('The Event Title is missing');
     } else if (eventData.startDate > eventData.endDate) {
       alert('Trip start date is before end Date');
@@ -57,13 +59,13 @@ const ViewEvent = ({ eventId, user, SaveEvent, DeleteEvent }) => {
       alert('Trip end date is before you drive up');
     } else {
       delete eventData.newEvent;
-      SaveEvent(eventData);
+      saveEvent(eventData);
     }
   }
-  const DeleteTheEvent = () => {
-    DeleteEvent(eventData);
+  const deleteTheEvent = () => {
+    deleteEvent(eventData);
   }
-  const CloseViewEvent = () => {
+  const closeViewEvent = () => {
     navigate('/dashboard/calendar');
   }
   useEffect(() => {
@@ -108,35 +110,37 @@ const ViewEvent = ({ eventId, user, SaveEvent, DeleteEvent }) => {
     }
   }, [eventData, user]);
   return (
-    <dialog style={{ display: (displayEventDialog) ? 'block' : 'none' }} className="view-event">
-      <nav className="view-event-nav">
-        <button title="View Trip Details" className={'view-event-nav-tab-details ' + (detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(true)}>Trip Details</button>
-        <button title="View Trip Guests" className={'view-event-nav-tab-guests ' + (!detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(false)}>Guests</button>
-      </nav>
-      <br></br>
-      <ViewEventDetails
-        detailsActive={detailsActive}
-        eventData={eventData}
-        editingEvent={editingEvent}
-        UpdateEventData={UpdateEventData}
-      ></ViewEventDetails>
-      <ViewEventGuests
-        detailsActive={detailsActive}
-        eventData={eventData}
-        editingEvent={editingEvent}
-        user={user}
-        isMember={isMember}
-        ChangeMaybe={ChangeMaybe}
-        AddRemoveUser={AddRemoveUser}
-        UpdateEventData={UpdateEventData}
-      ></ViewEventGuests>
-      <br></br>
-      <div className='view-event-btn-container'>
-        <Button theme="black" className={"view-event-close-btn " + ((eventData.newEvent) ? 'hidden' : 'visible')} onClick={CloseViewEvent}>Close</Button>
-        <Button className={"view-event-delete-btn " + ((editingEvent) ? 'visible' : 'hidden')} onClick={DeleteTheEvent}>Delete</Button>
-        <Button className={"view-event-save-btn " + ((userChangedEvent) ? 'visible' : 'hidden')} onClick={SaveChanges}>Save</Button>
-      </div>
-    </dialog>
+    <div className='view-event-bg' style={{ display: (displayEventDialog) ? 'block' : 'none' }}>
+      <dialog className="view-event">
+        <nav className="view-event-nav">
+          <button title="View Trip Details" className={'view-event-nav-tab-details ' + (detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(true)}>Trip Details</button>
+          <button title="View Trip Guests" className={'view-event-nav-tab-guests ' + (!detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(false)}>Guests</button>
+        </nav>
+        <br></br>
+        <ViewEventDetails
+          detailsActive={detailsActive}
+          eventData={eventData}
+          editingEvent={editingEvent}
+          updateEventData={updateEventData}
+        ></ViewEventDetails>
+        <ViewEventGuests
+          detailsActive={detailsActive}
+          eventData={eventData}
+          editingEvent={editingEvent}
+          user={user}
+          isMember={isMember}
+          changeMaybe={changeMaybe}
+          addRemoveUser={addRemoveUser}
+          updateEventData={updateEventData}
+        ></ViewEventGuests>
+        <br></br>
+        <div className='view-event-btn-container'>
+          <Button theme="black" className={"view-event-close-btn " + ((eventData.newEvent) ? 'hidden' : 'visible')} onClick={closeViewEvent}>Close</Button>
+          <Button className={"view-event-delete-btn " + ((editingEvent) ? 'visible' : 'hidden')} onClick={deleteTheEvent}>Delete</Button>
+          <Button className={"view-event-save-btn " + ((userChangedEvent) ? 'visible' : 'hidden')} onClick={saveChanges}>Save</Button>
+        </div>
+      </dialog>
+    </div>
   )
 }
 
