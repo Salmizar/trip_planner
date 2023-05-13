@@ -13,8 +13,28 @@ const DateInput = ({ dateValue, title, placeHolder, onChange, className, disable
   const ToggleDatePicker = () => {
     if (dateInputContainer.current.classList.contains('date-input-container-visible')) {
       dateInputContainer.current.classList.remove('date-input-container-visible');
+      window.removeEventListener('resize', checkPickerPosition);
     } else {
       dateInputContainer.current.classList.add('date-input-container-visible');
+      window.addEventListener('resize', checkPickerPosition);
+    }
+  }
+  const checkPickerPosition = (event) => {
+    if (dateInputContainer.current) {
+      let pickerPadding = 10;
+      let pickerRect = dateInputContainer.current.getBoundingClientRect();
+      let newLeftPos = (dateInputContainer.current.parentElement.getBoundingClientRect().left + pickerRect.width + pickerPadding);
+      if (window.innerWidth < newLeftPos) {
+        if (window.innerWidth < (pickerPadding * 2 + pickerRect.width)) {
+          dateInputContainer.current.style.left = (pickerPadding - dateInputContainer.current.parentElement.getBoundingClientRect().left) + 'px';
+        } else {
+          dateInputContainer.current.style.left = (window.innerWidth - newLeftPos) + 'px';
+        }
+      } else {
+        dateInputContainer.current.style.left = '-5px';
+      }
+    } else {
+      window.removeEventListener('resize', checkPickerPosition);
     }
   }
   const ChangeDisplayDate = (year, month, day) => {
@@ -27,6 +47,7 @@ const DateInput = ({ dateValue, title, placeHolder, onChange, className, disable
   useEffect(() => {
     if (dateValue != undefined) {
       var newDate = new Date(dateValue);
+      dateInputContainer.current.classList.remove('date-input-container-visible');
       setDisplayDate(new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()));
       setPickerDate(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
     }
@@ -36,11 +57,11 @@ const DateInput = ({ dateValue, title, placeHolder, onChange, className, disable
   }, [pickerDate]);
   return (
     <div className={((className) ? className : '') + " date-input"}>
-      <div title={title} 
-      className={'date-input-display-date' +
-        ((disabled) ? ' date-input-display-date-disabled' : '')+
-        ((error)? ' date-input-display-date-error':'' )
-      } onClick={ToggleDatePicker}>
+      <div title={title}
+        className={'date-input-display-date' +
+          ((disabled) ? ' date-input-display-date-disabled' : '') +
+          ((error) ? ' date-input-display-date-error' : '')
+        } onClick={ToggleDatePicker}>
         {((displayDate) ? displayDate.toDateString() : placeHolder && title)}
       </div>
       <div ref={dateInputContainer} className="date-input-container">

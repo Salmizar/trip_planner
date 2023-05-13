@@ -1,9 +1,9 @@
 import React from 'react'
 import "./calendar-day.css";
 import CalendarEvent from '../calendar-event/calendar-event';
-const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events, user, CreateEvent}) => {
+const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events, user, createEvent}) => {
     return (
-        <div className={((isThisMonth) ? "calendar-day-container" : "calendar-day-container-notthismonth")} onClick={() =>  CreateEvent(year, month, day) }>
+        <div className={((isThisMonth) ? "calendar-day-container" : "calendar-day-container-notthismonth")} onClick={() =>  createEvent(year, month, day) }>
             <div className={((isThisToday) ? "calendar-date-of-week-today" : "calendar-date-of-week")}>
                 <div>{day}</div>
             </div>

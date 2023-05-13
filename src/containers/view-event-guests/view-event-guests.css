@@ -7,6 +7,27 @@
 .view-event-add-myself-btn {
 float: right;
 }
+.view_event-add-guest-results {
+    border: 1px solid #dcdcdc;
+    position: absolute;
+    width: 350px;
+    margin-top:-7px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 200px;
+    background-color: #FFF;
+    z-index: 1;
+}
+.view_event-add-guest-result {
+    padding:5px 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+.view_event-add-guest-result:hover {
+    background-color: #f6f6f6;
+}
+
 .view-event-guest-list {
     overflow-y: auto;
     overflow-x: hidden;
@@ -15,28 +36,18 @@ float: right;
 }
 .view-event-guest {
     padding: 10px;
-    display: flex;
+    width: 340px;
+    display: block;
     background-color: #FFF;
 }
 .view-event-guest:hover {
     background-color: #F2F2F2;
 }
-.view-event-guest-maybe {
-    position: absolute;
-    right:80px;
-    margin-top:-2px;
-}
-.view-event-guest-remove {
-    position: absolute;
-    right:40px;
-    height: 18px;
-    width: 18px;
-}
-.view-event-guest-owner {
-    position: absolute;
-    right: 30px;
-    font-size: 14px;
-    color: gray;
+.view-event-guest-name {
+    float:left;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 200px;
 }
 .view-event-guest-icon {
     height: 24px;
@@ -46,3 +57,20 @@ float: right;
     font-weight:450;
     padding-left: 6px;
   }
+.view-event-guest-maybe {
+    float: right;
+    right:0px;
+    margin-top:-2px;
+    padding-right: 15px;
+}
+.view-event-guest-remove {
+    float: right;
+    height: 18px;
+    width: 18px;
+}
+.view-event-guest-owner {
+    text-align: right;
+    white-space: nowrap;
+    font-size: 14px;
+    color: gray;
+}

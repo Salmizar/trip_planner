@@ -4,12 +4,11 @@ import "./calendar.css";
 import * as Utils from '../../utils';
 import CalendarDay from '../calendar-day/calendar-day';
 import ViewEvent from '../view-event/view-event';
-import { createEvent } from '@testing-library/react';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
   const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
   const { eventId } = useParams();
-  const SaveEvent = function (eventData) {
+  const saveEvent = function (eventData) {
     for (var eKey in Object.keys(Utils.StaticData.calendarData)) {
       if (eventData.eId === Utils.StaticData.calendarData[eKey].eId) {
         Utils.StaticData.calendarData[eKey] = { ...eventData };
@@ -18,7 +17,7 @@ const Calendar = ({ currentDate, user }) => {
     }
     navigate("/dashboard/calendar");
   }
-  const DeleteEvent = function (eventData) {
+  const deleteEvent = function (eventData) {
     if (window.confirm('Are you sure you want to delete this?')) {
       for (var eKey=0;eKey < Utils.StaticData.calendarData.length;eKey++) {
         if (eventData.eId === Utils.StaticData.calendarData[eKey].eId) {
@@ -29,9 +28,9 @@ const Calendar = ({ currentDate, user }) => {
       navigate("/dashboard/calendar");
     }
   }
-  const CreateEvent = function (year, month, day) {
+  const createEvent = function (year, month, day) {
     var newEventDate = new Date(year, month, day);
-    var newEvent = {...Utils.StaticData.newEventObject(newEventDate)};
+    var newEvent = {...Utils.CalendarUtils.newEventObject(newEventDate)};
     newEvent.guests = [
       {
         uId: user.uid,
@@ -65,12 +64,12 @@ const Calendar = ({ currentDate, user }) => {
               isThisToday={day[1].isThisToday}
               isThisMonth={day[1].isThisMonth}
               user={user}
-              CreateEvent={CreateEvent}
+              createEvent={createEvent}
             ></CalendarDay>
           )}
         </div>
       )}
-      <ViewEvent eventId={eventId} user={user} SaveEvent={SaveEvent} DeleteEvent={DeleteEvent}></ViewEvent>
+      <ViewEvent eventId={eventId} user={user} saveEvent={saveEvent} deleteEvent={deleteEvent}></ViewEvent>
     </div>
   )
 }
