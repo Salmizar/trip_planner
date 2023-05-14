@@ -47,7 +47,17 @@ export const getCalendarData = function (currentDate, calendarData) {
         }
         let calendarDayEvents = datesOfTheMonth[eventWeek][eventStart.getTime()].dayEvents;
         var eventIndex = getEmptyEventSlot(calendarDayEvents);
-        if (eventIndex > 0) {
+        if (eventIndex === 5) {
+            //no more slots available, so toss it in overflow
+            calendarDayEvents['overflow']['e' + Object.keys(calendarDayEvents['overflow']).length] = {
+                name: event.name,
+                event: event,
+                eventLength: eventLength,
+                eventStartOfNextWeek: (eventStart.getDay() === 0),
+                eventStartingToday: (eventLengthIndex === 0),
+                color: event.color
+            }
+        } else if (eventIndex > 0) {
             //Found an open slot
             var eventSlotOffset = 0;
             for (var eventLengthIndex = 0; eventLengthIndex < eventLength; eventLengthIndex++) {
@@ -69,29 +79,18 @@ export const getCalendarData = function (currentDate, calendarData) {
                     }
                 }
             }
-        } else if (eventIndex === 4) {
-            //no more slots available, so toss it in overflow
-            calendarDayEvents['overflow']['e' + Object.keys(calendarDayEvents['overflow']).length] = {
-                name: event.name,
-                event: event,
-                eventLength: eventLength,
-                eventStartOfNextWeek: (eventStart.getDay() === 0),
-                eventStartingToday: (eventLengthIndex === 0),
-                color: event.color
-            }
         }
     }
     return datesOfTheMonth;
 }
 const getEmptyEventSlot = function (calendarDayEvents) {
-    for (let eventIndex = 1; eventIndex <= 4; eventIndex++) {
-        if (Object.keys(calendarDayEvents['e' + eventIndex]).length === 0) {
+    for (let eventIndex = 1; eventIndex <= 5; eventIndex++) {
+        if (eventIndex === 5) {
+            return 5;
+        } else if (Object.keys(calendarDayEvents['e' + eventIndex]).length === 0) {
             return eventIndex;
-        } else if (eventIndex === 4) {
-            return 4;
         }
     }
-    return 0;
 }
 export const getDatesOfTheMonth = function (currentDate) {
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());

@@ -109,6 +109,120 @@ export const calendarData = [
         ]
     },
     {
+        name: '1 day trip',
+        startDate: 1683172800000,//may 4
+        endDate: 1683172800000,//May 4
+        driveUpDate: 1683172800000,//may 4
+        driveHomeDate: 1683172800000,//May 4
+        color: 'lavender',
+        location: 'need more space to test overflow',
+        notes: 'no notes',
+        canInvite: true,
+        guestsCanModify: false,
+        guests: [
+            {
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
+                name: 'Chris DAoust',
+                eventOwner: true
+            }
+        ]
+    },
+    {
+        name: '1 day overflow trip',
+        startDate: 1683172800000,//may 4
+        endDate: 1683172800000,//May 4
+        driveUpDate: 1683172800000,//may 4
+        driveHomeDate: 1683172800000,//May 4
+        color: 'lavender',
+        location: 'need more space to test overflow',
+        notes: 'no notes',
+        canInvite: true,
+        guestsCanModify: false,
+        guests: [
+            {
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
+                name: 'Chris DAoust',
+                eventOwner: true
+            }
+        ]
+    },
+    {
+        name: 'Oh yeah, another trp',
+        startDate: 1683172800000,//may 4
+        endDate: 1683172800000,//May 4
+        driveUpDate: 1683172800000,//may 4
+        driveHomeDate: 1683172800000,//May 4
+        color: 'lavender',
+        location: 'need more space to test overflow',
+        notes: 'no notes',
+        canInvite: true,
+        guestsCanModify: false,
+        guests: [
+            {
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
+                name: 'Chris DAoust',
+                eventOwner: true
+            }
+        ]
+    },
+    {
+        name: 'Are we done yet?!',
+        startDate: 1683172800000,//may 4
+        endDate: 1683172800000,//May 4
+        driveUpDate: 1683172800000,//may 4
+        driveHomeDate: 1683172800000,//May 4
+        color: 'lavender',
+        location: 'need more space to test overflow',
+        notes: 'no notes',
+        canInvite: true,
+        guestsCanModify: false,
+        guests: [
+            {
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
+                name: 'Chris DAoust',
+                eventOwner: true
+            }
+        ]
+    },
+    {
+        name: 'A few more and I should be done',
+        startDate: 1683172800000,//may 4
+        endDate: 1683172800000,//May 4
+        driveUpDate: 1683172800000,//may 4
+        driveHomeDate: 1683172800000,//May 4
+        color: 'lavender',
+        location: 'need more space to test overflow',
+        notes: 'no notes',
+        canInvite: true,
+        guestsCanModify: false,
+        guests: [
+            {
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
+                name: 'Chris DAoust',
+                eventOwner: true
+            }
+        ]
+    },
+    {
+        name: 'This one should overflow',
+        startDate: 1683172800000,//may 4
+        endDate: 1683172800000,//May 4
+        driveUpDate: 1683172800000,//may 4
+        driveHomeDate: 1683172800000,//May 4
+        color: 'lavender',
+        location: 'need more space to test overflow',
+        notes: 'no notes',
+        canInvite: true,
+        guestsCanModify: false,
+        guests: [
+            {
+                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
+                name: 'Chris DAoust',
+                eventOwner: true
+            }
+        ]
+    },
+    {
         name: 'Small 2 Day Trip',
         startDate: 1683259200000,//may 5
         endDate: 1683259200000,//May 5
@@ -391,5 +505,5 @@ for (var id = 0; id < calendarData.length; id++) {
     calendarData[id].eId = id + 1;
 }
 calendarData.sort((a, b) => {
-    return a.driveUpDate - b.driveUpDate;
+    return a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate;
 });
