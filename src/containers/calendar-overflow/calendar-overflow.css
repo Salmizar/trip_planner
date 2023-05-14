@@ -1,0 +1,48 @@
+.calendar-event-overflow {
+    position: relative;
+    top: 96px;
+    padding-top:2px;
+    height: 25px;
+    border-radius: 3px;
+    z-index: 2;
+    text-align: center;
+}
+.calendar-event-overflow-events {
+    cursor: pointer;
+    width: calc(100vw / 7);
+    font-weight: bold;
+
+}
+.calendar-event-overflow:hover {
+    background-color: #f6f6f6;
+}
+
+.calendar-event-overflow-dialog {
+    display: flex;
+    flex-direction:column;
+    border-radius: 10px;
+    box-shadow: 5px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    position: absolute;
+    width: 250px;
+    height: 300px;
+    left: calc((((100vw / 7)) / 2) - 125px);
+    top: -100px;
+    cursor:default;
+}
+
+.calendar-event-overflow-dialog-title {
+    font-size: 20px;
+    font-weight: normal;
+}
+.calendar-event-overflow-event-list {
+    position: relative;
+    top: 5px;
+    height: 170px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.calendar-event-overflow-close-btn {
+    position: relative;
+    top:15px;
+}
