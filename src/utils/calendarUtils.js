@@ -29,7 +29,6 @@ export const getDateWeek = function (dte, dowOffset) {
     return weeknum;
 };
 export const getCalendarData = function (currentDate, calendarData) {
-    console.clear();
     var datesOfTheMonth = getDatesOfTheMonth(currentDate);
     var monthConfines = getMonthVisualStartStop(currentDate);
     for (var key in calendarData) {
@@ -47,7 +46,7 @@ export const getCalendarData = function (currentDate, calendarData) {
             }
         }
         let calendarDayEvents = datesOfTheMonth[eventWeek][eventStart.getTime()].dayEvents;
-        var eventIndex = getEmptyEventSlot(calendarDayEvents);
+        let eventIndex = Object.keys(calendarDayEvents).length + 1;
         var eventSlotOffset = 0;
         for (var eventLengthIndex = 0; eventLengthIndex < eventLength; eventLengthIndex++) {
             let offsetEventStart = new Date(event.driveUpDate);
@@ -56,7 +55,7 @@ export const getCalendarData = function (currentDate, calendarData) {
             if (datesOfTheMonth[eWeek]) {
                 if (offsetEventStart.getDay() === 0 && eventIndex > 0) {
                     //new Week, see if we can move the event to lower slots
-                    var eventSlotOffset = eventIndex - getEmptyEventSlot(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents);
+                    var eventSlotOffset = eventIndex - Object.keys(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents).length + 1;
                 }
                 datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
                     name: event.name,
@@ -70,21 +69,13 @@ export const getCalendarData = function (currentDate, calendarData) {
             }
         }
     }
-    console.log(datesOfTheMonth);
     return datesOfTheMonth;
 }
 const sortObj = function (unsorted) {
     return Object.keys(unsorted).sort().reduce(function (sorted, key) {
         sorted[key] = unsorted[key];
-      return sorted;
+        return sorted;
     }, {});
-  }
-const getEmptyEventSlot = function (calendarDayEvents) {
-    for (let eventIndex = 1; eventIndex <= maxSlots; eventIndex++) {
-        if (!calendarDayEvents.hasOwnProperty('e' + eventIndex)) {
-            return eventIndex;
-        }
-    }
 }
 export const getDatesOfTheMonth = function (currentDate) {
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
@@ -92,7 +83,7 @@ export const getDatesOfTheMonth = function (currentDate) {
     const datesOfTheMonth = {};
     for (let weekCounter = 0; weekCounter <= 6; weekCounter++) {
         let weekArray = {};
-        var weekOfYear = getDateWeek(tempDate);
+        let weekOfYear = getDateWeek(tempDate);
         for (let dayCounter = 0; dayCounter <= 6; dayCounter++) {
             weekArray[tempDate.getTime()] = {
                 dayEvents: {
@@ -138,19 +129,9 @@ export const newEventObject = function (newEventDate) {
         ]
     }
 }
-const getMonthVisualStartStop = function (currentDate) {
-    const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
-    const visualDates = {};
-    visualDates.startDate = new Date(tempDate.getTime());
-    for (let weekCounter = 0; weekCounter <= 6; weekCounter++) {
-        for (let dayCounter = 0; dayCounter <= 6; dayCounter++) {
-            tempDate.setDate(tempDate.getDate() + 1);
-        }
-        if (tempDate.getDate() < 8 && weekCounter > 0) {
-            tempDate.setDate(tempDate.getDate() - 1);
-            break;//We are at the end of the month
-        }
-    }
-    visualDates.endDate = tempDate;
-    return visualDates;
-}
+const getMonthVisualStartStop = (currentDate) => {
+    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
+    const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
+    return { startDate, endDate };
+  };

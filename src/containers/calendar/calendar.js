@@ -10,25 +10,22 @@ const Calendar = ({ currentDate, user }) => {
   const [availableSlots, setAvailableSlots] = useState(4);
   const { eventId } = useParams();
   const saveEvent = function (eventData) {
-    for (var eKey in Object.keys(Utils.StaticData.calendarData)) {
-      if (eventData.eId === Utils.StaticData.calendarData[eKey].eId) {
-        Utils.StaticData.calendarData[eKey] = { ...eventData };
-        setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
-      }
+    let eventIndex = Utils.StaticData.calendarData.findIndex(event => event.eId === eventData.eId);
+    if (eventIndex >= 0) {
+      Utils.StaticData.calendarData[eventIndex] = { ...eventData };
+      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
     }
     navigate("/dashboard/calendar");
   }
   const deleteEvent = function (eventData) {
-    if (window.confirm('Are you sure you want to delete this?')) {
-      for (var eKey = 0; eKey < Utils.StaticData.calendarData.length; eKey++) {
-        if (eventData.eId === Utils.StaticData.calendarData[eKey].eId) {
-          Utils.StaticData.calendarData.splice(eKey, 1);
-          setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
-        }
-      }
-      navigate("/dashboard/calendar");
+    let eventIndex = Utils.StaticData.calendarData.findIndex(event => event.eId === eventData.eId);
+    if (eventIndex >= 0) {
+      Utils.StaticData.calendarData.splice(eventIndex, 1);
+      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
     }
+    navigate("/dashboard/calendar");
   }
+
   const createEvent = function (year, month, day) {
     var newEventDate = new Date(year, month, day);
     var newEvent = { ...Utils.CalendarUtils.newEventObject(newEventDate) };
@@ -41,11 +38,11 @@ const Calendar = ({ currentDate, user }) => {
     ]
     Utils.StaticData.calendarData.push(newEvent);
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
-    navigate("/dashboard/calendar/" + newEvent.eId + '/edit');
+    navigate("/dashboard/calendar/" + newEvent.eId );
   }
   const checkAvailableSlots = () => {
     //85 = main div offset+days of week. 22 = date height and event cell height
-    let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22 ;
+    let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22;
     let availSlots = Math.floor(cellHeight / 23) - 1;// -1 for overflow spacing
     setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
   }
@@ -55,7 +52,6 @@ const Calendar = ({ currentDate, user }) => {
       window.removeEventListener('resize', checkAvailableSlots);
     }
   }, [calendarData]);
-
   useEffect(() => {
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
   }, [currentDate, Utils.StaticData.calendarData]);
