@@ -1,6 +1,5 @@
 .calendar-event-overflow {
-    position: relative;
-    top: 96px;
+    position: absolute;
     padding-top:2px;
     height: 25px;
     border-radius: 3px;
@@ -11,7 +10,8 @@
     cursor: pointer;
     width: calc(100vw / 7);
     font-weight: bold;
-
+    white-space: nowrap;
+    overflow: hidden;
 }
 .calendar-event-overflow:hover {
     background-color: #f6f6f6;

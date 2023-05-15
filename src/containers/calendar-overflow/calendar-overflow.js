@@ -3,7 +3,7 @@ import "./calendar-overflow.css";
 import CalendarEvent from '../calendar-event/calendar-event';
 import { Button } from "../../components/button/button.style";
 
-const CalendarOverflow = ({ events, eventDate, user }) => {
+const CalendarOverflow = ({ eventIndex, events, eventDate, user }) => {
     const [displayOverflowDialog, setDisplayOverflowDialog] = useState(false);
     const viewEvents = (e) => {
         e.stopPropagation();
@@ -18,18 +18,18 @@ const CalendarOverflow = ({ events, eventDate, user }) => {
 
     }
     return (
-        <div className='calendar-event-overflow'>
+        <div className='calendar-event-overflow' style={{top: (eventIndex * 24) + 'px'}}>
             <div className='calendar-event-overflow-events' onClick={viewEvents}>
-            {events && Object.keys(events.overflow).length} more event{((events && Object.keys(events.overflow).length > 1) ? 's' : '')}
+                {events && Object.keys(events.overflow).length} more event{((events && Object.keys(events.overflow).length > 1) ? 's' : '')}
             </div>
-            <dialog className='calendar-event-overflow-dialog' style={{ display: (displayOverflowDialog) ? 'block' : 'none' }} onClick={(e) => e.stopPropagation()  }>
+            <dialog className='calendar-event-overflow-dialog' style={{ display: (displayOverflowDialog) ? 'block' : 'none' }} onClick={(e) => e.stopPropagation()}>
                 <div className='calendar-event-overflow-dialog-title'>
-                {eventDate.toLocaleDateString("en-us", { day: 'numeric', month: 'long', weekday: 'short' })}
+                    {eventDate.toLocaleDateString("en-us", { day: 'numeric', month: 'long', weekday: 'short' })}
                 </div>
                 <div className='calendar-event-overflow-event-list'>
                     {Object.values(events).map((event, index) => {
                         if (event.eventStartingToday || event.eventStartOfNextWeek) {
-                            return <CalendarEvent key={index} eventIndex={index-1} user={user} event={event} overflowView={true}></CalendarEvent>
+                            return <CalendarEvent key={index} eventIndex={index - 1} user={user} event={event} overflowView={true}></CalendarEvent>
                         }
                     })}
                     {Object.values(events.overflow).map((event, index) => {
@@ -38,7 +38,7 @@ const CalendarOverflow = ({ events, eventDate, user }) => {
                     )}
                 </div>
                 <Button theme="black" className="calendar-event-overflow-close-btn" onClick={closeOverflowDialog}>Close</Button>
-          
+
             </dialog>
         </div>
     )

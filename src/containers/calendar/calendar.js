@@ -7,6 +7,7 @@ import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
   const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+  const [availableSlots, setAvailableSlots] = useState(4);
   const { eventId } = useParams();
   const saveEvent = function (eventData) {
     for (var eKey in Object.keys(Utils.StaticData.calendarData)) {
@@ -19,9 +20,9 @@ const Calendar = ({ currentDate, user }) => {
   }
   const deleteEvent = function (eventData) {
     if (window.confirm('Are you sure you want to delete this?')) {
-      for (var eKey=0;eKey < Utils.StaticData.calendarData.length;eKey++) {
+      for (var eKey = 0; eKey < Utils.StaticData.calendarData.length; eKey++) {
         if (eventData.eId === Utils.StaticData.calendarData[eKey].eId) {
-          Utils.StaticData.calendarData.splice(eKey,1);
+          Utils.StaticData.calendarData.splice(eKey, 1);
           setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
         }
       }
@@ -30,7 +31,7 @@ const Calendar = ({ currentDate, user }) => {
   }
   const createEvent = function (year, month, day) {
     var newEventDate = new Date(year, month, day);
-    var newEvent = {...Utils.CalendarUtils.newEventObject(newEventDate)};
+    var newEvent = { ...Utils.CalendarUtils.newEventObject(newEventDate) };
     newEvent.guests = [
       {
         uId: user.uid,
@@ -42,6 +43,20 @@ const Calendar = ({ currentDate, user }) => {
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
     navigate("/dashboard/calendar/" + newEvent.eId + '/edit');
   }
+  const checkAvailableSlots = () => {
+    //85 = main div offset+days of week. 22 = date height and event cell height
+    let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22 ;
+    let availSlots = Math.floor(cellHeight / 23) - 1;// -1 for overflow spacing
+    console.log(availSlots,cellHeight, window.innerHeight, Object.entries(calendarData).length);
+    setAvailableSlots(availSlots);
+  }
+  useEffect(() => {
+    window.addEventListener('resize', checkAvailableSlots);
+    return _ => {
+      window.removeEventListener('resize', checkAvailableSlots);
+    }
+  }, [calendarData]);
+
   useEffect(() => {
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
   }, [currentDate, Utils.StaticData.calendarData]);
@@ -61,6 +76,7 @@ const Calendar = ({ currentDate, user }) => {
               month={day[1].month}
               year={day[1].year}
               events={day[1].dayEvents}
+              availableSlots={availableSlots}
               isThisToday={day[1].isThisToday}
               isThisMonth={day[1].isThisMonth}
               user={user}
