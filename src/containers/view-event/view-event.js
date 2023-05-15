@@ -37,12 +37,7 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
     setEventData(tempEventData);
   }
   const getGuest = (uId) => {
-    for (var guest in eventData.guests) {
-      if (uId === eventData.guests[guest].uId) {
-        return guest;
-      }
-    }
-    return undefined;
+    return eventData.guests.findIndex(guest => guest.uId === uId);
   }
   const saveChanges = () => {
     if (eventData.name.length === 0) {
@@ -76,13 +71,12 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
       } else {
         var calendarData = Utils.StaticData.calendarData;
         var entryFound = false;
-        for (var calEvent in calendarData) {
-          if (parseInt(calendarData[calEvent].eId) === parseInt(eventId)) {
-            setEventData(JSON.parse(JSON.stringify(calendarData[calEvent])));
+        let calEventIndex = calendarData.findIndex(calEvent => calEvent.eId === parseInt(eventId));
+        if (calEventIndex >= 0) {
+            setEventData(JSON.parse(JSON.stringify(calendarData[calEventIndex])));
             entryFound = true;
             setDisplayEventDialog(true);
-            setUserChangedEvent(calendarData[calEvent].newEvent);
-          }
+            setUserChangedEvent(calendarData[calEventIndex].newEvent);
         }
         if (!entryFound) {
           //invalidEventId
@@ -98,12 +92,10 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
     if (displayEventDialog) {
       var isEventOwner = false;
       var isEventMember = false;
-      for (var guest in eventData.guests) {
-        if (user && eventData.guests[guest].uId === user.uid) {
-          isEventOwner = eventData.guests[guest].eventOwner;
+      let guestIndex = eventData.guests.findIndex(guest => user && guest.uId === user.uid);
+      if (guestIndex >= 0) {
+         isEventOwner = eventData.guests[guestIndex].eventOwner;
           isEventMember = true;
-          break;
-        }
       }
       setIsMember(isEventMember);
       setEditingEvent(eventData.guestsCanModify || isEventOwner);
