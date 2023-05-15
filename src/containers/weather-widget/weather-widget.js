@@ -131,7 +131,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                     console.log('An error occurred processing the Weather Data', error);
                 }
             }
-            console.log(processedData);
+            //console.log(processedData);
             setFiveDayForecast(processedData);
             setState('success');
         }
