@@ -6,6 +6,7 @@ const CalendarEvent = ({ event, eventIndex, user, overflowView}) => {
     const navigate = useNavigate();
     let { eventId } = useParams();
     var cEvent = event.event;
+    console.log(cEvent);
     var driveUpLength = ((overflowView)? 0 : (cEvent.startDate - cEvent.driveUpDate) / 86400000);
     var driveHomeLength = ((overflowView)? 0: (cEvent.driveHomeDate - cEvent.endDate) / 86400000);
     const OpenEvent = (e) => {
@@ -35,7 +36,7 @@ const CalendarEvent = ({ event, eventIndex, user, overflowView}) => {
             onClick={(e) => OpenEvent(e)}
             onDoubleClick={(e) => CanEditEvent(e)}
         >
-            <div className="calendar-event-driveUp" style={{ visibility: ((cEvent.eventStartingToday || overflowView) ? 'visible' : 'hidden'), width: 'calc(100vw / 7 * ' + driveUpLength + ')' }}></div>
+            <div className="calendar-event-driveUp" style={{ visibility: ((overflowView || event.eventStartingToday) ? 'visible' : 'hidden'), width: 'calc(100vw / 7 * ' + driveUpLength + ')' }}></div>
             <div className="calendar-event-title">{event.name}</div>
             <div className="calendar-event-driveHome" style={{ width: 'calc(100vw / 7 * ' + driveHomeLength + ')' }}></div>
         </div>

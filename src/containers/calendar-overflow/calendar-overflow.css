@@ -12,6 +12,7 @@
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
+    color: #70757a;
 }
 .calendar-event-overflow:hover {
     background-color: #f6f6f6;
