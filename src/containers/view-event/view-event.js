@@ -58,7 +58,9 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
     }
   }
   const deleteTheEvent = () => {
-    deleteEvent(eventData);
+    if (window.confirm('Are you sure you want to delete this?')) {
+      deleteEvent(eventData);
+    }
   }
   const closeViewEvent = () => {
     navigate('/dashboard/calendar');

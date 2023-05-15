@@ -78,12 +78,14 @@ const sortObj = function (unsorted) {
     }, {});
 }
 export const getDatesOfTheMonth = function (currentDate) {
-    const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
     const todaysDate = new Date();
     const datesOfTheMonth = {};
+    const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
+    
     for (let weekCounter = 0; weekCounter <= 6; weekCounter++) {
         let weekArray = {};
         let weekOfYear = getDateWeek(tempDate);
+
         for (let dayCounter = 0; dayCounter <= 6; dayCounter++) {
             weekArray[tempDate.getTime()] = {
                 dayEvents: {

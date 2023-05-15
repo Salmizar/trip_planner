@@ -38,7 +38,7 @@ const Calendar = ({ currentDate, user }) => {
     ]
     Utils.StaticData.calendarData.push(newEvent);
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
-    navigate("/dashboard/calendar/" + newEvent.eId );
+    navigate("/dashboard/calendar/" + newEvent.eId);
   }
   const checkAvailableSlots = () => {
     //85 = main div offset+days of week. 22 = date height and event cell height
