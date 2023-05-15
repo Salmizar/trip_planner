@@ -47,8 +47,7 @@ const Calendar = ({ currentDate, user }) => {
     //85 = main div offset+days of week. 22 = date height and event cell height
     let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22 ;
     let availSlots = Math.floor(cellHeight / 23) - 1;// -1 for overflow spacing
-    console.log(availSlots,cellHeight, window.innerHeight, Object.entries(calendarData).length);
-    setAvailableSlots(availSlots);
+    setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
   }
   useEffect(() => {
     window.addEventListener('resize', checkAvailableSlots);
