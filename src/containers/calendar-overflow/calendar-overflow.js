@@ -65,7 +65,7 @@ const CalendarOverflow = ({ events, eventDate, user, availableSlots }) => {
                 </div>
                 <div className='calendar-event-overflow-event-list'>
                     {Object.values(events).map((event, index) => {
-                            return <CalendarEvent key={index} availableSlots={index} user={user} eventDate={eventDate} event={event} overflowView={true}></CalendarEvent>
+                            return <CalendarEvent key={index} eventIndex={index} user={user} eventDate={eventDate} event={event} overflowView={true}></CalendarEvent>
                     })}
                 </div>
                 <Button theme="black" className="calendar-event-overflow-close-btn" onClick={toggleOverflowDialog}>Close</Button>
