@@ -24,7 +24,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
     setGuestListSearchResults([]);
   }
   return (
-    <div className={((!detailsActive) ? 'block' : 'hidden')}>
+    <div className={'view-event-guests '+((!detailsActive) ? 'block' : 'hidden')}>
       <Input
         disabled={!editingEvent}
         ref={searchUserField}

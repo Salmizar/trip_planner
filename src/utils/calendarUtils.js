@@ -45,20 +45,22 @@ export const getCalendarData = function (currentDate, calendarData) {
                 eventWeek = eventStart.getFullYear() + '-' + getDateWeek(eventStart);
             }
         }
+
         let calendarDayEvents = datesOfTheMonth[eventWeek][eventStart.getTime()].dayEvents;
-        let eventIndex = Object.keys(calendarDayEvents).length + 1;
+        let eventIndex = findBlankEventSlot(calendarDayEvents);
         var eventSlotOffset = 0;
         for (var eventLengthIndex = 0; eventLengthIndex < eventLength; eventLengthIndex++) {
             let offsetEventStart = new Date(event.driveUpDate);
             offsetEventStart.setDate(offsetEventStart.getDate() + eventLengthIndex);
             let eWeek = offsetEventStart.getFullYear() + '-' + getDateWeek(offsetEventStart);
             if (datesOfTheMonth[eWeek]) {
-                if (offsetEventStart.getDay() === 0 && eventIndex > 0) {
+                if (offsetEventStart.getDay() === 0) {
                     //new Week, see if we can move the event to lower slots
-                    var eventSlotOffset = eventIndex - Object.keys(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents).length + 1;
+                    var eventSlotOffset = eventIndex - findBlankEventSlot(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents);
                 }
                 datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
                     name: event.name,
+                    eventSlot: (eventIndex - eventSlotOffset),
                     event: event,
                     eventLength: eventLength - eventLengthIndex,
                     eventStartOfNextWeek: (offsetEventStart.getDay() === 0),
@@ -70,6 +72,13 @@ export const getCalendarData = function (currentDate, calendarData) {
         }
     }
     return datesOfTheMonth;
+}
+const findBlankEventSlot = function(calendarDayEvents) {
+    for (var findBlankSpot = 1; findBlankSpot <= maxSlots; findBlankSpot++) {
+        if (calendarDayEvents['e'+findBlankSpot] === undefined) {
+            return findBlankSpot;
+        }
+    }
 }
 const sortObj = function (unsorted) {
     return Object.keys(unsorted).sort().reduce(function (sorted, key) {

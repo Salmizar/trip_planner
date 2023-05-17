@@ -1,3 +1,7 @@
+.view-event-guests {
+    position: relative;
+    top: 40px;
+}
 .view-event-add-guest {
     width: 215px;
 }

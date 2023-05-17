@@ -11,9 +11,11 @@
 .calendar-days-of-week-container,
 .calendar-week-container {
     width: 100vw;
+    max-width: 100%;
+    min-width: 390px;
     border-bottom: 1px solid rgb(218 220 224);
     display: flex;
-    height: 150px;
+    height: 100%;
     color: #70757a;
 }
 

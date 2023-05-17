@@ -1,3 +1,7 @@
+.view-event-details {
+    position: relative;
+    top: 40px;
+}
 .view-event-title {
     width: 350px;
 }
@@ -23,16 +27,20 @@
 .view-event-notes {
     width: 350px;
     padding-bottom: 50px;
+    resize: none;
 }
 
 .view-event-date {
-    width: 155px;
+    width: 162px;
 }
 .view-event-start {
     float:left
 }
 .view-event-end {
     float: right;
+}
+.view-event-date-start-stop-container {
+    width: 350px;
 }
 .view-event-date-to {
     position: relative;

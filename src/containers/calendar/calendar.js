@@ -7,7 +7,8 @@ import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
   const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
-  const [availableSlots, setAvailableSlots] = useState(4);
+  const [availableSlots, setAvailableSlots] = useState(1);
+  const [minCellHeight, setMinCellHeight] = useState(100);
   const { eventId } = useParams();
   const saveEvent = function (eventData) {
     let eventIndex = Utils.StaticData.calendarData.findIndex(event => event.eId === eventData.eId);
@@ -25,7 +26,6 @@ const Calendar = ({ currentDate, user }) => {
     }
     navigate("/dashboard/calendar");
   }
-
   const createEvent = function (year, month, day) {
     var newEventDate = new Date(year, month, day);
     var newEvent = { ...Utils.CalendarUtils.newEventObject(newEventDate) };
@@ -41,12 +41,15 @@ const Calendar = ({ currentDate, user }) => {
     navigate("/dashboard/calendar/" + newEvent.eId);
   }
   const checkAvailableSlots = () => {
-    //85 = main div offset+days of week. 22 = date height and event cell height
+    //85 = main div offset+days of week. 22 = date height. 25 = cell height
     let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22;
-    let availSlots = Math.floor(cellHeight / 23) - 1;// -1 for overflow spacing
+    let minHeight = (415 / Object.entries(calendarData).length);
+    setMinCellHeight(minHeight);
+    let availSlots = Math.floor(Math.max(minHeight-24, cellHeight) / 25) - 1;// -1 for overflow spacing
     setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
   }
   useEffect(() => {
+    checkAvailableSlots();
     window.addEventListener('resize', checkAvailableSlots);
     return _ => {
       window.removeEventListener('resize', checkAvailableSlots);
@@ -63,7 +66,7 @@ const Calendar = ({ currentDate, user }) => {
         )}
       </div>
       {Object.entries(calendarData).map((week) =>
-        <div key={JSON.stringify(week)} className="calendar-week-container">
+        <div key={JSON.stringify(week)} className="calendar-week-container" style={{minHeight: minCellHeight}}>
           {Object.entries(Object.values(week)[1]).map((day) =>
             <CalendarDay
               key={JSON.stringify(day[1])}

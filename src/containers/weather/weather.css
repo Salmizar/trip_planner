@@ -1,4 +1,6 @@
 .weather {
     width: 100vw;
+    min-width: 600px;
+    max-width: 100%;
     cursor:default;
 }
