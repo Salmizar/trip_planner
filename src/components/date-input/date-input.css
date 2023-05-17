@@ -78,6 +78,10 @@
     background-color: #ffe6e6;
 }
 
+.date-input-display-date-selected {
+    border: 1px solid;
+}
+
 .date-input-week-container {
     display: flex;
     height: 30px;

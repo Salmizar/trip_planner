@@ -9,7 +9,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
     titleInput.current.focus();
   },[eventData]);
   return (
-    <div className={((detailsActive)?'block':'hidden')}>
+    <div className={'view-event-details '+((detailsActive)?'block':'hidden')}>
         <Input
           className="view-event-title"
           theme={((!editingEvent)?'disabled':((eventData && eventData.name && eventData.name.length>0)?'enabled':'error'))}
@@ -20,7 +20,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           onChange={(e) => updateEventData('name', e.target.value)}
           placeholder="Event Title"
         />
-        <div>
+        <div className='view-event-date-start-stop-container'>
           <DateInput
             disabled={!editingEvent}
             error={eventData.startDate > eventData.endDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
@@ -33,6 +33,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
           <span className='view-event-date-to'>to </span>
           <DateInput
             disabled={!editingEvent}
+            containerXOffset={-80}
             error={eventData.startDate > eventData.endDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
             className="view-event-date view-event-end"
             dateValue={eventData.endDate}

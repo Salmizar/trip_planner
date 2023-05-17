@@ -110,7 +110,6 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
           <button title="View Trip Details" className={'view-event-nav-tab-details ' + (detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(true)}>Trip Details</button>
           <button title="View Trip Guests" className={'view-event-nav-tab-guests ' + (!detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(false)}>Guests</button>
         </nav>
-        <br></br>
         <ViewEventDetails
           detailsActive={detailsActive}
           eventData={eventData}
@@ -127,7 +126,6 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
           addRemoveUser={addRemoveUser}
           updateEventData={updateEventData}
         ></ViewEventGuests>
-        <br></br>
         <div className='view-event-btn-container'>
           <Button theme="black" className={"view-event-close-btn " + ((eventData.newEvent) ? 'hidden' : 'visible')} onClick={closeViewEvent}>Close</Button>
           <Button className={"view-event-delete-btn " + ((editingEvent) ? 'visible' : 'hidden')} onClick={deleteTheEvent}>Delete</Button>

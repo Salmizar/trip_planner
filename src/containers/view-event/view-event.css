@@ -1,29 +1,42 @@
+:root {
+    --min-height: 500px;
+    --view-event-height: 600px;
+    --view-event-height-padded: 610px;
+    --view-event-width: 390px;
+    --view-event-min-top: 50px;
+}
+
 .view-event-bg {
     position: absolute;
     z-index: 5;
-    top:0px;
-    left:0px;
-    bottom:0px;
-    right:0px;
+    top: -65px;
+    left: 0px;
+    bottom: 0px;
+    min-height: var(--min-height);
+    right: 0px;
     background-color: rgba(0, 0, 0, 0.1);
 }
+
 .view-event {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     border-radius: 10px;
     box-shadow: 5px 8px 16px 0px rgba(0, 0, 0, 0.5);
     padding: 20px;
-    width: 390px;
-    height: 620px;
-    top: 20px;
+    width: --view-event-width;
+    height: max(min(calc(100vh - max(min(var(--view-event-min-top), calc(100vh - var(--view-event-height-padded))), 0px)), var(--view-event-height-padded)), var(--min-height));
+    max-height: var(--view-event-height);
+    overflow-x: hidden;
+    overflow-y: auto;
+    top: max(min(var(--view-event-min-top), calc(100vh - var(--view-event-height-padded))), 0px);
 }
 
 .view-event-nav {
     border-bottom: 1px solid rgb(218 220 224);
     height: 22px;
-    position: relative;
+    position: absolute;
     left: -20px;
-    width: 390px;
+    width: calc(var(--view-event-width)=20px);
 }
 
 .view-event-nav-tab-details,
@@ -34,18 +47,18 @@
     text-align: center;
     width: 100px;
     height: 27px;
-    top: -5px;
     position: absolute;
+    top: -5px;
     border-top-left-radius: 10px;
     border-top-Right-radius: 10px;
 }
 
 .view-event-nav-tab-details {
-    left: 10px;
+    left: 30px;
 }
 
 .view-event-nav-tab-guests {
-    left: 120px;
+    left: 140px;
 }
 
 .view-event-nav-tab-active {
@@ -57,13 +70,13 @@
 }
 
 .view-event-btn-container {
-text-align: center;
-width: 350px;
-position: absolute;
-bottom:20px;
-
+    text-align: center;
+    position: absolute;
+    top: calc(var(--view-event-height) - 80px);
+    width: calc(var(--view-event-width) - 40px);
 }
+
 .view-event-btn-container button {
-    margin:0px 10px 0px;
-    width:90px;
+    margin: 0px 10px 0px;
+    width: 90px;
 }
