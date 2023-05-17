@@ -36,7 +36,7 @@
     height: 22px;
     position: absolute;
     left: -20px;
-    width: calc(var(--view-event-width)=20px);
+    width: calc(var(--view-event-width) + 20px);
 }
 
 .view-event-nav-tab-details,

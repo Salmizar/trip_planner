@@ -12,6 +12,7 @@
     height: 100%;
     position: relative;
 }
+
 .calendar-day-container,
 .calendar-day-container-notthismonth {
     display: flex;
