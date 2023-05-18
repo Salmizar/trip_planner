@@ -37,6 +37,9 @@ const Calendar = ({ currentDate, user }) => {
       }
     ]
     Utils.StaticData.calendarData.push(newEvent);
+    Utils.StaticData.calendarData.sort((a, b) => {
+      return a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate;
+    });
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
     navigate("/dashboard/calendar/" + newEvent.eId);
   }
