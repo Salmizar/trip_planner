@@ -22,7 +22,7 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
             style={{
                 backgroundColor: event.color,
                 width: ((overflowView) ? '100%' : 'calc(100vw / 7 * ' + eventLength + ')'),
-                minWidth: (minEventWidth * eventLength) + 'px',
+                minWidth: ((overflowView) ? '100%' : (minEventWidth * eventLength) + 'px'),
                 top: (eventIndex * 24) + 'px'
             }}
             onClick={(e) => OpenEvent(e)}

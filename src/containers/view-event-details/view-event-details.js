@@ -7,7 +7,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
   const titleInput = createRef();
   useEffect(() => {
     titleInput.current.focus();
-  },[eventData, titleInput]);
+  },[eventData]);
   return (
     <div className={'view-event-details '+((detailsActive)?'block':'hidden')}>
         <Input
@@ -30,7 +30,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
             title="Event Start Date"
             placeholder="Start Date"
           />
-          <span className='view-event-date-to'>to </span>
+          <span className='view-event-date-to'>to</span>
           <DateInput
             disabled={!editingEvent}
             containerXOffset={-80}
