@@ -66,7 +66,7 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
     navigate('/dashboard/calendar');
   }
   useEffect(() => {
-    if (eventId != undefined) {
+    if (eventId !== undefined) {
       if (isNaN(eventId)) {
         //invalid EventId
         navigate("/dashboard/calendar");
@@ -89,7 +89,7 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
       setDisplayEventDialog(false);
       setUserChangedEvent(false);
     }
-  }, [eventId]);
+  }, [eventId, navigate, displayEventDialog]);
   useEffect(() => {
     if (displayEventDialog) {
       var isEventOwner = false;
@@ -102,7 +102,7 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
       setIsMember(isEventMember);
       setEditingEvent(eventData.guestsCanModify || isEventOwner);
     }
-  }, [eventData, user]);
+  }, [eventData, user, displayEventDialog]);
   return (
     <div className='view-event-bg' style={{ display: (displayEventDialog) ? 'block' : 'none' }}>
       <dialog className="view-event">

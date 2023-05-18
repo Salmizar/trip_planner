@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from "styled-components";
 const theme = {
   enabled: {
@@ -25,8 +24,8 @@ export const Input = styled.input`
   font-size: 18px;
   border: 1px solid #dcdcdc;
   &:focus {
-    outline: ${props => (props.type != 'checkbox' ? theme[props.theme].outline : theme['disabled'].outline)};
-    outline-color: ${props => (props.type != 'checkbox' ? theme[props.theme].outlineColor : theme['disabled'].outlineColor)};
+    outline: ${props => (props.type !== 'checkbox' ? theme[props.theme].outline : theme['disabled'].outline)};
+    outline-color: ${props => (props.type !== 'checkbox' ? theme[props.theme].outlineColor : theme['disabled'].outlineColor)};
   }
   &:disabled {
     outline-color: ${(props) => theme['disabled'].outlineColor};

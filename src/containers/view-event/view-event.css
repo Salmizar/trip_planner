@@ -24,7 +24,7 @@
     box-shadow: 5px 8px 16px 0px rgba(0, 0, 0, 0.5);
     padding: 20px;
     width: --view-event-width;
-    height: max(min(calc(100vh - max(min(var(--view-event-min-top), calc(100vh - var(--view-event-height-padded))), 0px)), var(--view-event-height-padded)), var(--min-height));
+    height: max( min( calc( 100vh - max( min( var(--view-event-min-top) , calc( 100vh - var(--view-event-height-padded) ) ), 0px ) ), var(--view-event-height-padded) ), var(--min-height)) ;
     max-height: var(--view-event-height);
     overflow-x: hidden;
     overflow-y: auto;

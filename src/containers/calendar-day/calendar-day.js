@@ -1,6 +1,5 @@
 import React from 'react'
 import "./calendar-day.css";
-import * as Utils from '../../utils';
 import CalendarEvent from '../calendar-event/calendar-event';
 import CalendarOverflow from '../calendar-overflow/calendar-overflow';
 const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events, availableSlots, user, createEvent }) => {
@@ -20,6 +19,7 @@ const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events, avail
                                 event={event}></CalendarEvent>
                         }
                     }
+                    return null;
                 }
                 )}
                 <CalendarOverflow

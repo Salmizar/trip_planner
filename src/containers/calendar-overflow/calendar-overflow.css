@@ -1,3 +1,6 @@
+:root {
+    --calendar-event-dialog-width: 250px;
+}
 .calendar-event-overflow {
     position: absolute;
     padding-top:2px;
@@ -25,9 +28,9 @@
     box-shadow: 5px 8px 16px 0px rgba(0, 0, 0, 0.5);
     padding: 20px;
     position: absolute;
-    width: 250px;
+    width: var(--calendar-event-dialog-width);
     height: 300px;
-    left: calc((100vw / 7 / 2) - 125px);
+    left: calc((100vw / 7 / 2) - calc(var(--calendar-event-dialog-width) / 2));
     top: -100px;
     cursor:default;
     z-index: 2;

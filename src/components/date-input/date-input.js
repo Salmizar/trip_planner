@@ -49,13 +49,12 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
     }
   }
   useEffect(() => {
-    if (dateValue != undefined) {
+    if (dateValue !== undefined) {
       var newDate = new Date(dateValue);
-      dateInputContainer.current.classList.remove('date-input-container-visible');
       setDisplayDate(new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()));
       setPickerDate(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
     }
-  }, [dateValue]);
+  }, [dateValue, ]);
   useEffect(() => {
     setDatesOfMonth(Utils.CalendarUtils.getDatesOfTheMonth(pickerDate));
   }, [pickerDate]);

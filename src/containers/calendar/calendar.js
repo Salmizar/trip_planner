@@ -1,4 +1,4 @@
-import { React, createElement, useEffect, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import "./calendar.css";
 import * as Utils from '../../utils';
@@ -40,19 +40,21 @@ const Calendar = ({ currentDate, user }) => {
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
     navigate("/dashboard/calendar/" + newEvent.eId);
   }
-  const checkAvailableSlots = () => {
-    //85 = main div offset+days of week. 22 = date height. 25 = cell height
-    let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22;
-    let minHeight = (415 / Object.entries(calendarData).length);
-    setMinCellHeight(minHeight);
-    let availSlots = Math.floor(Math.max(minHeight-24, cellHeight) / 25) - 1;// -1 for overflow spacing
-    setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
-  }
   useEffect(() => {
+    const checkAvailableSlots = () => {
+      //85 = main div offset+days of week. 22 = date height. 25 = cell height
+      let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22;
+      let minHeight = (415 / Object.entries(calendarData).length);
+      setMinCellHeight(minHeight);
+      let availSlots = Math.floor(Math.max(minHeight-24, cellHeight) / 25) - 1;// -1 for overflow spacing
+      setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
+    }
     checkAvailableSlots();
     window.addEventListener('resize', checkAvailableSlots);
+    window.addEventListener('orientationchange', checkAvailableSlots);
     return _ => {
       window.removeEventListener('resize', checkAvailableSlots);
+      window.removeEventListener('orientationchange', checkAvailableSlots);
     }
   }, [calendarData]);
   useEffect(() => {
