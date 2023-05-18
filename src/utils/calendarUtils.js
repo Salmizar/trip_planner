@@ -56,7 +56,7 @@ export const getCalendarData = function (currentDate, calendarData) {
             if (datesOfTheMonth[eWeek]) {
                 if (offsetEventStart.getDay() === 0) {
                     //new Week, see if we can move the event to lower slots
-                    var eventSlotOffset = eventIndex - findBlankEventSlot(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents);
+                    eventSlotOffset = eventIndex - findBlankEventSlot(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents);
                 }
                 datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
                     name: event.name,

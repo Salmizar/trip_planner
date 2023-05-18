@@ -140,7 +140,7 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
         const fetchWeather = async () => {
             try {
                 const response = await fetch(
-                    'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=' + unit + '&appid=' + apiId
+                    'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=' + unit + '&appid=' + apiId
                 );
                 const data = await response.json();
                 setLocationData(data);

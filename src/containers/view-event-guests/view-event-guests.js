@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from 'react'
+import React, { createRef, useState } from 'react'
 import { Input } from "../../components/input/input.style";
 import "./view-event-guests.css"
 import CheckBox from '../../components/checkbox/checkbox';
@@ -12,7 +12,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
   const searchUsers = (e) => {
     let searchValue = e.target.value.toLowerCase();
     let obj = [];
-    if (searchValue!='') {
+    if (searchValue!=='') {
       obj = Utils.StaticData.userList.filter(u => u.email.toLowerCase().indexOf(searchValue)>-1 || u.displayName.toLowerCase().indexOf(searchValue)>-1);
     }
     setGuestListSearchResults(obj);
@@ -41,7 +41,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
                   {searchResult.displayName.substring(0, 1)}
             </div>&nbsp;&nbsp;
             {searchResult.displayName}&nbsp;&nbsp;
-            <b>{(eventData.guests.find((guest) => guest.uId === searchResult.uId)!=undefined)?'- Already a Guest':''}</b>
+            <b>{(eventData.guests.find((guest) => guest.uId === searchResult.uId)!==undefined)?'- Already a Guest':''}</b>
           </div>
         )}
       </div>
@@ -65,7 +65,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
                 src={'/assets/removeIcon.png'}
                 onClick={(e) => addRemoveUser(false, guest.uId)}></img>
               <CheckBox
-                disabled={!editingEvent && user.uid != guest.uId}
+                disabled={!editingEvent && user.uid !== guest.uId}
                 className={"view-event-guest-maybe " + ((guest.eventOwner) ? 'hidden' : 'block')}
                 type="checkbox"
                 checked={guest.maybe}

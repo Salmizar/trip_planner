@@ -7,7 +7,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventDa
   const titleInput = createRef();
   useEffect(() => {
     titleInput.current.focus();
-  },[eventData]);
+  },[eventData, titleInput]);
   return (
     <div className={'view-event-details '+((detailsActive)?'block':'hidden')}>
         <Input
