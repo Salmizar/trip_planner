@@ -45,6 +45,7 @@
     top: 5px;
     height: 170px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
 }
 .calendar-event-overflow-close-btn {
