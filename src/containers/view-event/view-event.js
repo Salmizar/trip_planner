@@ -67,23 +67,15 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
   }
   useEffect(() => {
     if (eventId !== undefined) {
-      if (isNaN(eventId)) {
-        //invalid EventId
-        navigate("/dashboard/calendar");
+      var calendarData = Utils.StaticData.calData.calendarData;
+      if (calendarData[eventId]) {
+        console.log('remove ALL JSON.parse/stringify commands for newer JS obj copy')
+        setEventData(JSON.parse(JSON.stringify(calendarData[eventId])));
+        setDisplayEventDialog(true);
+        setUserChangedEvent(calendarData[eventId].newEvent);
       } else {
-        var calendarData = Utils.StaticData.calendarData;
-        var entryFound = false;
-        let calEventIndex = calendarData.findIndex(calEvent => calEvent.eId === parseInt(eventId));
-        if (calEventIndex >= 0) {
-            setEventData(JSON.parse(JSON.stringify(calendarData[calEventIndex])));
-            entryFound = true;
-            setDisplayEventDialog(true);
-            setUserChangedEvent(calendarData[calEventIndex].newEvent);
-        }
-        if (!entryFound) {
-          //invalidEventId
-          navigate("/dashboard/calendar");
-        }
+        //no Event found, invalid EventId
+        navigate("/dashboard/calendar");
       }
     } else if (eventId === undefined) {
       setDisplayEventDialog(false);
@@ -96,8 +88,8 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
       var isEventMember = false;
       let guestIndex = eventData.guests.findIndex(guest => user && guest.uId === user.uid);
       if (guestIndex >= 0) {
-         isEventOwner = eventData.guests[guestIndex].eventOwner;
-          isEventMember = true;
+        isEventOwner = eventData.guests[guestIndex].eventOwner;
+        isEventMember = true;
       }
       setIsMember(isEventMember);
       setEditingEvent(eventData.guestsCanModify || isEventOwner);

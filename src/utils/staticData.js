@@ -1,33 +1,33 @@
 export const userList = [
     {
-        uId:'4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-        displayName:'C DAoust',
-        email: 'daoust.chris@gmail.com'
+        uId: "4eXCxrmeJRcrUoaqMGGngCQKWUy1",
+        displayName: "C DAoust",
+        email: "daoust.chris@gmail.com"
     },
     {
-        uId:'48eXCxrmeJRcHFD45DJTDFJHBUfaFF',
-        displayName:'Chantal Perreault',
-        email: 'chantal.d.perreault@gmail.com'
+        uId: "48eXCxrmeJRcHFD45DJTDFJHBUfaFF",
+        displayName: "Chantal Perreault",
+        email: "chantal.d.perreault@gmail.com"
     },
     {
-        uId:'4egU7sFewfsSAsfaFSAStewtmynNYHMngCQKWUy1',
-        displayName:'Trevor Delam',
-        email: 't.delam@gmail.com'
+        uId: "4egU7sFewfsSAsfaFSAStewtmynNYHMngCQKWUy1",
+        displayName: "Trevor Delam",
+        email: "t.delam@gmail.com"
     },
     {
-        uId:'HGDSSDGDSDDSffdsJRcrUoaqMGGngCQKWUy1',
-        displayName:'Ryan',
-        email: 'Ryan.ellis@gmail.com'
+        uId: "HGDSSDGDSDDSffdsJRcrUoaqMGGngCQKWUy1",
+        displayName: "Ryan",
+        email: "Ryan.ellis@gmail.com"
     },
     {
-        uId:'98J9M9898mjDM89jm98Mj98MojkahmNIUN',
-        displayName:'Kyle Wylie',
-        email: 'Wylie.coyote@gmail.com'
+        uId: "98J9M9898mjDM89jm98Mj98MojkahmNIUN",
+        displayName: "Kyle Wylie",
+        email: "Wylie.coyote@gmail.com"
     },
     {
-        uId:'98J9k13KKDldkXSsaxaK12K2WO0UN',
-        displayName:'Eric la May',
-        email: 'Eric.la.may@gmail.com'
+        uId: "98J9k13KKDldkXSsaxaK12K2WO0UN",
+        displayName: "Eric la May",
+        email: "Eric.la.may@gmail.com"
     }
 ];
 export const calendarColors = {
@@ -88,422 +88,419 @@ export const calendarColors = {
     Medium_Green: "#90C8AC",
     Dark_Turquoise: "#73A9AD"
 }
-export const calendarData = [
-    {
-        name: '2 Day Trip',
-        startDate: 1683086400000,//may 3
-        endDate: 1683172800000,//May 4
-        driveUpDate: 1683086400000,//may 3
-        driveHomeDate: 1683172800000,//May 4
-        color: 'lightblue',
-        location: 'Just going to Mattawa',
-        notes: '16ome5 notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: '1 day trip',
-        startDate: 1683172800000,//may 4
-        endDate: 1683172800000,//May 4
-        driveUpDate: 1683172800000,//may 4
-        driveHomeDate: 1683172800000,//May 4
-        color: 'lavender',
-        location: 'need more space to test overflow',
-        notes: 'no notes',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: '1 day overflow trip',
-        startDate: 1683172800000,//may 4
-        endDate: 1683172800000,//May 4
-        driveUpDate: 1683172800000,//may 4
-        driveHomeDate: 1683172800000,//May 4
-        color: 'lavender',
-        location: 'need more space to test overflow',
-        notes: 'no notes',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Oh yeah, another trp',
-        startDate: 1683172800000,//may 4
-        endDate: 1683172800000,//May 4
-        driveUpDate: 1683172800000,//may 4
-        driveHomeDate: 1683172800000,//May 4
-        color: 'lavender',
-        location: 'need more space to test overflow',
-        notes: 'no notes',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Are we done yet?!',
-        startDate: 1683172800000,//may 4
-        endDate: 1683172800000,//May 4
-        driveUpDate: 1683172800000,//may 4
-        driveHomeDate: 1683172800000,//May 4
-        color: 'lavender',
-        location: 'need more space to test overflow',
-        notes: 'no notes',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'A few more and I should be done',
-        startDate: 1683172800000,//may 4
-        endDate: 1683172800000,//May 4
-        driveUpDate: 1683172800000,//may 4
-        driveHomeDate: 1683172800000,//May 4
-        color: 'lavender',
-        location: 'need more space to test overflow',
-        notes: 'no notes',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'This one should overflow',
-        startDate: 1683172800000,//may 4
-        endDate: 1683172800000,//May 4
-        driveUpDate: 1683172800000,//may 4
-        driveHomeDate: 1683172800000,//May 4
-        color: 'lavender',
-        location: 'need more space to test overflow',
-        notes: 'no notes',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Small 2 Day Trip',
-        startDate: 1683259200000,//may 5
-        endDate: 1683259200000,//May 5
-        driveUpDate: 1683259200000,//may 5
-        driveHomeDate: 1683259200000,//May 5
-        color: 'lemonchiffon',
-        location: 'Meet at the Esso in Rolphton',
-        notes: 's165651651651ome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Chic Chocs',
-        startDate: 1683259200000,//may 5
-        endDate: 1683432000000,//may 7
-        driveUpDate: 1683172800000,//may 4
-        driveHomeDate: 1683432000000,//may 7
-        color: 'burlywood',
-        location: 'someLocationText',
-        notes: 'as5x1ad6csome notes about the trip',
-        canInvite: false,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            },
-            {
-                uId: '3',
-                name: 'Trevor Delam',
-                maybe: true
-            },
-            {
-                uId: '4',
-                name: 'Eric La May',
-                maybe: true
-            },
-            {
-                uId: '5',
-                name: 'Kyle Wylie'
-            }
-        ]
-    },
-    {
-        name: 'Mattawa',
-        startDate: 1683345600000,//may 6
-        endDate: 1683432000000,//may 7
-        driveUpDate: 1683345600000,//may 6
-        driveHomeDate: 1683432000000,//may 7
-        color: 'darkseagreen',
-        location: 'someLocationText',
-        notes: 'dfklvjna vkjad vfadsome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'big overlap',
-        startDate: 1683432000000,//may 7
-        endDate: 1684209600000,//May 16
-        driveUpDate: 1683432000000,//may 7
-        driveHomeDate: 1684296000000,//May 17
-        color: 'lightgray',
-        location: 'someLocationText',
-        notes: 'fdvkj 34fkl4nf 1lsome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust'
-            },
-            {
-                uId: 'sdcd',
-                name: 'Chantal Perreault',
-                eventOwner: true
-            },
-            {
-                uId: 'MGGngCQKWUy1',
-                name: 'Ryan Ellis'
-            }
-        ]
-    },
-    {
-        name: 'month overlap',
-        startDate: 1685160000000,//may 27
-        endDate: 1685592000000,//June 1
-        driveUpDate: 1685160000000,//may 27
-        driveHomeDate: 1685592000000,//June 1
-        color: 'lightseagreen',
-        location: 'someLocationText',
-        notes: 'q g4 qk qkgn1q 3kgj1n gklj1 jknsome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'End of May event',
-        startDate: 1685332800000,//may 29
-        endDate: 1685592000000,//June 1
-        driveUpDate: 1685332800000,//may 29
-        driveHomeDate: 1685592000000,//June 1
-        color: 'lightpink',
-        location: 'someLocationText',
-        notes: 'dfv f6v5sfv6 s0fv65 0va6f5v0a65 1v0asome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'A Long Trip',
-        startDate: 1684296000000,//may 17
-        endDate: 1684382400000,//May 18
-        driveUpDate: 1684296000000,//may 17
-        driveHomeDate: 1684382400000,//May 18
-        color: 'lightpink',
-        location: 'someLocationText',
-        notes: 'ae;vkn 34kj1 34gjsome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Chic Chocs 2',
-        startDate: 1684382400000,//may 18
-        endDate: 1684641600000,//may 21
-        driveUpDate: 1684382400000,//may 18
-        driveHomeDate: 1684641600000,//may 21
-        color: 'greenyellow',
-        location: 'someLocationText',
-        notes: 'ewfklqm flk4mf ;l3k4 some notes about the trip',
-        canInvite: true,
-        guestsCanModify: true,
-        guests: [
-            {
-                uId: 'celkdje2edlk2',
-                name: 'Ryan Ellis',
-                eventOwner: true
-            },
-            {
-                uId: 'scdscecdsc_lkdje2edlk2',
-                name: 'Richie Drunkie',
-                maybe: true
-            }
-        ]
-    },
-    {
-        name: 'Small Day Trip 2',
-        startDate: 1684468800000,//may 19
-        endDate: 1684468800000,//May 19
-        driveUpDate: 1684468800000,//may 19
-        driveHomeDate: 1684468800000,//may 19
-        color: 'salmon',
-        location: 'someLocationText',
-        notes: 'rmkq3 4fklm3 gklsome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Mattawa 2',
-        startDate: 1684555200000,//may 20
-        endDate: 1684641600000,//may 21
-        driveUpDate: 1684555200000,//may 20
-        driveHomeDate: 1684641600000,//may 21
-        color: 'lightsteelblue',
-        location: 'someLocationText',
-        notes: ' 43klgm q3glk;m 34glksome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Random name',
-        startDate: 1683604800000,//may 9
-        endDate: 1683691200000,//may 10
-        driveUpDate: 1683604800000,//may 9
-        driveHomeDate: 1683691200000,//may 10
-        color: 'orange',
-        location: 'someLocationText',
-        notes: 'rg q4klgmq 34;glk qm34gksome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
-    },
-    {
-        name: 'Chantal',
-        startDate: 1683691200000,//may 10
-        endDate: 1683864000000,//may 12
-        driveUpDate: 1683691200000,//may 10
-        driveHomeDate: 1683864000000,//may 12
-        color: 'lightcoral',
-        location: 'Right in the Valios parking lot',
-        notes: 'er;lkm gmqergkmq er;lgkmqe l;gkqme some notes about the trip',
-        canInvite: false,
-        guestsCanModify: true,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            },
-            {
-                uId: '2',
-                name: 'Chantal Perreault'
-            }
-        ]
-    },
-    {
-        name: 'Eric',
-        startDate: 1683777600000,//may 11
-        endDate: 1683777600000,//may 11
-        driveUpDate: 1683777600000,//may 11
-        driveHomeDate: 1683777600000,//may 11
-        color: 'lightskyblue',
-        location: 'someLocationText',
-        notes: 'ae;rlkvm erl;km r;elkm erl;kgmqe r;msome notes about the trip',
-        canInvite: true,
-        guestsCanModify: false,
-        guests: [
-            {
-                uId: '4eXCxrmeJRcrUoaqMGGngCQKWUy1',
-                name: 'Chris DAoust',
-                eventOwner: true
-            }
-        ]
+export const calData = {
+    "calendarData": {
+        "gjyfXsgTb92JDAk5gpCc": {
+            "canInvite": true,
+            "color": "lightskyblue",
+            "driveHomeDate": 1683777600000,
+            "driveUpDate": 1683777600000,
+            "endDate": 1683777600000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "Eric",
+            "notes": "ae;rlkvm erl;km r;elkm erl;kgmqe r;msome notes about the trip",
+            "startDate": 1683777600000
+        },
+        "3Yt389lUwb4LDcWHtT71": {
+            "canInvite": true,
+            "color": "lightblue",
+            "driveHomeDate": 1683172800000,
+            "driveUpDate": 1683086400000,
+            "endDate": 1683172800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "Just going to Mattawa",
+            "name": "2 Day Trip",
+            "notes": "16ome5 notes about the trip",
+            "startDate": 1683086400000
+        },
+        "EeZL5nq2be4wx3My300l": {
+            "canInvite": true,
+            "color": "lavender",
+            "driveHomeDate": 1683172800000,
+            "driveUpDate": 1683172800000,
+            "endDate": 1683172800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "need more space to test overflow",
+            "name": "1 day trip",
+            "notes": "no notes",
+            "startDate": 1683172800000
+        },
+        "XMd9xL9hF68O89SiObKm": {
+            "canInvite": true,
+            "color": "lavender",
+            "driveHomeDate": 1683172800000,
+            "driveUpDate": 1683172800000,
+            "endDate": 1683172800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "need more space to test overflow",
+            "name": "1 day overflow trip",
+            "notes": "no notes",
+            "startDate": 1683172800000
+        },
+        "1KrO8ZqkLUa4Kk22JNfk": {
+            "canInvite": true,
+            "color": "lavender",
+            "driveHomeDate": 1683172800000,
+            "driveUpDate": 1683172800000,
+            "endDate": 1683172800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "need more space to test overflow",
+            "name": "Oh yeah, another trp",
+            "notes": "no notes",
+            "startDate": 1683172800000
+        },
+        "TMpRMVJn74MOp2PGXvRc": {
+            "canInvite": true,
+            "color": "lavender",
+            "driveHomeDate": 1683172800000,
+            "driveUpDate": 1683172800000,
+            "endDate": 1683172800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "need more space to test overflow",
+            "name": "Are we done yet?!",
+            "notes": "no notes",
+            "startDate": 1683172800000
+        },
+        "dcz325t9XmGG784eW7mG": {
+            "canInvite": true,
+            "color": "lavender",
+            "driveHomeDate": 1683172800000,
+            "driveUpDate": 1683172800000,
+            "endDate": 1683172800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "need more space to test overflow",
+            "name": "A few more and I should be done",
+            "notes": "no notes",
+            "startDate": 1683172800000
+        },
+        "LDl9fFBU3eeypxAPIkB0": {
+            "canInvite": true,
+            "color": "lavender",
+            "driveHomeDate": 1683172800000,
+            "driveUpDate": 1683172800000,
+            "endDate": 1683172800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "need more space to test overflow",
+            "name": "This one should overflow",
+            "notes": "no notes",
+            "startDate": 1683172800000
+        },
+        "x9e1AVzAsqGC0YnZjxyi": {
+            "canInvite": true,
+            "color": "lemonchiffon",
+            "driveHomeDate": 1683259200000,
+            "driveUpDate": 1683259200000,
+            "endDate": 1683259200000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "Meet at the Esso in Rolphton",
+            "name": "Small 2 Day Trip",
+            "notes": "s165651651651ome notes about the trip",
+            "startDate": 1683259200000
+        },
+        "4TPHZPmAnoNjrwIOAYwf": {
+            "canInvite": false,
+            "color": "burlywood",
+            "driveHomeDate": 1683432000000,
+            "driveUpDate": 1683172800000,
+            "endDate": 1683432000000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                },
+                {
+                    "maybe": true,
+                    "name": "Trevor Delam",
+                    "uId": "3"
+                },
+                {
+                    "maybe": true,
+                    "name": "Eric La May",
+                    "uId": "4"
+                },
+                {
+                    "name": "Kyle Wylie",
+                    "uId": "5"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "Chic Chocs",
+            "notes": "as5x1ad6csome notes about the trip",
+            "startDate": 1683259200000
+        },
+        "FYeaOwVCcE9liTSJjGp2": {
+            "canInvite": true,
+            "color": "darkseagreen",
+            "driveHomeDate": 1683432000000,
+            "driveUpDate": 1683345600000,
+            "endDate": 1683432000000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "Mattawa",
+            "notes": "dfklvjna vkjad vfadsome notes about the trip",
+            "startDate": 1683345600000
+        },
+        "mwVPsmk2ACZrwXiL0U5w": {
+            "canInvite": true,
+            "color": "lightgray",
+            "driveHomeDate": 1684296000000,
+            "driveUpDate": 1683432000000,
+            "endDate": 1684209600000,
+            "guests": [
+                {
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                },
+                {
+                    "eventOwner": true,
+                    "name": "Chantal Perreault",
+                    "uId": "sdcd"
+                },
+                {
+                    "name": "Ryan Ellis",
+                    "uId": "MGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "big overlap",
+            "notes": "fdvkj 34fkl4nf 1lsome notes about the trip",
+            "startDate": 1683432000000
+        },
+        "fuYAYGQC3ZhLt8IqVDBR": {
+            "canInvite": true,
+            "color": "lightseagreen",
+            "driveHomeDate": 1685592000000,
+            "driveUpDate": 1685160000000,
+            "endDate": 1685592000000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "month overlap",
+            "notes": "q g4 qk qkgn1q 3kgj1n gklj1 jknsome notes about the trip",
+            "startDate": 1685160000000
+        },
+        "0tZipn9HF0ZO3BeBOeyl": {
+            "canInvite": true,
+            "color": "lightpink",
+            "driveHomeDate": 1685592000000,
+            "driveUpDate": 1685332800000,
+            "endDate": 1685592000000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "End of May event",
+            "notes": "dfv f6v5sfv6 s0fv65 0va6f5v0a65 1v0asome notes about the trip",
+            "startDate": 1685332800000
+        },
+        "gIXhFxGE6Imr2YbdD1tM": {
+            "canInvite": true,
+            "color": "lightpink",
+            "driveHomeDate": 1684382400000,
+            "driveUpDate": 1684296000000,
+            "endDate": 1684382400000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "A Long Trip",
+            "notes": "ae;vkn 34kj1 34gjsome notes about the trip",
+            "startDate": 1684296000000
+        },
+        "ebWDEXV0P1l4812QJqCA": {
+            "canInvite": true,
+            "color": "greenyellow",
+            "driveHomeDate": 1684641600000,
+            "driveUpDate": 1684382400000,
+            "endDate": 1684641600000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Ryan Ellis",
+                    "uId": "celkdje2edlk2"
+                },
+                {
+                    "maybe": true,
+                    "name": "Richie Drunkie",
+                    "uId": "scdscecdsc_lkdje2edlk2"
+                }
+            ],
+            "guestsCanModify": true,
+            "location": "someLocationText",
+            "name": "Chic Chocs 2",
+            "notes": "ewfklqm flk4mf ;l3k4 some notes about the trip",
+            "startDate": 1684382400000
+        },
+        "QGpbG5W2tkRAtuA90UTn": {
+            "canInvite": true,
+            "color": "salmon",
+            "driveHomeDate": 1684468800000,
+            "driveUpDate": 1684468800000,
+            "endDate": 1684468800000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "Small Day Trip 2",
+            "notes": "rmkq3 4fklm3 gklsome notes about the trip",
+            "startDate": 1684468800000
+        },
+        "cNFKXn1CwFBgQptxxBM2": {
+            "canInvite": true,
+            "color": "lightsteelblue",
+            "driveHomeDate": 1684641600000,
+            "driveUpDate": 1684555200000,
+            "endDate": 1684641600000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "Mattawa 2",
+            "notes": " 43klgm q3glk;m 34glksome notes about the trip",
+            "startDate": 1684555200000
+        },
+        "IJ27YCMJcZMuWrw5svIf": {
+            "canInvite": true,
+            "color": "orange",
+            "driveHomeDate": 1683691200000,
+            "driveUpDate": 1683604800000,
+            "endDate": 1683691200000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                }
+            ],
+            "guestsCanModify": false,
+            "location": "someLocationText",
+            "name": "Random name",
+            "notes": "rg q4klgmq 34;glk qm34gksome notes about the trip",
+            "startDate": 1683604800000
+        },
+        "2o0ziGJFpKyKG853RU3p": {
+            "canInvite": false,
+            "color": "lightcoral",
+            "driveHomeDate": 1683864000000,
+            "driveUpDate": 1683691200000,
+            "endDate": 1683864000000,
+            "guests": [
+                {
+                    "eventOwner": true,
+                    "name": "Chris DAoust",
+                    "uId": "4eXCxrmeJRcrUoaqMGGngCQKWUy1"
+                },
+                {
+                    "name": "Chantal Perreault",
+                    "uId": "2"
+                }
+            ],
+            "guestsCanModify": true,
+            "location": "Right in the Valios parking lot",
+            "name": "Chantal",
+            "notes": "er;lkm gmqergkmq er;lgkmqe l;gkqme some notes about the trip",
+            "startDate": 1683691200000
+        }
     }
-]
-for (var id = 0; id < calendarData.length; id++) {
-    calendarData[id].eId = id + 1;
 }
-calendarData.sort((a, b) => {
-    return a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate;
-});
+calData.calendarData = Object.fromEntries( Object.entries(calData.calendarData).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate) );
