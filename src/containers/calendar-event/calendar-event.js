@@ -18,7 +18,7 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
         navigate("/dashboard/calendar/" + cEvent.eId);
     }
     return (
-        <div className={'calendar-event ' + ((!isNaN(eventId) && parseInt(eventId) === parseInt(cEvent.eId)) ? 'calendar-event-selected' : '')}
+        <div className={'calendar-event ' + ((eventId === cEvent.eId) ? 'calendar-event-selected' : '')}
             style={{
                 backgroundColor: event.color,
                 width: ((overflowView) ? '100%' : 'calc(100vw / 7 * ' + eventLength + ')'),

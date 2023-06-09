@@ -6,23 +6,21 @@ import CalendarDay from '../calendar-day/calendar-day';
 import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
-  const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+  const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
   const [availableSlots, setAvailableSlots] = useState(1);
   const [minCellHeight, setMinCellHeight] = useState(100);
   const { eventId } = useParams();
   const saveEvent = function (eventData) {
-    let eventIndex = Utils.StaticData.calendarData.findIndex(event => event.eId === eventData.eId);
-    if (eventIndex >= 0) {
-      Utils.StaticData.calendarData[eventIndex] = { ...eventData };
-      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+    if (Utils.StaticData.calData.calendarData[eventData.eId]) {
+      Utils.StaticData.calData.calendarData[eventData.eId] = { ...eventData };
+      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
     }
     navigate("/dashboard/calendar");
   }
   const deleteEvent = function (eventData) {
-    let eventIndex = Utils.StaticData.calendarData.findIndex(event => event.eId === eventData.eId);
-    if (eventIndex >= 0) {
-      Utils.StaticData.calendarData.splice(eventIndex, 1);
-      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+    if (Utils.StaticData.calData.calendarData[eventData.eId]) {
+      delete Utils.StaticData.calData.calendarData[eventData.eId];
+      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
     }
     navigate("/dashboard/calendar");
   }
@@ -36,11 +34,11 @@ const Calendar = ({ currentDate, user }) => {
         eventOwner: true
       }
     ]
-    Utils.StaticData.calendarData.push(newEvent);
-    Utils.StaticData.calendarData.sort((a, b) => {
-      return a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate;
-    });
-    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
+    Utils.StaticData.calData.calendarData[newEvent.eId] = newEvent;
+    Utils.StaticData.calData.calendarData = Object.fromEntries(
+      Object.entries(Utils.StaticData.calData.calendarData).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate)
+    )
+    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
     navigate("/dashboard/calendar/" + newEvent.eId);
   }
   useEffect(() => {
@@ -49,7 +47,7 @@ const Calendar = ({ currentDate, user }) => {
       let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22;
       let minHeight = (415 / Object.entries(calendarData).length);
       setMinCellHeight(minHeight);
-      let availSlots = Math.floor(Math.max(minHeight-24, cellHeight) / 25) - 1;// -1 for overflow spacing
+      let availSlots = Math.floor(Math.max(minHeight - 24, cellHeight) / 25) - 1;// -1 for overflow spacing
       setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
     }
     checkAvailableSlots();
@@ -61,8 +59,8 @@ const Calendar = ({ currentDate, user }) => {
     }
   }, [calendarData]);
   useEffect(() => {
-    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calendarData));
-  }, [currentDate, Utils.StaticData.calendarData]);
+    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
+  }, [currentDate, Utils.StaticData.calData.calendarData]);
   return (
     <div className="calendar">
       <div className="calendar-days-of-week-container">
@@ -71,7 +69,7 @@ const Calendar = ({ currentDate, user }) => {
         )}
       </div>
       {Object.entries(calendarData).map((week) =>
-        <div key={JSON.stringify(week)} className="calendar-week-container" style={{minHeight: minCellHeight}}>
+        <div key={JSON.stringify(week)} className="calendar-week-container" style={{ minHeight: minCellHeight }}>
           {Object.entries(Object.values(week)[1]).map((day) =>
             <CalendarDay
               key={JSON.stringify(day[1])}

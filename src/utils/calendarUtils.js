@@ -33,6 +33,7 @@ export const getCalendarData = function (currentDate, calendarData) {
     var monthConfines = getMonthVisualStartStop(currentDate);
     for (var key in calendarData) {
         let event = calendarData[key];
+        event.eId = key;
         let eventStart = new Date(event.driveUpDate);
         let eventEnd = new Date(event.driveHomeDate);
         let eventLength = 1 + ((eventEnd.getTime() - eventStart.getTime()) / 86400000);
@@ -117,7 +118,7 @@ export const getDatesOfTheMonth = function (currentDate) {
 export const newEventObject = function (newEventDate) {
     let calColors = StaticData.calendarColors;
     let calColorKeys = Object.keys(calColors);
-    let eId = StaticData.calendarData.length + 1;
+    let eId = "someNewEventId"+Math.random(10000);
     return {
         name: 'New Trip',
         eId: eId,
