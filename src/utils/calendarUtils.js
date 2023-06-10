@@ -1,5 +1,4 @@
 import { StaticData } from '.';
-
 export const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 export const maxSlots = 10;
 export const getDateWeek = function (dte, dowOffset) {

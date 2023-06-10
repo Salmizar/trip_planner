@@ -16,14 +16,15 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+console.log('process.env.REACT_APP_API_KEY',process.env);
 const firebaseConfig = {
-    apiKey: "AIzaSyAU_MzAEGEcTEO9Qq72Tbj7a0cqLnBmv6M",
-    authDomain: "trip-calendar-dc06b.firebaseapp.com",
-    projectId: "trip-calendar-dc06b",
-    storageBucket: "trip-calendar-dc06b.appspot.com",
-    messagingSenderId: "943206433272",
-    appId: "1:943206433272:web:431112244d8ec05120560d",
-    measurementId: "G-X29Z2B3MC8"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASURMENT_ID
   };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
