@@ -6,7 +6,7 @@ import CalendarDay from '../calendar-day/calendar-day';
 import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
-  const [calendarData, setCalendarData] = useState(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
+  const [calendarData, setCalendarData] = useState({});
   const [availableSlots, setAvailableSlots] = useState(1);
   const [minCellHeight, setMinCellHeight] = useState(100);
   const { eventId } = useParams();
@@ -45,7 +45,7 @@ const Calendar = ({ currentDate, user }) => {
     const checkAvailableSlots = () => {
       //85 = main div offset+days of week. 22 = date height. 25 = cell height
       let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22;
-      let minHeight = (415 / Object.entries(calendarData).length);
+      let minHeight = (415 / ((calendarData.length)?Object.entries(calendarData).length:5));
       setMinCellHeight(minHeight);
       let availSlots = Math.floor(Math.max(minHeight - 24, cellHeight) / 25) - 1;// -1 for overflow spacing
       setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
@@ -59,6 +59,7 @@ const Calendar = ({ currentDate, user }) => {
     }
   }, [calendarData]);
   useEffect(() => {
+    console.log('setCalendarData');
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
   }, [currentDate, Utils.StaticData.calData.calendarData]);
   return (
