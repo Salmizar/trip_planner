@@ -7,7 +7,6 @@ import CalendarDay from '../calendar-day/calendar-day';
 import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
-  const dbRef = ref(getDatabase(), "calendarData");
   const [calendarEvents, setCalendarEvents] = useState({});
   const [calendarEventsLoaded, setCalendarEventsLoaded] = useState(false);
   const [calendarData, setCalendarData] = useState({});
@@ -85,12 +84,13 @@ const Calendar = ({ currentDate, user }) => {
   useEffect(() => {
     setCalendarEventsLoaded(true);
     setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, calendarEvents));
-  }, [calendarEvents]);
+  }, [currentDate, calendarEvents]);
   useEffect(() => {
     setCalendarEventsLoaded(false);
+    const dbRef = ref(getDatabase(), "calendarData");
     onValue(dbRef, (snapshot) => {
       const data = snapshot.val();
-      const calEvents = {...calendarEvents};
+      const calEvents = {};
       for (var key in data) {
         if (!calEvents[key]) {
           calEvents[key] = data[key];

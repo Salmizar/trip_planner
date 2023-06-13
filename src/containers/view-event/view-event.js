@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import "./view-event.css";
-import * as Utils from '../../utils';
 import { Button } from "../../components/button/button.style";
 import ViewEventDetails from "../view-event-details/view-event-details";
 import ViewEventGuests from "../view-event-guests/view-event-guests";
@@ -81,7 +80,7 @@ const ViewEvent = ({calendarEvents, calendarEventsLoaded, eventId, user, saveEve
       setUserChangedEvent(false);
     }
   }
-  }, [eventId, calendarEventsLoaded,navigate, displayEventDialog]);
+  }, [eventId, calendarEvents, calendarEventsLoaded,navigate, displayEventDialog]);
   useEffect(() => {
     if (displayEventDialog) {
       var isEventOwner = false;
