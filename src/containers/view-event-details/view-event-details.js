@@ -3,14 +3,15 @@ import { Input } from "../../components/input/input.style";
 import DateInput from "../../components/date-input/date-input";
 import { TextArea } from "../../components/textarea/textarea.style";
 import "./view-event-details.css"
-const ViewEventDetails = ({eventData, editingEvent, detailsActive, updateEventData}) => {
+const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEventData}) => {
   const titleInput = createRef();
   useEffect(() => {
     titleInput.current.focus();
   },[eventData]);
   return (
-    <div className={'view-event-details '+((detailsActive)?'block':'hidden')}>
+    <div className={'view-event-details '+((detailsTabActive)?'block':'hidden')}>
         <Input
+          disabled={!editingEvent}
           className="view-event-title"
           theme={((!editingEvent)?'disabled':((eventData && eventData.name && eventData.name.length>0)?'enabled':'error'))}
           error={true}

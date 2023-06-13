@@ -6,9 +6,9 @@ import { Button } from "../../components/button/button.style";
 import ViewEventDetails from "../view-event-details/view-event-details";
 import ViewEventGuests from "../view-event-guests/view-event-guests";
 
-const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
+const ViewEvent = ({calendarEvents, calendarEventsLoaded, eventId, user, saveEvent, deleteEvent }) => {
   const navigate = useNavigate();
-  const [detailsActive, setDetailsActive] = useState(true);
+  const [detailsTabActive, setdetailsTabActive] = useState(true);
   const [userChangedEvent, setUserChangedEvent] = useState(false);
   const [displayEventDialog, setDisplayEventDialog] = useState(false);
   const [editingEvent, setEditingEvent] = useState(false);
@@ -58,7 +58,7 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
     }
   }
   const deleteTheEvent = () => {
-    if (window.confirm('Are you sure you want to delete this?')) {
+    if (eventData.newEvent || window.confirm('Are you sure you want to delete this?')) {
       deleteEvent(eventData);
     }
   }
@@ -66,13 +66,12 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
     navigate('/dashboard/calendar');
   }
   useEffect(() => {
+    if (calendarEventsLoaded) {
     if (eventId !== undefined) {
-      var calendarData = Utils.StaticData.calData.calendarData;
-      if (calendarData[eventId]) {
-        console.log('remove ALL JSON.parse/stringify commands for newer JS obj copy')
-        setEventData(JSON.parse(JSON.stringify(calendarData[eventId])));
+      if (calendarEvents[eventId]) {
+        setEventData(JSON.parse(JSON.stringify(calendarEvents[eventId])));
         setDisplayEventDialog(true);
-        setUserChangedEvent(calendarData[eventId].newEvent);
+        setUserChangedEvent(calendarEvents[eventId].newEvent);
       } else {
         //no Event found, invalid EventId
         navigate("/dashboard/calendar");
@@ -81,7 +80,8 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
       setDisplayEventDialog(false);
       setUserChangedEvent(false);
     }
-  }, [eventId, navigate, displayEventDialog]);
+  }
+  }, [eventId, calendarEventsLoaded,navigate, displayEventDialog]);
   useEffect(() => {
     if (displayEventDialog) {
       var isEventOwner = false;
@@ -99,17 +99,17 @@ const ViewEvent = ({ eventId, user, saveEvent, deleteEvent }) => {
     <div className='view-event-bg' style={{ display: (displayEventDialog) ? 'block' : 'none' }}>
       <dialog className="view-event">
         <nav className="view-event-nav">
-          <button title="View Trip Details" className={'view-event-nav-tab-details ' + (detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(true)}>Trip Details</button>
-          <button title="View Trip Guests" className={'view-event-nav-tab-guests ' + (!detailsActive ? 'view-event-nav-tab-active' : '')} onClick={() => setDetailsActive(false)}>Guests</button>
+          <button title="View Trip Details" className={'view-event-nav-tab-details ' + (detailsTabActive ? 'view-event-nav-tab-active' : '')} onClick={() => setdetailsTabActive(true)}>Trip Details</button>
+          <button title="View Trip Guests" className={'view-event-nav-tab-guests ' + (!detailsTabActive ? 'view-event-nav-tab-active' : '')} onClick={() => setdetailsTabActive(false)}>Guests</button>
         </nav>
         <ViewEventDetails
-          detailsActive={detailsActive}
+          detailsTabActive={detailsTabActive}
           eventData={eventData}
           editingEvent={editingEvent}
           updateEventData={updateEventData}
         ></ViewEventDetails>
         <ViewEventGuests
-          detailsActive={detailsActive}
+          detailsTabActive={detailsTabActive}
           eventData={eventData}
           editingEvent={editingEvent}
           user={user}

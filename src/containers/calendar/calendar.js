@@ -1,32 +1,55 @@
 import { React, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import { getDatabase, ref, onValue, child, push, update, set, remove } from "firebase/database";
 import "./calendar.css";
 import * as Utils from '../../utils';
 import CalendarDay from '../calendar-day/calendar-day';
 import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
+  const dbRef = ref(getDatabase(), "calendarData");
+  const [calendarEvents, setCalendarEvents] = useState({});
+  const [calendarEventsLoaded, setCalendarEventsLoaded] = useState(false);
   const [calendarData, setCalendarData] = useState({});
   const [availableSlots, setAvailableSlots] = useState(1);
   const [minCellHeight, setMinCellHeight] = useState(100);
   const { eventId } = useParams();
   const saveEvent = function (eventData) {
-    if (Utils.StaticData.calData.calendarData[eventData.eId]) {
-      Utils.StaticData.calData.calendarData[eventData.eId] = { ...eventData };
-      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
+    if (calendarEvents[eventData.eId]) {
+      let calEvents = {...calendarEvents};
+      if (eventData.eId === "NewEvent") {
+        delete calEvents[eventData.eId];
+        setCalendarEvents(calEvents);
+        delete eventData.eId;
+        const newPostKey = push(child(ref(getDatabase()), "calendarData")).key;
+        const updateData = {};
+        updateData['/calendarData/' + newPostKey] = eventData;
+        update(ref(getDatabase()), updateData);
+      } else {        
+        let eventId = eventData.eId;
+        delete eventData.eId;
+        set(ref(getDatabase(), '/calendarData/' + eventId), eventData);
+      }
     }
     navigate("/dashboard/calendar");
   }
   const deleteEvent = function (eventData) {
-    if (Utils.StaticData.calData.calendarData[eventData.eId]) {
-      delete Utils.StaticData.calData.calendarData[eventData.eId];
-      setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
+    if (calendarEvents[eventData.eId]) {
+      let calEvents = {...calendarEvents};
+      if (eventData.eId === "NewEvent") {
+        delete calEvents[eventData.eId];
+        setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, calEvents));
+      } else {
+        remove(ref(getDatabase(), '/calendarData/' + eventId));
+      }
     }
     navigate("/dashboard/calendar");
   }
   const createEvent = function (year, month, day) {
     var newEventDate = new Date(year, month, day);
-    var newEvent = { ...Utils.CalendarUtils.newEventObject(newEventDate) };
+    var newEvent = Utils.CalendarUtils.newEventObject(newEventDate);
+    let newEventId = newEvent.eId;
+    delete newEvent.eId;
     newEvent.guests = [
       {
         uId: user.uid,
@@ -34,18 +57,19 @@ const Calendar = ({ currentDate, user }) => {
         eventOwner: true
       }
     ]
-    Utils.StaticData.calData.calendarData[newEvent.eId] = newEvent;
-    Utils.StaticData.calData.calendarData = Object.fromEntries(
-      Object.entries(Utils.StaticData.calData.calendarData).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate)
-    )
-    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
-    navigate("/dashboard/calendar/" + newEvent.eId);
+    let calEvents = {...calendarEvents};
+    calEvents[newEventId] = newEvent;
+    
+    let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate) );
+    setCalendarEvents(sortedCalendarEvents);
+    setCalendarEventsLoaded(false);
+    navigate("/dashboard/calendar/" + newEventId);
   }
   useEffect(() => {
     const checkAvailableSlots = () => {
       //85 = main div offset+days of week. 22 = date height. 25 = cell height
       let cellHeight = ((window.innerHeight - 85) / Object.entries(calendarData).length) - 22;
-      let minHeight = (415 / ((calendarData.length)?Object.entries(calendarData).length:5));
+      let minHeight = (415 / ((calendarData.length) ? Object.entries(calendarData).length : 5));
       setMinCellHeight(minHeight);
       let availSlots = Math.floor(Math.max(minHeight - 24, cellHeight) / 25) - 1;// -1 for overflow spacing
       setAvailableSlots(Math.min(availSlots, Utils.CalendarUtils.maxSlots));
@@ -59,9 +83,23 @@ const Calendar = ({ currentDate, user }) => {
     }
   }, [calendarData]);
   useEffect(() => {
-    console.log('setCalendarData');
-    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, Utils.StaticData.calData.calendarData));
-  }, [currentDate, Utils.StaticData.calData.calendarData]);
+    setCalendarEventsLoaded(true);
+    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, calendarEvents));
+  }, [calendarEvents]);
+  useEffect(() => {
+    setCalendarEventsLoaded(false);
+    onValue(dbRef, (snapshot) => {
+      const data = snapshot.val();
+      const calEvents = {...calendarEvents};
+      for (var key in data) {
+        if (!calEvents[key]) {
+          calEvents[key] = data[key];
+        }
+      }
+      let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate) );
+      setCalendarEvents(sortedCalendarEvents);
+    });
+  }, [currentDate]);
   return (
     <div className="calendar">
       <div className="calendar-days-of-week-container">
@@ -87,7 +125,7 @@ const Calendar = ({ currentDate, user }) => {
           )}
         </div>
       )}
-      <ViewEvent eventId={eventId} user={user} saveEvent={saveEvent} deleteEvent={deleteEvent}></ViewEvent>
+      <ViewEvent calendarEvents={calendarEvents} calendarEventsLoaded={calendarEventsLoaded} eventId={eventId} user={user} saveEvent={saveEvent} deleteEvent={deleteEvent}></ViewEvent>
     </div>
   )
 }

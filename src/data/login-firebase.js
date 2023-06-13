@@ -16,7 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-console.log('process.env.REACT_APP_API_KEY',process.env);
+import * as Utils from '../utils';
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -24,7 +24,8 @@ const firebaseConfig = {
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
     appId: process.env.REACT_APP_APP_ID,
-    measurementId: process.env.REACT_APP_MEASURMENT_ID
+    measurementId: process.env.REACT_APP_MEASURMENT_ID,
+    databaseURL: process.env.REACT_APP_DATABASE_URL
   };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -37,10 +38,13 @@ const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
+      let calColors = Utils.CalendarUtils.calendarColors;
+      let calColorKeys = Object.keys(calColors);
       await addDoc(collection(db, "users"), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
+        color: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]],
         email: user.email,
       });
     }
@@ -61,10 +65,13 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
+    let calColors = Utils.CalendarUtils.calendarColors;
+    let calColorKeys = Object.keys(calColors);
     await addDoc(collection(db, "users"), {
       uid: user.uid,
       name,
       authProvider: "local",
+      color: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]],
       email,
     });
   } catch (err) {
