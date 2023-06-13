@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, logout } from "../../firebase";
+import { auth, db, logout } from "../../data/login-firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import "./dashboard.css";
 import Calendar from '../calendar/calendar';
 import Weather from '../weather/weather';
 const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
-  const [name, setName] = useState("");
+  const [userProfile, setUserProfile] = useState({name:"",color:""});
   let tDate = new Date();
   const [currentDate, setCurrentDate] = useState(new Date(tDate.getFullYear(), tDate.getMonth(), 1));
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Dashboard = () => {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
-      setName(data.name);
+      setUserProfile(data);
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -70,9 +70,8 @@ const Dashboard = () => {
           </button>
           <div className="dashboard-nav-calendar-display-date">{currentDate.toLocaleDateString("en-us", { month: 'long', year: 'numeric' })}</div>
         </div>
-        <button className="dashboard-nav-user" onClick={showUserMenu}>{name.substring(0, 1)}</button>
+        <button className="dashboard-nav-user" style={{backgroundColor: userProfile.color }} onClick={showUserMenu}>{userProfile.name.substring(0, 1)}</button>
         <ul className="dashboard-nav-user-menu">
-          <li onClick={() => alert('TODO: Complete Settings Dialog')}>Settings</li>
           <li onClick={logout}>Logout</li>
         </ul>
       </nav>

@@ -1,5 +1,62 @@
-import { StaticData } from '.';
 export const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export const calendarColors = {
+    //Credit https://proactivecreative.com/pastel-color-palette/
+    Lavender: "#957DAD",
+    Thistle_Pink: "#E0BBe4",
+    Candy_Pink: "#FEC8D8",
+    Misty_Rose: "#FFDFD3",
+    Pastel_Pink: "#FFC4C4",
+    Periwinkle: "#CBC7DD",
+    Pale_Orange: "#FFDFBD",
+    Palest_Yellow: "#F8FFEB",
+    Pale_Sea_Blue: "#BAEEE5",
+    Lilac: "#DFC5E8",
+    Soft_Yellow1: "#FFFAB0",
+    Tea_Green: "#CBF2B8",
+    Baby_Blue: "#D6D8F2",
+    Baby_Pink: "#F4CFDF",
+    Soft_Yellow2: "#FAF4B7",
+    Light_Brandy: "#E7CBA9",
+    Soft_Sage: "#CCD4BF",
+    Ecru: "#F5F3E7",
+    Pastel_Peach: "#EEBAB2",
+    Warm_Sand: "#E9DAC1",
+    Light_Turquoise: "#CDFCF6",
+    Sea_Green: "#54BAB90",
+    Linen: "#F7ECDE",
+    Muted_Blue: "#7882A4",
+    Warm_Brown: "#C0A080",
+    Light_Gray: "#EFEFEF",
+    Medium_Gray: "#D1D1D1",
+    Deep_Aubergine: "#645CAA",
+    Medium_Purple: "#A084CA",
+    Lavender2: "#BFACE0",
+    Pale_Purple_Pink: "#EBC7E8",
+    Warm_Sun: "#D37F40",
+    Sea_Blue: "#94C0D0",
+    Pale_Coral: "#ECCBC0",
+    Soft_Orange: "#FAC590",
+    Warm_Pink: "#EF7C8E",
+    Rose_Pink: "#D8A7B1",
+    Cream: "#FAE8EO",
+    Mint_Green: "#B6E2D3",
+    Pale_Sea_Blue2: "#D6EFED",
+    Sky_Blue: "#B7D3DF",
+    Medium_Lilac: "#C9BBCF",
+    Muted_Purple: "#898AA6",
+    Warm_Berry: "#85586F",
+    Soft_Raspberry: "#AC7D88",
+    Pale_Orange2: "#DEB6AB",
+    Soft_Yellow3: "#F8ECD1",
+    Slate_Blue: "#698396",
+    Medium_Green2: "#A9C8C0",
+    Warm_Yellow: "#DBBC8E",
+    Rich_Blush_Pink: "#AE8A8C",
+    Sunny_Yellow: "#F5F0BB",
+    Spring_Green: "#C4DFAA",
+    Medium_Green: "#90C8AC",
+    Dark_Turquoise: "#73A9AD"
+}
 export const maxSlots = 10;
 export const getDateWeek = function (dte, dowOffset) {
     /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
@@ -115,9 +172,9 @@ export const getDatesOfTheMonth = function (currentDate) {
     return datesOfTheMonth;
 }
 export const newEventObject = function (newEventDate) {
-    let calColors = StaticData.calendarColors;
+    let calColors = calendarColors;
     let calColorKeys = Object.keys(calColors);
-    let eId = "someNewEventId"+Math.random(10000);
+    let eId = "NewEvent";
     return {
         name: 'New Trip',
         eId: eId,

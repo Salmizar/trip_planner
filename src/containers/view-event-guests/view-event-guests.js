@@ -1,30 +1,44 @@
-import React, { createRef, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import { Input } from "../../components/input/input.style";
 import "./view-event-guests.css"
 import CheckBox from '../../components/checkbox/checkbox';
 import * as Utils from '../../utils';
 import { Button } from "../../components/button/button.style";
-const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMember, changeMaybe, addRemoveUser, updateEventData }) => {
-  var calColors = Utils.StaticData.calendarColors;
+import { db } from "../../data/login-firebase"
+import { collection, getDocs } from "firebase/firestore";
+const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMember, changeMaybe, addRemoveUser, updateEventData }) => {
+  const [usersList, setUsersList] = useState([]);
   const searchUserField = createRef();
   const [guestListSearchResults, setGuestListSearchResults] = useState([]);
-  var calColorKeys = Object.keys(calColors);
+  const calColors = Utils.CalendarUtils.calendarColors;
+  const calColorKeys = Object.keys(calColors);
+  const getUserList = async () => {
+    let usersList = [];
+    let users = await getDocs(collection(db, "users"));
+    users.forEach((doc) => {
+      usersList.push(doc.data());
+    });
+    setUsersList(usersList);
+  }
+  useEffect(() => {
+    getUserList();
+  }, []);
   const searchUsers = (e) => {
     let searchValue = e.target.value.toLowerCase();
     let obj = [];
-    if (searchValue!=='') {
-      obj = Utils.StaticData.userList.filter(u => u.email.toLowerCase().indexOf(searchValue)>-1 || u.displayName.toLowerCase().indexOf(searchValue)>-1);
+    if (searchValue !== '') {
+      obj = usersList.filter(u => u.email.toLowerCase().indexOf(searchValue) > -1 || u.name.toLowerCase().indexOf(searchValue) > -1);
     }
     setGuestListSearchResults(obj);
   }
   const AddGuest = (guest) => {
-    addRemoveUser(true, guest.uId, guest.displayName);
+    addRemoveUser(true, guest.uid, guest.name);
     searchUserField.current.value = '';
     searchUserField.current.focus();
     setGuestListSearchResults([]);
   }
   return (
-    <div className={'view-event-guests '+((!detailsActive) ? 'block' : 'hidden')}>
+    <div className={'view-event-guests ' + ((!detailsTabActive) ? 'block' : 'hidden')}>
       <Input
         disabled={!editingEvent}
         ref={searchUserField}
@@ -34,14 +48,14 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsActive, user, isMembe
         placeholder="Add a Guest"
       />
       <Button className={"view-event-add-myself-btn" + ((isMember) ? ' hidden' : '')} onClick={(e) => addRemoveUser(true, user.uid, user.displayName)}>Add Myself</Button>
-      <div className={'view_event-add-guest-results ' +((guestListSearchResults.length>0)?'visible':'invisible')}>
+      <div className={'view_event-add-guest-results ' + ((guestListSearchResults.length > 0) ? 'visible' : 'invisible')}>
         {(guestListSearchResults).map(searchResult =>
-          <div key={JSON.stringify(searchResult)} className='view_event-add-guest-result' onClick={() => {AddGuest(searchResult); }}>
-            <div className="view-event-guest-icon" style={{ backgroundColor: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]] }}>
-                  {searchResult.displayName.substring(0, 1)}
+          <div key={searchResult.uid} className='view_event-add-guest-result' onClick={() => { AddGuest(searchResult); }}>
+            <div className="view-event-guest-icon" style={{ backgroundColor: searchResult.color }}>
+              {searchResult.name.substring(0, 1)}
             </div>&nbsp;&nbsp;
-            {searchResult.displayName}&nbsp;&nbsp;
-            <b>{(eventData.guests.find((guest) => guest.uId === searchResult.uId)!==undefined)?'- Already a Guest':''}</b>
+            {searchResult.name}&nbsp;&nbsp;
+            <b>{(eventData.guests.find((guest) => guest.uId === searchResult.uid) !== undefined) ? '- Already a Guest' : ''}</b>
           </div>
         )}
       </div>

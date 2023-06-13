@@ -5,7 +5,7 @@ import {
   auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
-} from "../../firebase";
+} from "../../data/login-firebase";
 import "./register.css";
 import Logo from "../../components/logo/logo";
 import { Button } from "../../components/button/button.style";

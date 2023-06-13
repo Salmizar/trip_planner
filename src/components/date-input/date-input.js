@@ -12,16 +12,18 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
     setPickerDate(new Date(pickerDate.setMonth(pickerDate.getMonth() + incriment)));
   }
   const ToggleDatePicker = () => {
-    if (dateInputContainer.current.classList.contains('date-input-container-visible')) {
-      dateInputContainer.current.classList.remove('date-input-container-visible');
-      displayDateRef.current.classList.remove('date-input-display-date-selected');
-      window.removeEventListener('resize', checkPickerPosition);
-    } else {
-      dateInputContainer.current.classList.add('date-input-container-visible');
-      displayDateRef.current.classList.add('date-input-display-date-selected');
-      window.addEventListener('resize', checkPickerPosition);
+    if (!disabled) {
+      if (dateInputContainer.current.classList.contains('date-input-container-visible')) {
+        dateInputContainer.current.classList.remove('date-input-container-visible');
+        displayDateRef.current.classList.remove('date-input-display-date-selected');
+        window.removeEventListener('resize', checkPickerPosition);
+      } else {
+        dateInputContainer.current.classList.add('date-input-container-visible');
+        displayDateRef.current.classList.add('date-input-display-date-selected');
+        window.addEventListener('resize', checkPickerPosition);
+      }
+      checkPickerPosition();
     }
-    checkPickerPosition();
   }
   const checkPickerPosition = () => {
     if (dateInputContainer.current) {
@@ -30,12 +32,12 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
       let newLeftPos = (dateInputContainer.current.parentElement.getBoundingClientRect().left + pickerRect.width + pickerPadding);
       if (window.innerWidth < newLeftPos) {
         if (window.innerWidth < (pickerPadding * 2 + pickerRect.width)) {
-          dateInputContainer.current.style.left = (pickerPadding - dateInputContainer.current.parentElement.getBoundingClientRect().left) +((containerXOffset)?containerXOffset:0) + 'px';
+          dateInputContainer.current.style.left = (pickerPadding - dateInputContainer.current.parentElement.getBoundingClientRect().left) + ((containerXOffset) ? containerXOffset : 0) + 'px';
         } else {
-          dateInputContainer.current.style.left = (window.innerWidth - newLeftPos) +((containerXOffset)?containerXOffset:0) + 'px';
+          dateInputContainer.current.style.left = (window.innerWidth - newLeftPos) + ((containerXOffset) ? containerXOffset : 0) + 'px';
         }
       } else {
-        dateInputContainer.current.style.left = -5 +((containerXOffset)?containerXOffset:0) + 'px';
+        dateInputContainer.current.style.left = -5 + ((containerXOffset) ? containerXOffset : 0) + 'px';
       }
     } else {
       window.removeEventListener('resize', checkPickerPosition);
@@ -54,13 +56,13 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
       setDisplayDate(new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()));
       setPickerDate(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
     }
-  }, [dateValue, ]);
+  }, [dateValue,]);
   useEffect(() => {
     setDatesOfMonth(Utils.CalendarUtils.getDatesOfTheMonth(pickerDate));
   }, [pickerDate]);
   return (
     <div className={((className) ? className : '') + " date-input"}>
-      <div ref={displayDateRef}  title={title}
+      <div ref={displayDateRef} title={title}
         className={'date-input-display-date' +
           ((disabled) ? ' date-input-display-date-disabled' : '') +
           ((error) ? ' date-input-display-date-error' : '')
