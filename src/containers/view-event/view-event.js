@@ -5,7 +5,7 @@ import { Button } from "../../components/button/button.style";
 import ViewEventDetails from "../view-event-details/view-event-details";
 import ViewEventGuests from "../view-event-guests/view-event-guests";
 
-const ViewEvent = ({calendarEvents, calendarEventsLoaded, eventId, user, saveEvent, deleteEvent }) => {
+const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEvent, deleteEvent }) => {
   const navigate = useNavigate();
   const [detailsTabActive, setdetailsTabActive] = useState(true);
   const [userChangedEvent, setUserChangedEvent] = useState(false);
@@ -66,21 +66,21 @@ const ViewEvent = ({calendarEvents, calendarEventsLoaded, eventId, user, saveEve
   }
   useEffect(() => {
     if (calendarEventsLoaded) {
-    if (eventId !== undefined) {
-      if (calendarEvents[eventId]) {
-        setEventData(JSON.parse(JSON.stringify(calendarEvents[eventId])));
-        setDisplayEventDialog(true);
-        setUserChangedEvent(calendarEvents[eventId].newEvent);
-      } else {
-        //no Event found, invalid EventId
-        navigate("/dashboard/calendar");
+      if (eventId !== undefined) {
+        if (calendarEvents[eventId]) {
+          setEventData(JSON.parse(JSON.stringify(calendarEvents[eventId])));
+          setDisplayEventDialog(true);
+          setUserChangedEvent(calendarEvents[eventId].newEvent);
+        } else {
+          //no Event found, invalid EventId
+          navigate("/dashboard/calendar");
+        }
+      } else if (eventId === undefined) {
+        setDisplayEventDialog(false);
+        setUserChangedEvent(false);
       }
-    } else if (eventId === undefined) {
-      setDisplayEventDialog(false);
-      setUserChangedEvent(false);
     }
-  }
-  }, [eventId, calendarEvents, calendarEventsLoaded,navigate, displayEventDialog]);
+  }, [eventId, calendarEvents, calendarEventsLoaded, navigate, displayEventDialog]);
   useEffect(() => {
     if (displayEventDialog) {
       var isEventOwner = false;

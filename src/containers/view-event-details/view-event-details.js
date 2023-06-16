@@ -4,10 +4,9 @@ import DateInput from "../../components/date-input/date-input";
 import { TextArea } from "../../components/textarea/textarea.style";
 import "./view-event-details.css"
 const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEventData}) => {
-  const titleInput = createRef();
   useEffect(() => {
-    titleInput.current.focus();
-  },[titleInput,eventData]);
+    document.getElementsByClassName('view-event-title')[0].focus();
+  },[editingEvent]);
   return (
     <div className={'view-event-details '+((detailsTabActive)?'block':'hidden')}>
         <Input
@@ -17,7 +16,6 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
           error={true}
           type="text"
           value={eventData.name || ''}
-          ref={titleInput}
           onChange={(e) => updateEventData('name', e.target.value)}
           placeholder="Event Title"
         />
