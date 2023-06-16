@@ -84,11 +84,11 @@ export const getDateWeek = function (dte, dowOffset) {
     }
     return weeknum;
 };
-export const getCalendarData = function (currentDate, calendarData) {
+export const formatCalendarData = function (currentDate, calendarEvents) {
     var datesOfTheMonth = getDatesOfTheMonth(currentDate);
     var monthConfines = getMonthVisualStartStop(currentDate);
-    for (var key in calendarData) {
-        let event = calendarData[key];
+    for (var key in calendarEvents) {
+        let event = calendarEvents[key];
         event.eId = key;
         let eventStart = new Date(event.driveUpDate);
         let eventEnd = new Date(event.driveHomeDate);
@@ -102,9 +102,8 @@ export const getCalendarData = function (currentDate, calendarData) {
                 eventWeek = eventStart.getFullYear() + '-' + getDateWeek(eventStart);
             }
         }
-
         let calendarDayEvents = datesOfTheMonth[eventWeek][eventStart.getTime()].dayEvents;
-        let eventIndex = findBlankEventSlot(calendarDayEvents);
+        let eventIndex = Object.entries(calendarDayEvents).length;
         var eventSlotOffset = 0;
         for (var eventLengthIndex = 0; eventLengthIndex < eventLength; eventLengthIndex++) {
             let offsetEventStart = new Date(event.driveUpDate);
@@ -113,7 +112,7 @@ export const getCalendarData = function (currentDate, calendarData) {
             if (datesOfTheMonth[eWeek]) {
                 if (offsetEventStart.getDay() === 0) {
                     //new Week, see if we can move the event to lower slots
-                    eventSlotOffset = eventIndex - findBlankEventSlot(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents);
+                    eventSlotOffset = eventIndex - Object.entries(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents).length;
                 }
                 datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
                     name: event.name,
@@ -129,13 +128,6 @@ export const getCalendarData = function (currentDate, calendarData) {
         }
     }
     return datesOfTheMonth;
-}
-const findBlankEventSlot = function(calendarDayEvents) {
-    for (var findBlankSpot = 1; findBlankSpot <= maxSlots; findBlankSpot++) {
-        if (calendarDayEvents['e'+findBlankSpot] === undefined) {
-            return findBlankSpot;
-        }
-    }
 }
 const sortObj = function (unsorted) {
     return Object.keys(unsorted).sort().reduce(function (sorted, key) {

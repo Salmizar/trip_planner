@@ -37,7 +37,7 @@ const Calendar = ({ currentDate, user }) => {
       let calEvents = {...calendarEvents};
       if (eventData.eId === "NewEvent") {
         delete calEvents[eventData.eId];
-        setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, calEvents));
+        setCalendarData(Utils.CalendarUtils.formatCalendarData(currentDate, calEvents));
       } else {
         remove(ref(getDatabase(), '/calendarData/' + eventId));
       }
@@ -83,7 +83,7 @@ const Calendar = ({ currentDate, user }) => {
   }, [calendarData]);
   useEffect(() => {
     setCalendarEventsLoaded(true);
-    setCalendarData(Utils.CalendarUtils.getCalendarData(currentDate, calendarEvents));
+    setCalendarData(Utils.CalendarUtils.formatCalendarData(currentDate, calendarEvents));
   }, [currentDate, calendarEvents]);
   useEffect(() => {
     setCalendarEventsLoaded(false);
