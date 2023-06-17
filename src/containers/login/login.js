@@ -26,17 +26,19 @@ function Login() {
         <div className="login-container overflow-hidden shadow-lg">
           <Input
             type="text"
+            name="userName"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail Address"
           />
           <Input
             type="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <Button theme='black' onClick={() => logInWithEmailAndPassword(email, password)}>Login</Button>
+          <Button name="loginBtn" theme='black' onClick={() => logInWithEmailAndPassword(email, password)}>Login</Button>
           <Button onClick={signInWithGoogle}>Login with Google</Button>
           <div>
             <Link to="/reset">Forgot Password</Link>
