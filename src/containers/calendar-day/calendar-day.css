@@ -24,7 +24,8 @@
 }
 
 .calendar-day-container-notthismonth {
-    color: #bdbfc2;
+    font-weight: normal;
+    color: #70757a;
 }
 
 .calendar-date-of-week-today,

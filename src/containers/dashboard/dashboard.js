@@ -65,10 +65,10 @@ const Dashboard = () => {
             Today
           </button>
           <button title="Previous Month" className="dashboard-nav-calendar-navigation-previous" data-incriment="-1" onClick={ changeTheMonth }>
-            <img alt="Previous Month" src="/assets/arrowIcon.png"></img>
+            <img width="23px" height="23px" alt="Previous Month" src="/assets/arrowIcon.png"></img>
           </button>
           <button title="Next month" className="dashboard-nav-calendar-navigation-next" data-incriment="1" onClick={changeTheMonth }>
-            <img alt="Next Month" src="/assets/arrowIcon.png"></img>
+            <img width="23px" height="23px" alt="Next Month" src="/assets/arrowIcon.png"></img>
           </button>
           <div className="dashboard-nav-calendar-display-date">{currentDate.toLocaleDateString("en-us", { month: "long", year: "numeric" })}</div>
         </div>
