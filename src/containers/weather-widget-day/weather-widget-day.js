@@ -1,8 +1,8 @@
 import React from 'react'
 import "./weather-widget-day.css";
 import * as Utils from '../../utils';
-const WeatherWidgetDay = ({ forecastInfo, weatherIconDescription, firstEntry }) => {
-    const forecastData = JSON.parse(forecastInfo);
+const WeatherWidgetDay = ({ forecastInfo,  firstEntry }) => {
+    const forecastData = forecastInfo;
     return (
         <div className='weather-widget-forecast'>
             <div className={'weather-widget-forecast-date ' + (firstEntry ? 'block' : 'hidden') + ' text-gray-500'}>
@@ -17,7 +17,7 @@ const WeatherWidgetDay = ({ forecastInfo, weatherIconDescription, firstEntry }) 
                 </div>
                 <img  alt='weatherIcon' className='weather-widget-forecast-weather-ico' src={'/assets/weatherIcons/' + forecastData.night_weather_icon.substring(3) + 'n.png'}></img>
                 <div className='weather-widget-forecast-description'>
-                    <span>{weatherIconDescription[forecastData.night_weather_icon.substring(3)]}</span>
+                    <span>{Utils.WeatherUtils.weatherIconDescription[forecastData.night_weather_icon.substring(3)]}</span>
                     <div className='weather-widget-forecast-wind-direction'>
                         <svg height="10" width="8" style={{ transform: ' rotate(' + forecastData.night_wind_direction + 'deg)' }}>
                             <path d="M4 0 L0 10 L4 6 L8 10 Z" />
@@ -41,7 +41,7 @@ const WeatherWidgetDay = ({ forecastInfo, weatherIconDescription, firstEntry }) 
                 </div>
                 <img alt='weatherIcon' className='weather-widget-forecast-weather-ico' src={'/assets/weatherIcons/' + forecastData.day_weather_icon.substring(3) + 'd.png'}></img>
                 <div className='weather-widget-forecast-description'>
-                    <span>{weatherIconDescription[forecastData.day_weather_icon.substring(3)]}</span>
+                    <span>{Utils.WeatherUtils.weatherIconDescription[forecastData.day_weather_icon.substring(3)]}</span>
                     <div className='weather-widget-forecast-wind-direction'>
                         <svg height="10" width="8" style={{ transform: ' rotate(' + forecastData.day_wind_direction + 'deg)' }}>
                             <path d="M4 0 L0 10 L4 6 L8 10 Z" />

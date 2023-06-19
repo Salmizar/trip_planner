@@ -8,8 +8,8 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
   const [datesOfMonth, setDatesOfMonth] = useState({});
   const dateInputContainer = createRef();
   const displayDateRef = createRef();
-  const ToggleTheMonth = (incriment) => {
-    setPickerDate(new Date(pickerDate.setMonth(pickerDate.getMonth() + incriment)));
+  const ToggleTheMonth = (e) => {
+    setPickerDate(new Date(pickerDate.setMonth(pickerDate.getMonth() + parseInt(e.currentTarget.getAttribute("data-incriment")))));
   }
   const ToggleDatePicker = () => {
     if (!disabled) {
@@ -43,16 +43,17 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
       window.removeEventListener('resize', checkPickerPosition);
     }
   }
-  const ChangeDisplayDate = (year, month, day) => {
-    setDisplayDate(new Date(year, month, day));
+  const ChangeDisplayDate = (e) => {
+    let newDate = new Date(e.currentTarget.getAttribute("data-year"), e.currentTarget.getAttribute("data-month"), e.currentTarget.getAttribute("data-day"));
+    setDisplayDate(newDate);
     ToggleDatePicker();
     if (onChange) {
-      onChange(new Date(year, month, day));
+      onChange(newDate);
     }
   }
   useEffect(() => {
     if (dateValue !== undefined) {
-      var newDate = new Date(dateValue);
+      let newDate = new Date(dateValue);
       setDisplayDate(new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()));
       setPickerDate(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
     }
@@ -63,19 +64,19 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
   return (
     <div className={((className) ? className : '') + " date-input"}>
       <div ref={displayDateRef} title={title}
-        className={'date-input-display-date' +
-          ((disabled) ? ' date-input-display-date-disabled' : '') +
-          ((error) ? ' date-input-display-date-error' : '')
+        className={"date-input-display-date" +
+          ((disabled) ? " date-input-display-date-disabled" : "") +
+          ((error) ? " date-input-display-date-error" : "")
         } onClick={ToggleDatePicker}>
         {((displayDate) ? displayDate.toDateString() : placeHolder && title)}
       </div>
       <div ref={dateInputContainer} className="date-input-container">
-        <nav className='date-input-nav'>
+        <nav className="date-input-nav">
           {pickerDate.toLocaleDateString("en-us", { month: 'long', year: 'numeric' })}
-          <button title="Next month" className='date-input-nav-next' onClick={() => ToggleTheMonth(1)}>
+          <button title="Next month" className="date-input-nav-next" data-incriment="1" onClick={ ToggleTheMonth }>
             <img alt="Next Month" src="/assets/arrowIcon.png"></img>
           </button>
-          <button title="Previous Month" className='date-input-nav-previous' onClick={() => ToggleTheMonth(-1)}>
+          <button title="Previous Month" className="date-input-nav-previous" data-incriment="-1" onClick={ ToggleTheMonth }>
             <img alt="Previous Month" src="/assets/arrowIcon.png"></img>
           </button>
         </nav>
@@ -85,18 +86,21 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
           )}
         </div>
         {Object.entries(datesOfMonth).map((week) =>
-          <div title='Pick a Date' key={JSON.stringify(week)} className="date-input-week-container">
+          <div title="Pick a Date" key={week[0]} className="date-input-week-container">
             {Object.entries(Object.values(week)[1]).map((day) =>
-              <div key={JSON.stringify(day[1])} className='date-input-day-container'>
+              <div key={day[1].month + day[1].dayOfMonth } className='date-input-day-container'>
                 <div
                   className={
-                    'date-input-day' +
-                    ((day[1].isThisToday) ? ' date-input-today' : '' +
-                      ((day[1].year === displayDate.getFullYear() && day[1].month === displayDate.getMonth() && day[1].dayOfMonth === displayDate.getDate()) ? ' date-input-selected' : '')
+                    "date-input-day" +
+                    ((day[1].isThisToday) ? " date-input-today" : "" +
+                      ((day[1].year === displayDate.getFullYear() && day[1].month === displayDate.getMonth() && day[1].dayOfMonth === displayDate.getDate()) ? " date-input-selected" : "")
                     )}
-                  onClick={() => ChangeDisplayDate(day[1].year, day[1].month, day[1].dayOfMonth)}
+                  data-year={day[1].year}
+                  data-month={day[1].month}
+                  data-day={day[1].dayOfMonth}
+                  onClick={ ChangeDisplayDate }
                 >
-                  {JSON.stringify(day[1].dayOfMonth)}
+                  {day[1].dayOfMonth}
                 </div>
               </div>
             )}

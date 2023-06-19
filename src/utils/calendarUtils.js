@@ -58,14 +58,16 @@ export const calendarColors = {
     Dark_Turquoise: "#73A9AD"
 }
 export const maxSlots = 10;
-export const getDateWeek = function (dte, dowOffset) {
+const oneDay = 86400000;
+export const getDateWeek = (dte, dowOffset) => {
     /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
     dowOffset = typeof (dowOffset) == 'number' ? dowOffset : 0; //default dowOffset to zero
     var newYear = new Date(dte.getFullYear(), 0, 1);
     var day = newYear.getDay() - dowOffset; //the day of week the year begins on
     day = (day >= 0 ? day : day + 7);
-    var daynum = Math.floor((dte.getTime() - newYear.getTime() -
-        (dte.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / 86400000) + 1;
+    //Math.floor((dte.getTime() - newYear.getTime() - (dte.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / 86400000) + 1;
+    var daynum = Math.ceil((dte.getTime() - newYear.getTime()) / 86400000) + 1;
+    //console.log('getDateWeek', daynum === daynum2);
     var weeknum;
     //if the year starts before the middle of a week
     if (day < 4) {
@@ -84,7 +86,7 @@ export const getDateWeek = function (dte, dowOffset) {
     }
     return weeknum;
 };
-export const formatCalendarData = function (currentDate, calendarEvents) {
+export const formatCalendarData = (currentDate, calendarEvents) => {
     var datesOfTheMonth = getDatesOfTheMonth(currentDate);
     var monthConfines = getMonthVisualStartStop(currentDate);
     for (var key in calendarEvents) {
@@ -129,21 +131,19 @@ export const formatCalendarData = function (currentDate, calendarEvents) {
     }
     return datesOfTheMonth;
 }
-const sortObj = function (unsorted) {
+const sortObj = (unsorted) => {
     return Object.keys(unsorted).sort().reduce(function (sorted, key) {
         sorted[key] = unsorted[key];
         return sorted;
     }, {});
 }
-export const getDatesOfTheMonth = function (currentDate) {
+export const getDatesOfTheMonth = (currentDate) => {
     const todaysDate = new Date();
     const datesOfTheMonth = {};
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
-    
     for (let weekCounter = 0; weekCounter <= 6; weekCounter++) {
         let weekArray = {};
         let weekOfYear = getDateWeek(tempDate);
-
         for (let dayCounter = 0; dayCounter <= 6; dayCounter++) {
             weekArray[tempDate.getTime()] = {
                 dayEvents: {
@@ -163,7 +163,7 @@ export const getDatesOfTheMonth = function (currentDate) {
     }
     return datesOfTheMonth;
 }
-export const newEventObject = function (newEventDate) {
+export const newEventObject = (newEventDate) => {
     let calColors = calendarColors;
     let calColorKeys = Object.keys(calColors);
     let eId = "NewEvent";

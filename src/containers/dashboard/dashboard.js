@@ -4,8 +4,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, logout } from "../../data/login-firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import "./dashboard.css";
-import Calendar from '../calendar/calendar';
-import Weather from '../weather/weather';
+import Calendar from "../calendar/calendar";
+import Weather from "../weather/weather";
 const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
   const [userProfile, setUserProfile] = useState({name:"",color:""});
@@ -21,29 +21,31 @@ const Dashboard = () => {
       setUserProfile(data);
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
     }
   }, [user]);
-  const changeTheMonth = (incriment) => {
-    navigate('/dashboard/calendar');
+  const changeTheMonth = (e) => {
+    let incriment = e.currentTarget.getAttribute("data-incriment");
+    navigate("/dashboard/calendar");
     if (incriment == null) {
       let tDate = new Date();
       setCurrentDate(new Date(tDate.getFullYear(), tDate.getMonth(), 1));
       return;
     }
-    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + incriment)));
+    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + parseInt(incriment))));
   }
   const showUserMenu = (event) => {
-    var menu = document.getElementsByClassName("dashboard-nav-user-menu")[0];
-    menu.classList.add('dashboard-nav-user-menu-visible');
+    let menu = document.getElementsByClassName("dashboard-nav-user-menu")[0];
+    menu.classList.add("dashboard-nav-user-menu-visible");
     event.stopPropagation();
-    document.body.addEventListener('click', hideUserMenu);
+    document.body.addEventListener("click", hideUserMenu);
   }
   const hideUserMenu = () => {
-    var menu = document.getElementsByClassName("dashboard-nav-user-menu")[0];
-    menu.classList.remove('dashboard-nav-user-menu-visible');
-    document.body.removeEventListener('click', hideUserMenu);
+    let menu = document.getElementsByClassName("dashboard-nav-user-menu")[0];
+    menu.classList.remove("dashboard-nav-user-menu-visible");
+    document.body.removeEventListener("click", hideUserMenu);
   }
+  const navigateToCalendar = () => { navigate("/dashboard/calendar"); }
+  const navigateToWeather = () => { navigate("/dashboard/weather"); }
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
@@ -52,23 +54,23 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <nav className="dashboard-nav">
-        <button title="View the Calendar" className={'dashboard-nav-tab-calendar ' + (location.pathname.includes('/dashboard/calendar') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/calendar")}>
+        <button title="View the Calendar" className={"dashboard-nav-tab-calendar " + (location.pathname.includes("/dashboard/calendar") ? "dashboard-nav-tab-active" : "")} onClick={ navigateToCalendar }>
           Calendar
         </button>
-        <button title="View Weather" className={'dashboard-nav-tab-weather ' + (location.pathname.includes('/dashboard/weather') ? 'dashboard-nav-tab-active' : '')} onClick={() => navigate("/dashboard/weather")}>
+        <button title="View Weather" className={"dashboard-nav-tab-weather " + (location.pathname.includes("/dashboard/weather") ? "dashboard-nav-tab-active" : "")} onClick={ navigateToWeather}>
           Weather
         </button>
-        <div className={(location.pathname.includes('/dashboard/calendar') ? ' dashboard-nav-calendar-navigation' : 'dashboard-nav-calendar-navigation-hidden')}>
-          <button title="Go to today" className='dashboard-nav-calendar-navigation-today' onClick={() => changeTheMonth()}>
+        <div className={(location.pathname.includes("/dashboard/calendar") ? " dashboard-nav-calendar-navigation" : "dashboard-nav-calendar-navigation-hidden")}>
+          <button title="Go to today" className="dashboard-nav-calendar-navigation-today" onClick={ changeTheMonth }>
             Today
           </button>
-          <button title="Previous Month" className='dashboard-nav-calendar-navigation-previous' onClick={() => changeTheMonth(-1)}>
+          <button title="Previous Month" className="dashboard-nav-calendar-navigation-previous" data-incriment="-1" onClick={ changeTheMonth }>
             <img alt="Previous Month" src="/assets/arrowIcon.png"></img>
           </button>
-          <button title="Next month" className='dashboard-nav-calendar-navigation-next' onClick={() => changeTheMonth(1)}>
+          <button title="Next month" className="dashboard-nav-calendar-navigation-next" data-incriment="1" onClick={changeTheMonth }>
             <img alt="Next Month" src="/assets/arrowIcon.png"></img>
           </button>
-          <div className="dashboard-nav-calendar-display-date">{currentDate.toLocaleDateString("en-us", { month: 'long', year: 'numeric' })}</div>
+          <div className="dashboard-nav-calendar-display-date">{currentDate.toLocaleDateString("en-us", { month: "long", year: "numeric" })}</div>
         </div>
         <button className="dashboard-nav-user" style={{backgroundColor: userProfile.color }} onClick={showUserMenu}>{userProfile.name.substring(0, 1)}</button>
         <ul className="dashboard-nav-user-menu">

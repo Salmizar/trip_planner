@@ -20,10 +20,10 @@ export const weatherIconDescription = {
     '13': 'snow',
     '50': 'mist'
 };
-export function convertMPStoKPH(mps) {
+export const convertMPStoKPH = (mps) => {
     return Math.round((mps * 60 * 60) / 1000);
 }
-export function getWindDirection(deg) {
+export const getWindDirection = (deg) => {
     if (deg >= 11.25 && deg < 33.75)
         return "NNE";
     if (deg >= 33.75 && deg < 56.25)

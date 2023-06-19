@@ -13,9 +13,9 @@ const Calendar = ({ currentDate, user }) => {
   const [availableSlots, setAvailableSlots] = useState(1);
   const [minCellHeight, setMinCellHeight] = useState(100);
   const { eventId } = useParams();
-  const saveEvent = function (eventData) {
+  const saveEvent = (eventData) => {
     if (calendarEvents[eventData.eId]) {
-      let calEvents = {...calendarEvents};
+      let calEvents = structuredClone(calendarEvents);
       if (eventData.eId === "NewEvent") {
         delete calEvents[eventData.eId];
         setCalendarEvents(calEvents);
@@ -25,16 +25,16 @@ const Calendar = ({ currentDate, user }) => {
         updateData['/calendarData/' + newPostKey] = eventData;
         update(ref(getDatabase()), updateData);
       } else {        
-        let eventId = eventData.eId;
+        let eId = eventData.eId;
         delete eventData.eId;
-        set(ref(getDatabase(), '/calendarData/' + eventId), eventData);
+        set(ref(getDatabase(), '/calendarData/' + eId), eventData);
       }
     }
     navigate("/dashboard/calendar");
   }
-  const deleteEvent = function (eventData) {
+  const deleteEvent = (eventData) => {
     if (calendarEvents[eventData.eId]) {
-      let calEvents = {...calendarEvents};
+      let calEvents = structuredClone(calendarEvents);
       if (eventData.eId === "NewEvent") {
         delete calEvents[eventData.eId];
         setCalendarData(Utils.CalendarUtils.formatCalendarData(currentDate, calEvents));
@@ -44,9 +44,9 @@ const Calendar = ({ currentDate, user }) => {
     }
     navigate("/dashboard/calendar");
   }
-  const createEvent = function (year, month, day) {
-    var newEventDate = new Date(year, month, day);
-    var newEvent = Utils.CalendarUtils.newEventObject(newEventDate);
+  const createEvent = (year, month, day) => {
+    let newEventDate = new Date(year, month, day);
+    let newEvent = Utils.CalendarUtils.newEventObject(newEventDate);
     let newEventId = newEvent.eId;
     delete newEvent.eId;
     newEvent.guests = [
@@ -56,7 +56,7 @@ const Calendar = ({ currentDate, user }) => {
         eventOwner: true
       }
     ]
-    let calEvents = {...calendarEvents};
+    let calEvents = structuredClone(calendarEvents);
     calEvents[newEventId] = newEvent;
     
     let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate) );
@@ -89,13 +89,7 @@ const Calendar = ({ currentDate, user }) => {
     setCalendarEventsLoaded(false);
     const dbRef = ref(getDatabase(), "calendarData");
     onValue(dbRef, (snapshot) => {
-      const data = snapshot.val();
-      const calEvents = {};
-      for (var key in data) {
-        if (!calEvents[key]) {
-          calEvents[key] = data[key];
-        }
-      }
+      let calEvents = structuredClone(snapshot.val());
       let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate) );
       setCalendarEvents(sortedCalendarEvents);
     });
@@ -108,10 +102,10 @@ const Calendar = ({ currentDate, user }) => {
         )}
       </div>
       {Object.entries(calendarData).map((week) =>
-        <div key={JSON.stringify(week)} className="calendar-week-container" style={{ minHeight: minCellHeight }}>
+        <div key={week[0]} className="calendar-week-container" style={{ minHeight: minCellHeight }}>
           {Object.entries(Object.values(week)[1]).map((day) =>
             <CalendarDay
-              key={JSON.stringify(day[1])}
+              key={day[1].month + day[1].dayOfMonth}
               day={day[1].dayOfMonth}
               month={day[1].month}
               year={day[1].year}

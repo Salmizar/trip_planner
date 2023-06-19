@@ -7,7 +7,7 @@ import Logo from "../../components/logo/logo";
 import { Button } from "../../components/button/button.style";
 import { Input } from "../../components/input/input.style";
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading] = useAuthState(auth);

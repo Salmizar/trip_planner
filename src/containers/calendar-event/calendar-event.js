@@ -13,7 +13,7 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
     const tripLengthRemaining = (cEvent.driveHomeDate - eventDate.getTime() + oneDay) / oneDay;
     const dayOfWeek = new Date(cEvent.driveUpDate);
     const eventLength = (dayOfWeek.getDay() + tripLengthRemaining > 7) ? 7 - dayOfWeek.getDay() : event.eventLength;
-    const OpenEvent = (e) => {
+    const openEvent = (e) => {
         e.stopPropagation();
         navigate("/dashboard/calendar/" + cEvent.eId);
     }
@@ -25,7 +25,7 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
                 minWidth: ((overflowView) ? '100%' : (minEventWidth * eventLength) + 'px'),
                 top: (eventIndex * 24) + 'px'
             }}
-            onClick={(e) => OpenEvent(e)}
+            onClick={ openEvent }
         >
             <div
                 className="calendar-event-driveUp"

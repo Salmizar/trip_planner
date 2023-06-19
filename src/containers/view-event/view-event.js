@@ -13,13 +13,13 @@ const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEv
   const [editingEvent, setEditingEvent] = useState(false);
   const [isMember, setIsMember] = useState(false);
   const [eventData, setEventData] = useState({});
-  const changeMaybe = function (uId, newState) {
-    var tempGuestList = eventData.guests;
+  const changeMaybe = (uId, newState) => {
+    let tempGuestList = eventData.guests;
     tempGuestList[getGuest(uId)].maybe = newState;
     updateEventData('guests', tempGuestList);
   }
-  const addRemoveUser = function (addUser, uId, name) {
-    var tempGuestList = eventData.guests;
+  const addRemoveUser = (addUser, uId, name) => {
+    let tempGuestList = eventData.guests;
     if (addUser) {
       if (tempGuestList.find((guest) => guest.uId === uId) === undefined) {
         tempGuestList[Object.keys(tempGuestList).length] = { uId: uId, name: name };
@@ -29,7 +29,7 @@ const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEv
     }
     updateEventData('guests', tempGuestList);
   }
-  const updateEventData = function (obj, data) {
+  const updateEventData = (obj, data) => {
     let tempEventData = { ...eventData };
     tempEventData[obj] = data;
     setUserChangedEvent(true);
@@ -64,11 +64,17 @@ const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEv
   const closeViewEvent = () => {
     navigate('/dashboard/calendar');
   }
+  const displayDetailsTab = () => {
+    setdetailsTabActive(true);
+  }
+  const displayGuestsTab = () => {
+    setdetailsTabActive(false);
+  }
   useEffect(() => {
     if (calendarEventsLoaded) {
       if (eventId !== undefined) {
         if (calendarEvents[eventId]) {
-          setEventData(JSON.parse(JSON.stringify(calendarEvents[eventId])));
+          setEventData(structuredClone(calendarEvents[eventId]));
           setDisplayEventDialog(true);
           setUserChangedEvent(calendarEvents[eventId].newEvent);
         } else {
@@ -83,13 +89,9 @@ const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEv
   }, [eventId, calendarEvents, calendarEventsLoaded, navigate, displayEventDialog]);
   useEffect(() => {
     if (displayEventDialog) {
-      var isEventOwner = false;
-      var isEventMember = false;
       let guestIndex = eventData.guests.findIndex(guest => user && guest.uId === user.uid);
-      if (guestIndex >= 0) {
-        isEventOwner = eventData.guests[guestIndex].eventOwner;
-        isEventMember = true;
-      }
+      let isEventMember = guestIndex > -1;
+      let isEventOwner = isEventMember && eventData.guests[guestIndex].eventOwner;
       setIsMember(isEventMember);
       setEditingEvent(eventData.guestsCanModify || isEventOwner);
     }
@@ -98,8 +100,8 @@ const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEv
     <div className='view-event-bg' style={{ display: (displayEventDialog) ? 'block' : 'none' }}>
       <dialog className="view-event">
         <nav className="view-event-nav">
-          <button title="View Trip Details" className={'view-event-nav-tab-details ' + (detailsTabActive ? 'view-event-nav-tab-active' : '')} onClick={() => setdetailsTabActive(true)}>Trip Details</button>
-          <button title="View Trip Guests" className={'view-event-nav-tab-guests ' + (!detailsTabActive ? 'view-event-nav-tab-active' : '')} onClick={() => setdetailsTabActive(false)}>Guests</button>
+          <button title="View Trip Details" className={'view-event-nav-tab-details ' + (detailsTabActive ? 'view-event-nav-tab-active' : '')} onClick={ displayDetailsTab }>Trip Details</button>
+          <button title="View Trip Guests" className={'view-event-nav-tab-guests ' + (!detailsTabActive ? 'view-event-nav-tab-active' : '')} onClick={ displayGuestsTab }>Guests</button>
         </nav>
         <ViewEventDetails
           detailsTabActive={detailsTabActive}
