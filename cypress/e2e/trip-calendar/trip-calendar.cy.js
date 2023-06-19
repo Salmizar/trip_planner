@@ -1,6 +1,16 @@
-describe('Load Application', () => {
+describe('Checking Login Page Functionality', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
+  })
+  it('Check Forgot password redirect', () => {
+    cy.get('a').contains('Forgot Password')
+    .click()
+    cy.url().should('include', '/reset')
+  })
+  it('Check register redirect', () => {
+    cy.get('a').contains('Register')
+    .click()
+    cy.url().should('include', '/register')
   })
   it('Login to the application', () => {
     cy.get('input[name="userName"]')

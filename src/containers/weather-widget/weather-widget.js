@@ -8,8 +8,8 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
     const [state, setState] = useState('loading');
     const [locationData, setLocationData] = useState({});
     const [fiveDayForecast, setFiveDayForecast] = useState({});
-    const getForecastData = function (forecastDay) {
-        return JSON.stringify(fiveDayForecast[fiveDayForecast.forecastDates[forecastDay]]);
+    const getForecastData = (forecastDay) => {
+        return structuredClone(fiveDayForecast[fiveDayForecast.forecastDates[forecastDay]]);
     }
     useEffect(() => {
         let processedData = {};
@@ -148,7 +148,6 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                 console.log(error);
             }
         };
-        //if (location === "Ottawa") { setLocationData(Utils.StaticData.staticAPIData); }
         fetchWeather();
 
     }, [lat, lon]);
@@ -177,11 +176,11 @@ const WeatherWidget = ({ isFirstEntry, location, lon, lat }) => {
                             </div>
                         </div>
                     </div>
-                    <WeatherWidgetDay forecastInfo={getForecastData(0)} firstEntry={isFirstEntry} weatherIconDescription={Utils.WeatherUtils.weatherIconDescription}></WeatherWidgetDay>
-                    <WeatherWidgetDay forecastInfo={getForecastData(1)} firstEntry={isFirstEntry} weatherIconDescription={Utils.WeatherUtils.weatherIconDescription}></WeatherWidgetDay>
-                    <WeatherWidgetDay forecastInfo={getForecastData(2)} firstEntry={isFirstEntry} weatherIconDescription={Utils.WeatherUtils.weatherIconDescription}></WeatherWidgetDay>
-                    <WeatherWidgetDay forecastInfo={getForecastData(3)} firstEntry={isFirstEntry} weatherIconDescription={Utils.WeatherUtils.weatherIconDescription}></WeatherWidgetDay>
-                    <WeatherWidgetDay forecastInfo={getForecastData(4)} firstEntry={isFirstEntry} weatherIconDescription={Utils.WeatherUtils.weatherIconDescription}></WeatherWidgetDay>
+                    <WeatherWidgetDay forecastInfo={getForecastData(0)} firstEntry={isFirstEntry}></WeatherWidgetDay>
+                    <WeatherWidgetDay forecastInfo={getForecastData(1)} firstEntry={isFirstEntry}></WeatherWidgetDay>
+                    <WeatherWidgetDay forecastInfo={getForecastData(2)} firstEntry={isFirstEntry}></WeatherWidgetDay>
+                    <WeatherWidgetDay forecastInfo={getForecastData(3)} firstEntry={isFirstEntry}></WeatherWidgetDay>
+                    <WeatherWidgetDay forecastInfo={getForecastData(4)} firstEntry={isFirstEntry}></WeatherWidgetDay>
                 </div>
             ) : (
                 <div className='weather-widget-container weather-widget-container-loading'>loading</div>

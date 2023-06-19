@@ -31,11 +31,20 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
     }
     setGuestListSearchResults(obj);
   }
-  const AddGuest = (guest) => {
-    addRemoveUser(true, guest.uid, guest.name);
+  const AddGuest = (e) => {
+    addRemoveUser(true, e.currentTarget.getAttribute("data-uid"), e.currentTarget.getAttribute("data-name"));
     searchUserField.current.value = '';
     searchUserField.current.focus();
     setGuestListSearchResults([]);
+  }
+  const AddUser = (e) => {
+    addRemoveUser(true, e.currentTarget.getAttribute("data-uid"), e.currentTarget.getAttribute("data-name"));
+  }
+  const RemoveUser = (e) => {
+    addRemoveUser(false, e.currentTarget.getAttribute("data-uid"));
+  }
+  const UpdateMaybe = (e) => {
+    changeMaybe(e.currentTarget.getAttribute("data-set1"), e.target.checked);
   }
   return (
     <div className={'view-event-guests ' + ((!detailsTabActive) ? 'block' : 'hidden')}>
@@ -47,10 +56,14 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
         onChange={searchUsers}
         placeholder="Add a Guest"
       />
-      <Button className={"view-event-add-myself-btn" + ((isMember) ? ' hidden' : '')} onClick={(e) => addRemoveUser(true, user.uid, user.displayName)}>Add Myself</Button>
+      <Button
+        className={"view-event-add-myself-btn" + ((isMember) ? ' hidden' : '')} 
+        data-uid={user && user.uid}
+        data-name={user && user.displayName} 
+        onClick={ AddUser }>Add Myself</Button>
       <div className={'view_event-add-guest-results ' + ((guestListSearchResults.length > 0) ? 'visible' : 'invisible')}>
         {(guestListSearchResults).map(searchResult =>
-          <div key={searchResult.uid} className='view_event-add-guest-result' onClick={() => { AddGuest(searchResult); }}>
+          <div key={searchResult.uid} data-uid={searchResult.uid} data-name={searchResult.name} className='view_event-add-guest-result' onClick={ AddGuest }>
             <div className="view-event-guest-icon" style={{ backgroundColor: searchResult.color }}>
               {searchResult.name.substring(0, 1)}
             </div>&nbsp;&nbsp;
@@ -65,7 +78,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
       <div className='view-event-guest-list'>
         {eventData && eventData.guests && user &&
           (eventData.guests).map(guest =>
-            <div className='view-event-guest' key={JSON.stringify(guest)}>
+            <div className='view-event-guest' key={guest.uId}>
               <div className='view-event-guest-name'>
                 <div className="view-event-guest-icon" style={{ backgroundColor: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]] }}>
                   {guest.name.substring(0, 1)}
@@ -77,13 +90,15 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
                 title='Remove Guest'
                 className={'view-event-guest-remove ' + ((user && (user.uid === guest.uId || editingEvent) && !guest.eventOwner) ? 'block cursor-pointer' : 'hidden')}
                 src={'/assets/removeIcon.png'}
-                onClick={(e) => addRemoveUser(false, guest.uId)}></img>
+                data-uid={guest.uId}
+                onClick={ RemoveUser }></img>
               <CheckBox
                 disabled={!editingEvent && user.uid !== guest.uId}
                 className={"view-event-guest-maybe " + ((guest.eventOwner) ? 'hidden' : 'block')}
                 type="checkbox"
                 checked={guest.maybe}
-                onChange={(e) => changeMaybe(guest.uId, e.target.checked)}
+                dataset1={guest.uId} 
+                onChange={ UpdateMaybe }
                 title="Maybe coming"
               ></CheckBox>
               <div className={'view-event-guest-owner ' + ((guest.eventOwner) ? 'visible' : 'invisible')}>(Event Owner)</div>
