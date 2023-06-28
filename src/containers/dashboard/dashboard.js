@@ -18,6 +18,10 @@ const Dashboard = () => {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
+      if (user.displayName === null) {
+        //firebase bug where displayName is not populated if authProvider is local
+        user.displayName = data.name;
+      }
       setUserProfile(data);
     } catch (err) {
       console.error(err);

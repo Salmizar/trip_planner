@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { getDatabase, ref, onValue, child, push, update, set, remove } from "firebase/database";
 import "./calendar.css";
@@ -7,13 +7,14 @@ import CalendarDay from '../calendar-day/calendar-day';
 import ViewEvent from '../view-event/view-event';
 const Calendar = ({ currentDate, user }) => {
   const navigate = useNavigate();
+  const initialRender = useRef(false);
   const [calendarEvents, setCalendarEvents] = useState({});
   const [calendarEventsLoaded, setCalendarEventsLoaded] = useState(false);
   const [calendarData, setCalendarData] = useState({});
   const [availableSlots, setAvailableSlots] = useState(1);
   const [minCellHeight, setMinCellHeight] = useState(100);
   const { eventId } = useParams();
-  const saveEvent = (eventData) => {
+  const saveEvent = (eventData, updateGuestsOnly) => {
     if (calendarEvents[eventData.eId]) {
       let calEvents = structuredClone(calendarEvents);
       if (eventData.eId === "NewEvent") {
@@ -27,7 +28,11 @@ const Calendar = ({ currentDate, user }) => {
       } else {        
         let eId = eventData.eId;
         delete eventData.eId;
-        set(ref(getDatabase(), '/calendarData/' + eId), eventData);
+        if (updateGuestsOnly) {
+          set(ref(getDatabase(), '/calendarData/' + eId + '/guests'), eventData.guests);
+        } else {
+          set(ref(getDatabase(), '/calendarData/' + eId ), eventData);
+        }
       }
     }
     navigate("/dashboard/calendar");
@@ -47,6 +52,7 @@ const Calendar = ({ currentDate, user }) => {
   const createEvent = (year, month, day) => {
     let newEventDate = new Date(year, month, day);
     let newEvent = Utils.CalendarUtils.newEventObject(newEventDate);
+    newEvent.ownerId = user.uid;
     let newEventId = newEvent.eId;
     delete newEvent.eId;
     newEvent.guests = [
@@ -82,8 +88,11 @@ const Calendar = ({ currentDate, user }) => {
     }
   }, [calendarData]);
   useEffect(() => {
-    setCalendarEventsLoaded(true);
-    setCalendarData(Utils.CalendarUtils.formatCalendarData(currentDate, calendarEvents));
+    if (initialRender.current) {
+      setCalendarEventsLoaded(true);
+      setCalendarData(Utils.CalendarUtils.formatCalendarData(currentDate, calendarEvents));
+    }
+    initialRender.current = true;
   }, [currentDate, calendarEvents]);
   useEffect(() => {
     setCalendarEventsLoaded(false);

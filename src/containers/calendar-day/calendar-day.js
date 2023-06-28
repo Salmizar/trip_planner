@@ -1,7 +1,7 @@
-import React from 'react'
 import "./calendar-day.css";
 import CalendarEvent from '../calendar-event/calendar-event';
 import CalendarOverflow from '../calendar-overflow/calendar-overflow';
+import { React, memo } from "react";
 const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events, availableSlots, user, createEvent }) => {
     const createNewEvent = () => {
         createEvent(year, month, day);
@@ -38,6 +38,6 @@ const CalendarDay = ({ day, month, year, isThisToday, isThisMonth, events, avail
             }
         </div>
     )
-}
+};
 
-export default CalendarDay
+export default memo(CalendarDay)

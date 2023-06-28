@@ -38,7 +38,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
     setGuestListSearchResults([]);
   }
   const AddUser = (e) => {
-    addRemoveUser(true, e.currentTarget.getAttribute("data-uid"), e.currentTarget.getAttribute("data-name"));
+    addRemoveUser(true, user.uid, user.displayName);
   }
   const RemoveUser = (e) => {
     addRemoveUser(false, e.currentTarget.getAttribute("data-uid"));
@@ -49,17 +49,15 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
   return (
     <div className={'view-event-guests ' + ((!detailsTabActive) ? 'block' : 'hidden')}>
       <Input
-        disabled={!editingEvent}
+        disabled={!editingEvent && !eventData.canInvite}
         ref={searchUserField}
-        className={"view-event-add-guest" + ((isMember) ? ' view-event-add-guest-full' : '')}
+        className={"view-event-add-guest" + ((isMember || !eventData.canInvite) ? ' view-event-add-guest-full' : '')}
         type="text"
         onChange={searchUsers}
         placeholder="Add a Guest"
       />
       <Button
-        className={"view-event-add-myself-btn" + ((isMember) ? ' hidden' : '')} 
-        data-uid={user && user.uid}
-        data-name={user && user.displayName} 
+        className={"view-event-add-myself-btn" + ((isMember || !eventData.canInvite) ? ' hidden' : '')}
         onClick={ AddUser }>Add Myself</Button>
       <div className={'view_event-add-guest-results ' + ((guestListSearchResults.length > 0) ? 'visible' : 'invisible')}>
         {(guestListSearchResults).map(searchResult =>
@@ -88,7 +86,7 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
               <img
                 alt='removeUser'
                 title='Remove Guest'
-                className={'view-event-guest-remove ' + ((user && (user.uid === guest.uId || editingEvent) && !guest.eventOwner) ? 'block cursor-pointer' : 'hidden')}
+                className={'view-event-guest-remove ' + ((user && (user.uid === guest.uId || editingEvent) && !guest.eventOwner) ? 'block cursor-pointer' : 'invisible')}
                 src={'/assets/removeIcon.png'}
                 data-uid={guest.uId}
                 onClick={ RemoveUser }></img>
@@ -115,16 +113,16 @@ const ViewEventGuests = ({ eventData, editingEvent, detailsTabActive, user, isMe
         type="checkbox"
         checked={eventData.canInvite}
         onChange={(e) => updateEventData('canInvite', e.target.checked)}
-        title="Invite other Guests"
-        label="Invite Others"
+        title="Invite other guests"
+        label="Guests can invite others"
       ></CheckBox>
       <CheckBox
         disabled={!editingEvent}
         type="checkbox"
         checked={eventData.guestsCanModify}
         onChange={(e) => updateEventData('guestsCanModify', e.target.checked)}
-        title="Can Guests Modify this Event"
-        label="Guests can modify this Event"
+        title="Can guests modify this trips details"
+        label="Guests can modify trip details"
       ></CheckBox>
     </div>
   )
