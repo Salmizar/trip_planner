@@ -53,7 +53,7 @@ const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEv
       alert('Trip end date is before you drive up');
     } else {
       delete eventData.newEvent;
-      saveEvent(eventData);
+      saveEvent(eventData, !editingEvent);
     }
   }
   const deleteTheEvent = () => {
@@ -90,10 +90,8 @@ const ViewEvent = ({ calendarEvents, calendarEventsLoaded, eventId, user, saveEv
   useEffect(() => {
     if (displayEventDialog) {
       let guestIndex = eventData.guests.findIndex(guest => user && guest.uId === user.uid);
-      let isEventMember = guestIndex > -1;
-      let isEventOwner = isEventMember && eventData.guests[guestIndex].eventOwner;
-      setIsMember(isEventMember);
-      setEditingEvent(eventData.guestsCanModify || isEventOwner);
+      setIsMember(guestIndex > -1);
+      setEditingEvent(eventData.guestsCanModify || eventData.ownerId===user.uid);
     }
   }, [eventData, user, displayEventDialog]);
   return (

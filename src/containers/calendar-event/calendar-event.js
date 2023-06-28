@@ -1,4 +1,4 @@
-import React from 'react'
+import { React } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import "./calendar-event.css";
 
@@ -48,6 +48,6 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
             </div>
         </div>
     )
-}
+};
 
 export default CalendarEvent

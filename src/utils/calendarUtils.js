@@ -65,8 +65,8 @@ export const getDateWeek = (dte, dowOffset) => {
     var newYear = new Date(dte.getFullYear(), 0, 1);
     var day = newYear.getDay() - dowOffset; //the day of week the year begins on
     day = (day >= 0 ? day : day + 7);
-    //Math.floor((dte.getTime() - newYear.getTime() - (dte.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / 86400000) + 1;
-    var daynum = Math.ceil((dte.getTime() - newYear.getTime()) / 86400000) + 1;
+    //Math.floor((dte.getTime() - newYear.getTime() - (dte.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / oneDay) + 1;
+    var daynum = Math.ceil((dte.getTime() - newYear.getTime()) / oneDay) + 1;
     //console.log('getDateWeek', daynum === daynum2);
     var weeknum;
     //if the year starts before the middle of a week
@@ -94,7 +94,7 @@ export const formatCalendarData = (currentDate, calendarEvents) => {
         event.eId = key;
         let eventStart = new Date(event.driveUpDate);
         let eventEnd = new Date(event.driveHomeDate);
-        let eventLength = 1 + ((eventEnd.getTime() - eventStart.getTime()) / 86400000);
+        let eventLength = 1 + ((eventEnd.getTime() - eventStart.getTime()) / oneDay);
         let eventWeek = eventStart.getFullYear() + '-' + getDateWeek(eventStart);
         if (!datesOfTheMonth[eventWeek]) {
             if (monthConfines.endDate < eventStart || monthConfines.startDate > eventEnd) {
@@ -170,6 +170,7 @@ export const newEventObject = (newEventDate) => {
     return {
         name: 'New Trip',
         eId: eId,
+        ownerId: 0,
         startDate: newEventDate.getTime(),
         endDate: newEventDate.getTime(),
         driveUpDate: newEventDate.getTime(),
