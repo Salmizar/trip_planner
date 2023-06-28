@@ -7,3 +7,5 @@ The goal of this app is to make trip planning and viewing effortless. Anyone can
 
 Long term, the intention is to have a weather tab that will display all of the information weather inforation for all of the area's we like to ride in. Saving us time
 from viewing each indivigually. 
+
+Demo: https://trip-calendar-dc06b.firebaseapp.com/
