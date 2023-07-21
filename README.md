@@ -9,3 +9,29 @@ Long term, the intention is to have a weather tab that will display all of the i
 from viewing each indivigually. 
 
 Demo: https://trip-calendar-dc06b.firebaseapp.com/
+
+
+### Compiles and hot-reloads for development
+```
+npm start
+```
+
+### Deploy to firebase
+```
+firebase deploy
+```
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes filesproduction
+```
+npm run lint
+```
+npx eslint . or npx eslint . --fix
+```
+### Run Cypress to run testsproduction
+```
+node_modules/.bin/cypress open
+```

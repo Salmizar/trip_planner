@@ -6,7 +6,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "cypress": "^12.14.0",
     "firebase": "^9.19.1",
     "firebaseui": "^6.0.2",
     "react": "^18.2.0",
@@ -18,7 +17,13 @@
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "cypress": "^12.14.0",
+    "postcss-import": "^15.1.0",
+    "tailwindcss": "^3.3.1"
+  },
   "scripts": {
+    "lint": "eslint --fix --ext .js,.jsx .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,8 +47,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "postcss-import": "^15.1.0",
-    "tailwindcss": "^3.3.1"
+  "overrides": {
+    "semver": "7.5.3"
   }
 }
