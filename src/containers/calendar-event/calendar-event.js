@@ -11,8 +11,9 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
     const driveUpLength = ((overflowView) ? 0 : (cEvent.startDate - cEvent.driveUpDate) / oneDay);
     const driveHomeLength = ((overflowView) ? 0 : (cEvent.driveHomeDate - cEvent.endDate) / oneDay);
     const tripLengthRemaining = (cEvent.driveHomeDate - eventDate.getTime() + oneDay) / oneDay;
-    const dayOfWeek = new Date(cEvent.driveUpDate);
-    const eventLength = (dayOfWeek.getDay() + tripLengthRemaining > 7) ? 7 - dayOfWeek.getDay() : event.eventLength;
+    //set start of week on sunday
+    const dayOfWeekDay = (eventDate.getDay()===6)?0:eventDate.getDay();
+    const eventLength = (dayOfWeekDay + tripLengthRemaining > 7) ? 7 - dayOfWeekDay : event.eventLength;
     const openEvent = (e) => {
         e.stopPropagation();
         navigate("/dashboard/calendar/" + cEvent.eId);
@@ -40,7 +41,7 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
             <div
                 className="calendar-event-driveHome"
                 style={{
-                    visibility: ((overflowView || dayOfWeek.getDay() + tripLengthRemaining < 8) ? 'visible' : 'hidden'),
+                    visibility: ((overflowView || dayOfWeekDay + tripLengthRemaining < 8) ? 'visible' : 'hidden'),
                     width: 'calc(100vw / 7 * ' + driveHomeLength + ')',
                     minWidth:'max('+(minEventWidth * driveHomeLength) + 'px, 10px)',
                 }}
