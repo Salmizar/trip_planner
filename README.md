@@ -24,18 +24,20 @@ npm start
 ```
 firebase deploy
 ```
+
 ### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes filesproduction
+### Lints and fixes files
 ```
 npm run lint
-```
+
 npx eslint . or npx eslint . --fix
 ```
-### Run Cypress to run testsproduction
+
+### Run Cypress to run tests
 ```
 node_modules/.bin/cypress open
 ```
