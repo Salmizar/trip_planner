@@ -9,7 +9,8 @@ Long term, the intention is to have a weather tab that will display all of the i
 from viewing each indivigually. 
 
 **Built with**
-React.js. tailwind CSS, Utilizing GCP Firebase for Auth, firebase DB and firebase RTDB
+React.js. tailwind CSS, Utilizing GCP Firebase for Auth, firebase DB and firebase RTDB.
+
 Leverages OpenWeatherMaps API for weather data.
 
 Demo: https://trip-calendar-dc06b.firebaseapp.com/
