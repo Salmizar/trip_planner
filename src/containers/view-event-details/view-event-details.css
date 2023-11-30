@@ -39,14 +39,6 @@
 .view-event-end {
     float: right;
 }
-.view-event-date-start-stop-container {
-    width: 350px;
-}
-.view-event-date-to {
-    position: relative;
-    left:8px;
-    top:9px;
-}
 .view-event-date-container {
     padding-left: 10px;
     display:flex;

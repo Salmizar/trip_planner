@@ -19,7 +19,20 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
           onChange={(e) => updateEventData('name', e.target.value)}
           placeholder="Event Title"
         />
-        <div className='view-event-date-start-stop-container'>
+        <div className='view-event-date-container'>
+          <div className="view-event-date-label">Drive Up:</div>
+          <DateInput
+            disabled={!editingEvent}
+            error={eventData.driveUpDate > eventData.driveHomeDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
+            className="view-event-date"
+            dateValue={eventData.driveUpDate}
+            onChange={(newValue) => updateEventData('driveUpDate', newValue.getTime())}
+            title="Drive Update Date"
+            placeholder="Drive Up Date"
+          />
+        </div>
+        <div className='view-event-date-container'>
+          <div className="view-event-date-label">Start Ride:</div>
           <DateInput
             disabled={!editingEvent}
             error={eventData.startDate > eventData.endDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
@@ -29,7 +42,9 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
             title="Event Start Date"
             placeholder="Start Date"
           />
-          <span className='view-event-date-to'>to</span>
+        </div>
+        <div className='view-event-date-container'>
+          <div className="view-event-date-label">End Ride:</div>
           <DateInput
             disabled={!editingEvent}
             containerXOffset={-80}
@@ -41,32 +56,18 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
             placeholder="End Date"
           />
         </div>
-        <br></br><br></br>
-        <div className='view-event-date-container'>
-          <div className="view-event-date-label">Drive Up:</div>
-          <DateInput
-          disabled={!editingEvent}
-          error={eventData.driveUpDate > eventData.driveHomeDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
-          className="view-event-date"
-          dateValue={eventData.driveUpDate}
-          onChange={(newValue) => updateEventData('driveUpDate', newValue.getTime())}
-          title="Drive Update Date"
-          placeholder="Drive Up Date"
-        />
-        </div>
         <div className='view-event-date-container'>
           <div className="view-event-date-label">Drive Home:</div>
           <DateInput
-          disabled={!editingEvent}
-          error={eventData.driveUpDate > eventData.driveHomeDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
-          className="view-event-date"
-          dateValue={eventData.driveHomeDate}
-          onChange={(newValue) => updateEventData('driveHomeDate', newValue.getTime())}
-          title="Drive Home Date"
-          placeholder="Drive Home Date"
-        />
+            disabled={!editingEvent}
+            error={eventData.driveUpDate > eventData.driveHomeDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
+            className="view-event-date"
+            dateValue={eventData.driveHomeDate}
+            onChange={(newValue) => updateEventData('driveHomeDate', newValue.getTime())}
+            title="Drive Home Date"
+            placeholder="Drive Home Date"
+          />
         </div>
-        <br></br>
         <div className="view-event-location-container">
           <img alt='locationIcon' className='view-event-location-icon' src={'/assets/locationIcon.png'}></img>
           <Input
