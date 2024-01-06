@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <div>
       <Logo></Logo>
-      <div className="login">
+      <main className="login">
         <div className="login-container overflow-hidden shadow-lg">
           <Input
             type="text"
@@ -47,7 +47,7 @@ const Login = () => {
             Don't have an account? <Link to="/register">Register</Link> now.
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

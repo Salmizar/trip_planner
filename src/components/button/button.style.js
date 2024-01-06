@@ -19,6 +19,7 @@ export const Button = styled.button`
   margin-bottom: 10px;
   font-size: 18px;
   box-shadow: 0px 2px 2px lightgray;
+  font-weight: 600;
   transition: ease background-color 250ms;
   cursor: pointer;
   &:hover {

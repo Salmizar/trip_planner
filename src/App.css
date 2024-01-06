@@ -6,7 +6,9 @@
     font-family: font-sans;
     font-size: 13px;
 }
-
+a {
+    font-weight:700;
+}
 body {
     overflow-x:hidden;
     -webkit-user-select: none;
