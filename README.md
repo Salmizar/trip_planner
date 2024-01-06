@@ -5,8 +5,8 @@ or inform others when they can no longer go.
 
 The goal of this app is to make trip planning and viewing effortless. Anyone can jump on, see the trips, who's going, when arrive and departure days will be etc.
 
-Long term, the intention is to have a weather tab that will display all of the information weather inforation for all of the area's we like to ride in. Saving us time
-from viewing each indivigually. 
+Long term, the intention is to have a weather tab that will display all of the information weather information for all of the area's we like to ride in. Saving us time
+from viewing each individually. 
 
 **Built with**
 React.js. tailwind CSS, Utilizing GCP Firebase for Auth, firebase DB and firebase RTDB.
