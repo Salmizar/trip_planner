@@ -4,7 +4,7 @@ import * as Utils from "../../utils";
 
 const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, className, disabled, error }) => {
   const [displayDate, setDisplayDate] = useState(new Date(0));
-  const [pickerDate, setPickerDate] = useState(new Date(0));
+  const [pickerDate, setPickerDate] = useState(null);
   const [datesOfMonth, setDatesOfMonth] = useState({});
   const dateInputContainer = createRef();
   const displayDateRef = createRef();
@@ -57,9 +57,11 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
       setDisplayDate(new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()));
       setPickerDate(new Date(newDate.getFullYear(), newDate.getMonth(), 1));
     }
-  }, [dateValue,]);
+  }, [dateValue]);
   useEffect(() => {
-    setDatesOfMonth(Utils.CalendarUtils.getDatesOfTheMonth(pickerDate));
+    if (pickerDate != null) { 
+      setDatesOfMonth(Utils.CalendarUtils.getDatesOfTheMonth(pickerDate));
+    }
   }, [pickerDate]);
   return (
     <div className={((className) ? className : '') + " date-input"}>
@@ -72,7 +74,7 @@ const DateInput = ({ containerXOffset, dateValue, title, placeHolder, onChange, 
       </div>
       <div ref={dateInputContainer} className="date-input-container">
         <nav className="date-input-nav">
-          {pickerDate.toLocaleDateString("en-us", { month: 'long', year: 'numeric' })}
+          {pickerDate && pickerDate.toLocaleDateString("en-us", { month: 'long', year: 'numeric' })}
           <button title="Next month" className="date-input-nav-next" data-incriment="1" onClick={ ToggleTheMonth }>
             <img alt="Next Month" src="/assets/arrowIcon.png"></img>
           </button>

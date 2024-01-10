@@ -8,9 +8,9 @@ const CalendarEvent = ({ event, eventIndex, eventDate, overflowView }) => {
     const minEventWidth = 55.7;
     const oneDay = 86400000;
     const cEvent = event.event;
-    const driveUpLength = ((overflowView) ? 0 : (cEvent.startDate - cEvent.driveUpDate) / oneDay);
-    const driveHomeLength = ((overflowView) ? 0 : (cEvent.driveHomeDate - cEvent.endDate) / oneDay);
-    const tripLengthRemaining = (cEvent.driveHomeDate - eventDate.getTime() + oneDay) / oneDay;
+    const driveUpLength = ((overflowView) ? 0 : (new Date(cEvent.startDate).getTime() - new Date(cEvent.driveUpDate).getTime()) / oneDay);
+    const driveHomeLength = ((overflowView) ? 0 : (new Date(cEvent.driveHomeDate).getTime() - new Date(cEvent.endDate).getTime()) / oneDay);
+    const tripLengthRemaining = (new Date(cEvent.driveHomeDate).getTime() - eventDate.getTime() + oneDay) / oneDay;
     //set start of week on sunday
     const dayOfWeekDay = (eventDate.getDay()===6)?0:eventDate.getDay();
     const eventLength = (dayOfWeekDay + tripLengthRemaining > 7) ? 7 - dayOfWeekDay : event.eventLength;

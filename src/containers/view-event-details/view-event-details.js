@@ -26,7 +26,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
             error={eventData.driveUpDate > eventData.driveHomeDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
             className="view-event-date"
             dateValue={eventData.driveUpDate}
-            onChange={(newValue) => updateEventData('driveUpDate', newValue.getTime())}
+            onChange={(newValue) => updateEventData('driveUpDate', newValue.toISOString())}
             title="Drive Update Date"
             placeholder="Drive Up Date"
           />
@@ -38,7 +38,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
             error={eventData.startDate > eventData.endDate || eventData.startDate < eventData.driveUpDate || eventData.startDate > eventData.driveHomeDate}
             className="view-event-date view-event-start"
             dateValue={eventData.startDate}
-            onChange={(newValue) => updateEventData('startDate', newValue.getTime())}
+            onChange={(newValue) => updateEventData('startDate', newValue.toISOString())}
             title="Event Start Date"
             placeholder="Start Date"
           />
@@ -51,7 +51,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
             error={eventData.startDate > eventData.endDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
             className="view-event-date view-event-end"
             dateValue={eventData.endDate}
-            onChange={(newValue) => updateEventData('endDate', newValue.getTime())}
+            onChange={(newValue) => updateEventData('endDate', newValue.toISOString())}
             title="Event End Date"
             placeholder="End Date"
           />
@@ -63,7 +63,7 @@ const ViewEventDetails = ({eventData, editingEvent, detailsTabActive, updateEven
             error={eventData.driveUpDate > eventData.driveHomeDate || eventData.endDate > eventData.driveHomeDate || eventData.endDate < eventData.driveUpDate}
             className="view-event-date"
             dateValue={eventData.driveHomeDate}
-            onChange={(newValue) => updateEventData('driveHomeDate', newValue.getTime())}
+            onChange={(newValue) => updateEventData('driveHomeDate', newValue.toISOString())}
             title="Drive Home Date"
             placeholder="Drive Home Date"
           />

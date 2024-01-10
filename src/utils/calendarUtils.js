@@ -59,32 +59,11 @@ export const calendarColors = {
 }
 export const maxSlots = 10;
 const oneDay = 86400000;
-export const getDateWeek = (dte, dowOffset) => {
-    /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
-    dowOffset = typeof (dowOffset) == 'number' ? dowOffset : 0; //default dowOffset to zero
-    var newYear = new Date(dte.getFullYear(), 0, 1);
-    var day = newYear.getDay() - dowOffset; //the day of week the year begins on
-    day = (day >= 0 ? day : day + 7);
-    //Math.floor((dte.getTime() - newYear.getTime() - (dte.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / oneDay) + 1;
-    var daynum = Math.ceil((dte.getTime() - newYear.getTime()) / oneDay) + 1;
-    //console.log('getDateWeek', daynum === daynum2);
-    var weeknum;
-    //if the year starts before the middle of a week
-    if (day < 4) {
-        weeknum = Math.floor((daynum + day - 1) / 7) + 1;
-        if (weeknum > 52) {
-            var nYear = new Date(dte.getFullYear() + 1, 0, 1);
-            var nday = nYear.getDay() - dowOffset;
-            nday = nday >= 0 ? nday : nday + 7;
-            /*if the next year starts before the middle of
-              the week, it is week #1 of that year*/
-            weeknum = nday < 4 ? 1 : 53;
-        }
-    }
-    else {
-        weeknum = Math.floor((daynum + day - 1) / 7);
-    }
-    return weeknum;
+export const getDateWeek = (date) => {
+    var week1 = new Date(date.getFullYear(), 0, 1);
+    week1.setDate(1 - week1.getDay());
+    week1.setTime(week1.getTime() + ((date.getTimezoneOffset() * 60 * 1000) - (week1.getTimezoneOffset() * 60 * 1000)));
+    return 1 + Math.floor(((date.getTime() - week1.getTime()) / oneDay) / 7);
 };
 export const formatCalendarData = (currentDate, calendarEvents) => {
     var datesOfTheMonth = getDatesOfTheMonth(currentDate);
@@ -104,7 +83,7 @@ export const formatCalendarData = (currentDate, calendarEvents) => {
                 eventWeek = eventStart.getFullYear() + '-' + getDateWeek(eventStart);
             }
         }
-        let calendarDayEvents = datesOfTheMonth[eventWeek][eventStart.getTime()].dayEvents;
+        let calendarDayEvents = datesOfTheMonth[eventWeek][getDayMonthYear(eventStart)].dayEvents;
         let eventIndex = Object.entries(calendarDayEvents).length;
         var eventSlotOffset = 0;
         for (var eventLengthIndex = 0; eventLengthIndex < eventLength; eventLengthIndex++) {
@@ -114,9 +93,9 @@ export const formatCalendarData = (currentDate, calendarEvents) => {
             if (datesOfTheMonth[eWeek]) {
                 if (offsetEventStart.getDay() === 0) {
                     //new Week, see if we can move the event to lower slots
-                    eventSlotOffset = eventIndex - Object.entries(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents).length;
+                    eventSlotOffset = eventIndex - Object.entries(datesOfTheMonth[eWeek][getDayMonthYear(offsetEventStart)].dayEvents).length;
                 }
-                datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
+                datesOfTheMonth[eWeek][getDayMonthYear(offsetEventStart)].dayEvents['e' + (eventIndex - eventSlotOffset)] = {
                     name: event.name,
                     eventSlot: (eventIndex - eventSlotOffset),
                     event: event,
@@ -125,11 +104,14 @@ export const formatCalendarData = (currentDate, calendarEvents) => {
                     eventStartingToday: (eventLengthIndex === 0),
                     color: event.color
                 }
-                datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents = sortObj(datesOfTheMonth[eWeek][offsetEventStart.getTime()].dayEvents);
+                datesOfTheMonth[eWeek][getDayMonthYear(offsetEventStart)].dayEvents = sortObj(datesOfTheMonth[eWeek][getDayMonthYear(offsetEventStart)].dayEvents);
             }
         }
     }
     return datesOfTheMonth;
+}
+const getDayMonthYear = (dte) => {
+    return Intl.DateTimeFormat('en-US').format(dte).replace(/\//g, "-");
 }
 const sortObj = (unsorted) => {
     return Object.keys(unsorted).sort().reduce(function (sorted, key) {
@@ -143,9 +125,11 @@ export const getDatesOfTheMonth = (currentDate) => {
     const tempDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1 - currentDate.getDay());
     for (let weekCounter = 0; weekCounter <= 6; weekCounter++) {
         let weekArray = {};
-        let weekOfYear = getDateWeek(tempDate);
+        let weekOfYear = (tempDate.getFullYear() < currentDate.getFullYear()) ? 1 : getDateWeek(tempDate);
+        let something = getDateWeek(tempDate);
+        let something2 = tempDate;
         for (let dayCounter = 0; dayCounter <= 6; dayCounter++) {
-            weekArray[tempDate.getTime()] = {
+            weekArray[getDayMonthYear(tempDate)] = {
                 dayEvents: {
                 },
                 dayOfMonth: tempDate.getDate(),
@@ -171,10 +155,10 @@ export const newEventObject = (newEventDate) => {
         name: 'New Trip',
         eId: eId,
         ownerId: 0,
-        startDate: newEventDate.getTime(),
-        endDate: newEventDate.getTime(),
-        driveUpDate: newEventDate.getTime(),
-        driveHomeDate: newEventDate.getTime(),
+        startDate: newEventDate.toISOString(),
+        endDate: newEventDate.toISOString(),
+        driveUpDate: newEventDate.toISOString(),
+        driveHomeDate: newEventDate.toISOString(),
         color: calColors[calColorKeys[calColorKeys.length * Math.random() << 0]],
         location: '',
         notes: '',
@@ -195,4 +179,4 @@ const getMonthVisualStartStop = (currentDate) => {
     const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
     endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
     return { startDate, endDate };
-  };
+};

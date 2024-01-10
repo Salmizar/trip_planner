@@ -64,8 +64,7 @@ const Calendar = ({ currentDate, user }) => {
     ]
     let calEvents = structuredClone(calendarEvents);
     calEvents[newEventId] = newEvent;
-    
-    let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate) );
+    let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => new Date(a.driveUpDate) - new Date(b.driveUpDate) || new Date(b.driveHomeDate) - new Date(a.driveHomeDate)) );
     setCalendarEvents(sortedCalendarEvents);
     setCalendarEventsLoaded(false);
     navigate("/dashboard/calendar/" + newEventId);
@@ -99,7 +98,7 @@ const Calendar = ({ currentDate, user }) => {
     const dbRef = ref(getDatabase(), "calendarData");
     onValue(dbRef, (snapshot) => {
       let calEvents = structuredClone(snapshot.val());
-      let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => a.driveUpDate - b.driveUpDate || b.driveHomeDate - a.driveHomeDate) );
+      let sortedCalendarEvents = Object.fromEntries( Object.entries(calEvents).sort(([, a], [, b]) => new Date(a.driveUpDate) - new Date(b.driveUpDate) || new Date(b.driveHomeDate) - new Date(a.driveHomeDate)) );
       setCalendarEvents(sortedCalendarEvents);
     });
   }, [currentDate]);
